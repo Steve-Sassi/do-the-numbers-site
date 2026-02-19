@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Do The Numbers - B2B AI Consulting</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* Custom styles for neon accents, typography, and animations */
         :root {
             --neon-green: #39ff14;
-            --neon-glow: 0 0 3px var(--neon-green), 0 0 8px var(--neon-green), 0 0 15px var(--neon-green);
-            --font-primary: 'Inter', 'ui-sans-serif', 'system-ui', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            --font-primary: 'Inter', 'ui-sans-serif', 'system-ui', sans-serif;
         }
         html {
             scroll-behavior: smooth;
@@ -22,11 +23,7 @@
         }
         .neon-text {
             color: var(--neon-green);
-            text-shadow: var(--neon-glow);
-        }
-        .nav-link-active {
-            color: var(--neon-green);
-            text-shadow: var(--neon-glow);
+            text-shadow: 0 0 5px var(--neon-green), 0 0 15px rgba(57, 255, 20, 0.7);
         }
         .service-card {
             background-color: #111827;
@@ -34,109 +31,120 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(57, 255, 20, 0.1), 0 4px 6px -2px rgba(57, 255, 20, 0.05);
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px -5px rgba(57, 255, 20, 0.15);
         }
-        .font-sans {
-             font-family: var(--font-primary);
+        .form-input {
+            background-color: #1F2937;
+            border: 1px solid #374151;
+            color: #E5E7EB;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: var(--neon-green);
+            box-shadow: 0 0 0 2px rgba(57, 255, 20, 0.5);
         }
     </style>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-900 text-gray-100 font-sans">
-    <div class="container mx-auto p-8">
-        <header class="sticky top-0 z-50 bg-gray-900/80 backdrop-blur-sm py-4">
-            <div class="container mx-auto flex justify-between items-center">
-                <div>
-                    <h1 class="text-2xl font-black neon-text">DO THE NUMBERS</h1>
-                    <p class="text-sm text-gray-400">B2B AI & Vibe Coding Consulting</p>
-                </div>
-                <nav>
-                    <a href="#services" class="text-lg text-gray-300 hover:text-green-400 transition-colors px-4 py-2 rounded-md">Services</a>
-                    <a href="#about" class="text-lg text-gray-300 hover:text-green-400 transition-colors px-4 py-2 rounded-md">About</a>
-                    <a href="#contact" class="text-lg text-gray-300 hover:text-green-400 transition-colors px-4 py-2 rounded-md">Contact</a>
-                </nav>
-            </div>
-        </header>
+<body class="antialiased">
 
-        <main class="pt-12">
-            <section id="hero" class="text-center my-16">
-                <h2 class="text-6xl font-black mb-4 leading-tight">Human-Centric AI Development</h2>
-                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
-                    We translate your business goals into enterprise-grade AI applications using the power of natural language and 'vibe coding'.
-                </p>
-                <a href="#contact" class="mt-8 inline-block bg-green-500 text-gray-900 font-bold py-3 px-8 rounded-lg hover:bg-green-400 transition-colors transform hover:scale-105">
-                    Schedule a Consultation
+    <header class="p-4 md:p-6">
+        <nav class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-black neon-text" aria-label="Homepage">DO THE NUMBERS</a>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#services" class="text-gray-300 hover:text-green-400 transition-colors">Services</a>
+                <a href="#contact" class="text-gray-300 hover:text-green-400 transition-colors">Get Guide</a>
+                <a href="#" class="bg-gray-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-600 transition-colors">Book a Call</a>
+            </div>
+            <button class="md:hidden text-white" aria-label="Open menu">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="text-center container mx-auto pt-16 pb-24 md:pt-24 md:pb-32 px-4">
+            <h1 class="text-5xl md:text-7xl font-black mb-4 leading-tight">Build at the <span class="neon-text">Speed of Thought.</span></h1>
+            <p class="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto">
+                As a Digital Transformation Strategist, I help businesses leverage cutting-edge AI and intuitive 'vibe coding' to accelerate development and unlock innovation.
+            </p>
+            <div class="mt-10 flex justify-center gap-4">
+                <a href="#services" class="inline-block bg-green-500 text-gray-900 font-bold py-3 px-6 md:px-8 rounded-lg hover:bg-green-400 transition-colors transform hover:scale-105">
+                    Explore Services
                 </a>
-            </section>
+                <a href="#" class="inline-block bg-gray-700 text-white font-bold py-3 px-6 md:px-8 rounded-lg hover:bg-gray-600 transition-colors transform hover:scale-105">
+                    Book a Strategy Call
+                </a>
+            </div>
+        </section>
 
-            <section id="services" class="mt-32">
-                <h2 class="text-4xl font-bold text-center mb-12"><span class="neon-text">Our</span> Services</h2>
+        <!-- Services Section -->
+        <section id="services" class="py-16 md:py-24 bg-gray-900/50">
+            <div class="container mx-auto px-4">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="service-card p-8 rounded-lg">
-                        <h3 class="text-2xl font-bold mb-4">Vibe Coding Workshops</h3>
-                        <p class="text-gray-400">Intensive, hands-on training for your development teams. We empower your engineers to build at the speed of thought, turning natural language into robust applications.</p>
+                    <!-- Service 1 -->
+                    <div class="service-card p-8 rounded-lg text-center">
+                        <div class="flex justify-center mb-4">
+                            <svg class="w-12 h-12 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2.25a2.25 2.25 0 01-2.25 2.25H7.5A2.25 2.25 0 015.25 12V7.5A2.25 2.25 0 017.5 5.25h5.25a2.25 2.25 0 012.25 2.25v2.25z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">Vibe Coding Implementation</h3>
+                        <p class="text-gray-400">We train and empower your teams to build applications at unprecedented speeds using AI assistants and natural language workflows.</p>
                     </div>
-                    <div class="service-card p-8 rounded-lg">
-                        <h3 class="text-2xl font-bold mb-4">Enterprise AI Integration</h3>
-                        <p class="text-gray-400">We design, architect, and deploy bespoke AI solutions that seamlessly integrate with your existing enterprise systems, enhancing efficiency and unlocking new capabilities.</p>
+                    <!-- Service 2 -->
+                    <div class="service-card p-8 rounded-lg text-center">
+                        <div class="flex justify-center mb-4">
+                            <svg class="w-12 h-12 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">Digital Transformation Strategy</h3>
+                        <p class="text-gray-400">Leverage AI to modernize legacy systems and workflows, creating a more agile, efficient, and innovative enterprise environment.</p>
                     </div>
-                    <div class="service-card p-8 rounded-lg">
-                        <h3 class="text-2xl font-bold mb-4">PoC to Production</h3>
-                        <p class="text-gray-400">From a spark of an idea to a fully-functional proof-of-concept and beyond. We help you validate your vision, secure stakeholder buy-in, and scale for production.</p>
+                    <!-- Service 3 -->
+                    <div class="service-card p-8 rounded-lg text-center">
+                        <div class="flex justify-center mb-4">
+                            <svg class="w-12 h-12 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">Cloud AI Integration</h3>
+                        <p class="text-gray-400">Connect your natural language applications with enterprise data environments like Google Cloud and Microsoft Azure for seamless, scalable operations.</p>
                     </div>
                 </div>
-            </section>
-
-            <section id="about" class="mt-32 max-w-4xl mx-auto text-center">
-                <h2 class="text-4xl font-bold text-center mb-8"><span class="neon-text">The</span> Philosophy</h2>
-                <p class="text-lg text-gray-300 leading-relaxed">
-                    Do The Numbers is a collective of elite developers and strategists pioneering the next wave of software development. We believe the most powerful code is the one that's understood by everyone, not just machines. We replace complex syntax with intuitive, natural language, helping enterprises shed legacy cycles and embrace a faster, more creative, and more impactful way of building technology.
-                </p>
-            </section>
-        </main>
-
-        <footer id="contact" class="text-center mt-32 bg-gray-800/50 py-16 rounded-lg border border-gray-700">
-            <h2 class="text-4xl font-bold mb-4 neon-text">Let's Build the Future</h2>
-            <p class="text-lg text-gray-300 mb-8">Ready to transform your development process? Get in touch.</p>
-            <a href="mailto:hello@do-the-numbers.com" class="text-xl text-green-400 hover:text-green-300 underline font-semibold">
-                hello@do-the-numbers.com
-            </a>
-            <div class="mt-12 text-gray-500">
-                &copy; 2026 Do The Numbers. All rights reserved.
             </div>
-        </footer>
-    </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('nav a');
+        </section>
 
-            if (!sections.length || !navLinks.length) return;
+        <!-- Lead Capture Section -->
+        <section id="contact" class="py-16 md:py-24">
+            <div class="container mx-auto px-4 max-w-2xl text-center">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Ready to stop typing and <span class="neon-text">start building?</span></h2>
+                <p class="text-gray-400 mb-8">Get the free guide to enterprise vibe coding and see what's possible.</p>
+                <form action="#" method="POST" class="w-full max-w-lg mx-auto">
+                    <div class="flex flex-col md:flex-row gap-4 mb-4">
+                        <label for="name" class="sr-only">Name</label>
+                        <input type="text" id="name" name="name" class="form-input w-full px-4 py-3 rounded-md" placeholder="Your Name" required>
+                        
+                        <label for="email" class="sr-only">Corporate Email</label>
+                        <input type="email" id="email" name="email" class="form-input w-full px-4 py-3 rounded-md" placeholder="Corporate Email" required>
+                    </div>
+                    <button type="submit" class="w-full md:w-auto bg-green-500 text-gray-900 font-bold py-3 px-8 rounded-lg hover:bg-green-400 transition-colors transform hover:scale-105">
+                        Get the Enterprise Vibe Coding Guide
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
 
-            const activateNavLink = (id) => {
-                navLinks.forEach(link => {
-                    link.classList.remove('nav-link-active');
-                    if (link.getAttribute('href') === `#${id}`) {
-                        link.classList.add('nav-link-active');
-                    }
-                });
-            };
+    <footer class="border-t border-gray-800 mt-16 md:mt-24 py-8">
+        <div class="container mx-auto text-center text-gray-500">
+            <p>&copy; 2026 Do The Numbers. All rights reserved.</p>
+        </div>
+    </footer>
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        activateNavLink(entry.target.id);
-                    }
-                });
-            }, { rootMargin: '-40% 0px -60% 0px' });
-
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-        });
-    </script>
 </body>
 </html>
