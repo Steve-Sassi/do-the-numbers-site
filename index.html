@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do The Numbers - B2B AI Consulting</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for neon accents, typography, and animations */
+        :root {
+            --neon-green: #39ff14;
+            --neon-glow: 0 0 3px var(--neon-green), 0 0 8px var(--neon-green), 0 0 15px var(--neon-green);
+            --font-primary: 'Inter', 'ui-sans-serif', 'system-ui', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: #0A0A0A;
+            color: #E5E7EB;
+            font-family: var(--font-primary);
+        }
+        .neon-text {
+            color: var(--neon-green);
+            text-shadow: var(--neon-glow);
+        }
+        .nav-link-active {
+            color: var(--neon-green);
+            text-shadow: var(--neon-glow);
+        }
+        .service-card {
+            background-color: #111827;
+            border: 1px solid #1F2937;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(57, 255, 20, 0.1), 0 4px 6px -2px rgba(57, 255, 20, 0.05);
+        }
+        .font-sans {
+             font-family: var(--font-primary);
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans">
+    <div class="container mx-auto p-8">
+        <header class="sticky top-0 z-50 bg-gray-900/80 backdrop-blur-sm py-4">
+            <div class="container mx-auto flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl font-black neon-text">DO THE NUMBERS</h1>
+                    <p class="text-sm text-gray-400">B2B AI & Vibe Coding Consulting</p>
+                </div>
+                <nav>
+                    <a href="#services" class="text-lg text-gray-300 hover:text-green-400 transition-colors px-4 py-2 rounded-md">Services</a>
+                    <a href="#about" class="text-lg text-gray-300 hover:text-green-400 transition-colors px-4 py-2 rounded-md">About</a>
+                    <a href="#contact" class="text-lg text-gray-300 hover:text-green-400 transition-colors px-4 py-2 rounded-md">Contact</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="pt-12">
+            <section id="hero" class="text-center my-16">
+                <h2 class="text-6xl font-black mb-4 leading-tight">Human-Centric AI Development</h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    We translate your business goals into enterprise-grade AI applications using the power of natural language and 'vibe coding'.
+                </p>
+                <a href="#contact" class="mt-8 inline-block bg-green-500 text-gray-900 font-bold py-3 px-8 rounded-lg hover:bg-green-400 transition-colors transform hover:scale-105">
+                    Schedule a Consultation
+                </a>
+            </section>
+
+            <section id="services" class="mt-32">
+                <h2 class="text-4xl font-bold text-center mb-12"><span class="neon-text">Our</span> Services</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="service-card p-8 rounded-lg">
+                        <h3 class="text-2xl font-bold mb-4">Vibe Coding Workshops</h3>
+                        <p class="text-gray-400">Intensive, hands-on training for your development teams. We empower your engineers to build at the speed of thought, turning natural language into robust applications.</p>
+                    </div>
+                    <div class="service-card p-8 rounded-lg">
+                        <h3 class="text-2xl font-bold mb-4">Enterprise AI Integration</h3>
+                        <p class="text-gray-400">We design, architect, and deploy bespoke AI solutions that seamlessly integrate with your existing enterprise systems, enhancing efficiency and unlocking new capabilities.</p>
+                    </div>
+                    <div class="service-card p-8 rounded-lg">
+                        <h3 class="text-2xl font-bold mb-4">PoC to Production</h3>
+                        <p class="text-gray-400">From a spark of an idea to a fully-functional proof-of-concept and beyond. We help you validate your vision, secure stakeholder buy-in, and scale for production.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="about" class="mt-32 max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl font-bold text-center mb-8"><span class="neon-text">The</span> Philosophy</h2>
+                <p class="text-lg text-gray-300 leading-relaxed">
+                    Do The Numbers is a collective of elite developers and strategists pioneering the next wave of software development. We believe the most powerful code is the one that's understood by everyone, not just machines. We replace complex syntax with intuitive, natural language, helping enterprises shed legacy cycles and embrace a faster, more creative, and more impactful way of building technology.
+                </p>
+            </section>
+        </main>
+
+        <footer id="contact" class="text-center mt-32 bg-gray-800/50 py-16 rounded-lg border border-gray-700">
+            <h2 class="text-4xl font-bold mb-4 neon-text">Let's Build the Future</h2>
+            <p class="text-lg text-gray-300 mb-8">Ready to transform your development process? Get in touch.</p>
+            <a href="mailto:hello@do-the-numbers.com" class="text-xl text-green-400 hover:text-green-300 underline font-semibold">
+                hello@do-the-numbers.com
+            </a>
+            <div class="mt-12 text-gray-500">
+                &copy; 2026 Do The Numbers. All rights reserved.
+            </div>
+        </footer>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a');
+
+            if (!sections.length || !navLinks.length) return;
+
+            const activateNavLink = (id) => {
+                navLinks.forEach(link => {
+                    link.classList.remove('nav-link-active');
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('nav-link-active');
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        activateNavLink(entry.target.id);
+                    }
+                });
+            }, { rootMargin: '-40% 0px -60% 0px' });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
