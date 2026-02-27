@@ -3,7 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Do The Numbers - B2B AI Consulting</title>
+    <title>AI Sales Enablement Training | DTN Consulting</title>
+    <meta name="description" content="Train your enterprise sales team to build AI agents that automate busywork. Former sales leaders teaching vibe coding for CRM automation, meeting prep, and pipeline management.">
+    <meta name="keywords" content="AI sales enablement, sales AI training, AI sales assistant, enterprise sales automation, vibe coding, sales team AI, CRM automation, B2B sales AI">
+    <meta property="og:title" content="AI Sales Enablement Training | DTN Consulting">
+    <meta property="og:description" content="Sales leaders teaching sales teams to build AI agents. Automate the busywork. Reclaim selling time.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://do-the-numbers.com/">
+    <meta property="og:image" content="https://do-the-numbers.com/images/Sales-Enablement-Agent.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Sales Enablement Training | DTN Consulting">
+    <meta name="twitter:description" content="Sales leaders teaching sales teams to build AI agents that automate admin work.">
+    <link rel="canonical" href="https://do-the-numbers.com/">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "DTN Consulting",
+        "description": "AI Sales Enablement Training. We train enterprise sales teams to build AI agents using vibe coding.",
+        "url": "https://do-the-numbers.com",
+        "logo": "https://do-the-numbers.com/favicon.svg",
+        "sameAs": [
+            "https://www.linkedin.com/in/steve-sassi",
+            "https://www.linkedin.com/in/nicholasbianco"
+        ],
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "US"
+        },
+        "priceRange": "$$$$",
+        "serviceType": ["AI Sales Enablement Training", "Vibe Coding Implementation", "Digital Transformation Strategy", "Cloud AI Integration"],
+        "areaServed": "Worldwide",
+        "founder": [
+            {
+                "@type": "Person",
+                "name": "Steve Sassi",
+                "jobTitle": "Managing Partner & Principal Transformation Strategist"
+            },
+            {
+                "@type": "Person",
+                "name": "Nick Bianco",
+                "jobTitle": "Partner & Technical Advisor"
+            }
+        ]
+    }
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -61,14 +109,21 @@
                 <a href="#services" class="text-gray-300 hover:text-green-400 transition-colors">Services</a>
                 <a href="about.html" class="text-gray-300 hover:text-green-400 transition-colors">About Us</a>
                 <a href="#contact" class="text-gray-300 hover:text-green-400 transition-colors">Get Guide</a>
-                <a href="#" class="bg-gray-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-600 transition-colors">Book a Call</a>
+                <a href="book.html" class="bg-green-500 text-gray-900 font-bold py-2 px-4 rounded-lg hover:bg-green-400 transition-colors">Book a Call</a>
             </div>
-            <button class="md:hidden text-white" aria-label="Open menu">
+            <button id="mobile-menu-btn" class="md:hidden text-white" aria-label="Open menu">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
             </button>
         </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden container mx-auto mt-4 pb-4 border-b border-gray-800">
+            <a href="index.html#services" class="block py-2 text-gray-300 hover:text-green-400">Services</a>
+            <a href="about.html" class="block py-2 text-gray-300 hover:text-green-400">About Us</a>
+            <a href="index.html#contact" class="block py-2 text-gray-300 hover:text-green-400">Get Guide</a>
+            <a href="book.html" class="block py-2 text-green-400 font-bold">Book a Call</a>
+        </div>
     </header>
 
     <main>
@@ -82,7 +137,7 @@
                 <a href="#services" class="inline-block bg-green-500 text-gray-900 font-bold py-3 px-6 md:px-8 rounded-lg hover:bg-green-400 transition-colors transform hover:scale-105">
                     Explore Services
                 </a>
-                <a href="#" class="inline-block bg-gray-700 text-white font-bold py-3 px-6 md:px-8 rounded-lg hover:bg-gray-600 transition-colors transform hover:scale-105">
+                <a href="book.html" class="inline-block bg-gray-700 text-white font-bold py-3 px-6 md:px-8 rounded-lg hover:bg-gray-600 transition-colors transform hover:scale-105">
                     Book a Strategy Call
                 </a>
             </div>
@@ -193,12 +248,60 @@
             </div>
         </section>
 
+        <!-- Social Proof / Results Section -->
+        <section id="results" class="py-16 md:py-24">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold mb-4">Why Sales Leaders Choose Us</h2>
+                    <p class="text-gray-400 max-w-2xl mx-auto">We're not tech consultants teaching sales. We're sales veterans who mastered AI.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <!-- Stat 1 -->
+                    <div class="text-center p-6">
+                        <div class="text-5xl font-black neon-text mb-2">20+</div>
+                        <p class="text-gray-300 font-semibold">Years Enterprise Sales Experience</p>
+                        <p class="text-gray-500 text-sm mt-2">Fortune 500 go-to-market strategy at Informatica, Pivotree, and more.</p>
+                    </div>
+                    <!-- Stat 2 -->
+                    <div class="text-center p-6">
+                        <div class="text-5xl font-black neon-text mb-2">$MM</div>
+                        <p class="text-gray-300 font-semibold">AI & Cloud Deals Closed</p>
+                        <p class="text-gray-500 text-sm mt-2">Multi-million dollar enterprise transformations on Azure, GCP, and AWS.</p>
+                    </div>
+                    <!-- Stat 3 -->
+                    <div class="text-center p-6">
+                        <div class="text-5xl font-black neon-text mb-2">100%</div>
+                        <p class="text-gray-300 font-semibold">Sales-First Approach</p>
+                        <p class="text-gray-500 text-sm mt-2">We speak revenue, pipeline, and quota. Not just tech jargon.</p>
+                    </div>
+                </div>
+
+                <!-- Testimonial Placeholder -->
+                <div class="mt-16 max-w-3xl mx-auto">
+                    <div class="bg-gray-900 border border-gray-800 rounded-lg p-8 text-center">
+                        <svg class="w-10 h-10 text-green-400 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                        </svg>
+                        <p class="text-xl text-gray-300 italic mb-6">"Add your first client testimonial here. This section will be powerful once you have quotes from sales leaders whose teams you've trained."</p>
+                        <p class="text-green-400 font-semibold">— Future Client</p>
+                        <p class="text-gray-500 text-sm">VP of Sales, Enterprise Company</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Lead Capture Section -->
         <section id="contact" class="py-16 md:py-24">
             <div class="container mx-auto px-4 max-w-2xl text-center">
                 <h2 class="text-4xl md:text-5xl font-bold mb-4">Ready to stop typing and <span class="neon-text">start building?</span></h2>
                 <p class="text-gray-400 mb-8">Get the free guide to enterprise vibe coding and see what's possible.</p>
-                <form action="#" method="POST" class="w-full max-w-lg mx-auto">
+                <div class="mb-6">
+                    <a href="guide.html" class="inline-block bg-green-500 text-gray-900 font-bold py-3 px-8 rounded-lg hover:bg-green-400 transition-colors transform hover:scale-105">
+                        Get the Free Guide
+                    </a>
+                </div>
+                <p class="text-gray-500 text-sm mb-4">Or enter your email for a quick download:</p>
+                <form action="https://formspree.io/f/placeholder" method="POST" class="w-full max-w-lg mx-auto">
                     <div class="flex flex-col md:flex-row gap-4 mb-4">
                         <label for="name" class="sr-only">Name</label>
                         <input type="text" id="name" name="name" class="form-input w-full px-4 py-3 rounded-md" placeholder="Your Name" required>
@@ -215,10 +318,25 @@
     </main>
 
     <footer class="border-t border-gray-800 mt-16 md:mt-24 py-8">
-        <div class="container mx-auto text-center text-gray-500">
-            <p>&copy; 2026 DTN Consulting. All rights reserved.</p>
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500">&copy; 2026 DTN Consulting. All rights reserved.</p>
+                <div class="flex items-center space-x-6">
+                    <a href="privacy.html" class="text-gray-500 hover:text-green-400 transition-colors">Privacy Policy</a>
+                    <a href="https://www.linkedin.com/in/steve-sassi" target="_blank" rel="noopener" class="text-gray-500 hover:text-green-400 transition-colors" aria-label="Steve's LinkedIn">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                </div>
+            </div>
         </div>
     </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
 
 </body>
 </html>
