@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Enterprise AI Playbook | DTN Consulting</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --neon: #39ff14;
+    --bg: #0A0A0A;
+    --card: #111827;
+    --border: #1F2937;
+    --text: #E5E7EB;
+    --muted: #9CA3AF;
+    --dim: #6B7280;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 11pt;
+    line-height: 1.7;
+  }
+
+  /* ── COVER PAGE ─────────────────────────────── */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 72px;
+    page-break-after: always;
+    position: relative;
+    border-bottom: 4px solid var(--neon);
+  }
+
+  .cover-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 80px;
+  }
+
+  .cover-logo svg { width: 48px; height: 48px; }
+
+  .cover-logo-text {
+    font-size: 22pt;
+    font-weight: 900;
+    color: var(--neon);
+    text-shadow: 0 0 12px rgba(57,255,20,0.5);
+    letter-spacing: -0.5px;
+  }
+
+  .cover-eyebrow {
+    font-size: 9pt;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--neon);
+    margin-bottom: 20px;
+  }
+
+  .cover h1 {
+    font-size: 38pt;
+    font-weight: 900;
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+  }
+
+  .cover h1 span {
+    color: var(--neon);
+    text-shadow: 0 0 20px rgba(57,255,20,0.4);
+  }
+
+  .cover-sub {
+    font-size: 16pt;
+    font-weight: 700;
+    color: var(--muted);
+    margin-bottom: 48px;
+  }
+
+  .cover-meta {
+    font-size: 9pt;
+    color: var(--dim);
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* ── PAGE SHELL ─────────────────────────────── */
+  .page {
+    padding: 64px 72px;
+    page-break-after: always;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .page:last-child { page-break-after: avoid; }
+
+  /* ── RUNNING HEADER ─────────────────────────── */
+  .running-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 8pt;
+    color: var(--dim);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .running-header span { color: var(--neon); }
+
+  /* ── SECTION LABELS ─────────────────────────── */
+  .part-label {
+    display: inline-block;
+    font-size: 8pt;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--neon);
+    background: rgba(57,255,20,0.08);
+    border: 1px solid rgba(57,255,20,0.25);
+    padding: 4px 12px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+  }
+
+  /* ── HEADINGS ───────────────────────────────── */
+  h2 {
+    font-size: 22pt;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+  }
+
+  h2 .accent { color: var(--neon); text-shadow: 0 0 10px rgba(57,255,20,0.3); }
+
+  h3 {
+    font-size: 14pt;
+    font-weight: 700;
+    color: var(--neon);
+    margin-top: 32px;
+    margin-bottom: 10px;
+  }
+
+  h4 {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #fff;
+    margin-top: 20px;
+    margin-bottom: 6px;
+  }
+
+  /* ── BODY TEXT ──────────────────────────────── */
+  p { margin-bottom: 14px; color: var(--text); }
+
+  .lead {
+    font-size: 13pt;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 20px;
+  }
+
+  /* ── FOUNDER NOTE ───────────────────────────── */
+  .founder-note {
+    background: var(--card);
+    border-left: 4px solid var(--neon);
+    border-radius: 8px;
+    padding: 32px 36px;
+    margin-bottom: 32px;
+  }
+
+  .founder-note p { color: #D1FAE5; margin-bottom: 12px; }
+  .founder-note p:last-child { margin-bottom: 0; }
+
+  .founder-sig {
+    margin-top: 20px;
+    font-weight: 700;
+    color: var(--neon) !important;
+    font-size: 10pt;
+  }
+
+  /* ── HERO IMAGE ─────────────────────────────── */
+  .hero-image {
+    width: 100%;
+    border-radius: 10px;
+    margin: 28px 0;
+    display: block;
+    border: 1px solid var(--border);
+  }
+
+  /* ── USE CASE CARDS ─────────────────────────── */
+  .use-case {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    page-break-inside: avoid;
+  }
+
+  .use-case-number {
+    font-size: 8pt;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--neon);
+    margin-bottom: 8px;
+  }
+
+  .use-case h3 {
+    font-size: 13pt;
+    color: #fff;
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+
+  .uc-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-top: 12px;
+  }
+
+  .uc-col { }
+
+  .uc-col-label {
+    font-size: 7.5pt;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--neon);
+    margin-bottom: 5px;
+  }
+
+  .uc-col p { font-size: 9.5pt; color: var(--muted); margin: 0; }
+
+  /* ── TRIPLE A ───────────────────────────────── */
+  .triple-a-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .triple-a-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--neon);
+    border-radius: 8px;
+    padding: 24px 20px;
+    page-break-inside: avoid;
+  }
+
+  .triple-a-letter {
+    font-size: 36pt;
+    font-weight: 900;
+    color: var(--neon);
+    text-shadow: 0 0 16px rgba(57,255,20,0.35);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .triple-a-card h4 {
+    font-size: 12pt;
+    color: #fff;
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+
+  .triple-a-card p { font-size: 9.5pt; color: var(--muted); margin: 0; }
+
+  /* ── BULLET LISTS ───────────────────────────── */
+  ul {
+    list-style: none;
+    margin: 12px 0 16px 0;
+  }
+
+  ul li {
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 7px;
+    color: var(--text);
+    font-size: 10.5pt;
+  }
+
+  ul li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: var(--neon);
+    font-size: 9pt;
+  }
+
+  /* ── OBJECTION HANDLING ─────────────────────── */
+  .objection {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+    page-break-inside: avoid;
+  }
+
+  .objection-q {
+    font-size: 10.5pt;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+    font-style: italic;
+  }
+
+  .objection p { font-size: 10pt; color: var(--muted); margin: 0; }
+
+  /* ── TIMELINE ───────────────────────────────── */
+  .timeline { margin-top: 20px; }
+
+  .timeline-item {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    page-break-inside: avoid;
+  }
+
+  .timeline-marker {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    background: rgba(57,255,20,0.1);
+    border: 2px solid var(--neon);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8pt;
+    font-weight: 900;
+    color: var(--neon);
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  .timeline-content h4 { margin-top: 4px; }
+  .timeline-content p { font-size: 10pt; color: var(--muted); margin-top: 4px; }
+
+  /* ── TESTIMONIAL ────────────────────────────── */
+  .testimonial {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 32px 36px;
+    text-align: center;
+    margin: 28px 0;
+    page-break-inside: avoid;
+  }
+
+  .testimonial-quote {
+    font-size: 13pt;
+    font-style: italic;
+    color: #D1FAE5;
+    line-height: 1.65;
+    margin-bottom: 20px;
+  }
+
+  .testimonial-name {
+    font-weight: 700;
+    color: var(--neon);
+    font-size: 10pt;
+  }
+
+  .testimonial-title {
+    color: var(--dim);
+    font-size: 9pt;
+    margin-top: 4px;
+  }
+
+  /* ── TEAM BIOS ──────────────────────────────── */
+  .bio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .bio-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    page-break-inside: avoid;
+  }
+
+  .bio-name {
+    font-size: 13pt;
+    font-weight: 900;
+    color: var(--neon);
+    margin-bottom: 2px;
+  }
+
+  .bio-title {
+    font-size: 9pt;
+    color: var(--dim);
+    margin-bottom: 12px;
+  }
+
+  .bio-card p { font-size: 9.5pt; color: var(--muted); margin: 0; }
+
+  /* ── CTA BLOCK ──────────────────────────────── */
+  .cta-block {
+    background: linear-gradient(135deg, rgba(57,255,20,0.08) 0%, rgba(57,255,20,0.02) 100%);
+    border: 1px solid rgba(57,255,20,0.3);
+    border-radius: 12px;
+    padding: 40px 48px;
+    text-align: center;
+    margin-top: 32px;
+  }
+
+  .cta-block h2 { font-size: 20pt; margin-bottom: 10px; }
+
+  .cta-block p { color: var(--muted); margin-bottom: 20px; font-size: 11pt; }
+
+  .cta-url {
+    display: inline-block;
+    background: var(--neon);
+    color: #0A0A0A;
+    font-weight: 900;
+    font-size: 12pt;
+    padding: 14px 36px;
+    border-radius: 8px;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+  }
+
+  /* ── DIVIDER ────────────────────────────────── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 32px 0;
+  }
+
+  /* ── STATS ROW ──────────────────────────────── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .stat-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 28pt;
+    font-weight: 900;
+    color: var(--neon);
+    text-shadow: 0 0 12px rgba(57,255,20,0.3);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 9pt;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .stat-desc { font-size: 8.5pt; color: var(--dim); }
+
+  /* ── FOOTER ─────────────────────────────────── */
+  .doc-footer {
+    margin-top: auto;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 8pt;
+    color: var(--dim);
+  }
+
+  .doc-footer span { color: var(--neon); }
+
+  /* ── PRINT ──────────────────────────────────── */
+  @media print {
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     COVER PAGE
+═══════════════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-logo">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 80V20 L40 20 L40 60 L60 20 L80 20 L50 65 L80 65 L80 80 L20 80Z" fill="white"/>
+      <path d="M50 65L80 65L80 80L20 80V75" stroke="#39ff14" stroke-width="4"/>
+    </svg>
+    <span class="cover-logo-text">DTN Consulting</span>
+  </div>
+
+  <div class="cover-eyebrow">Sales Leaders Teaching Sales Teams to Master AI</div>
+
+  <h1>The Enterprise<br>AI Playbook<br><span>for Sales Teams</span></h1>
+
+  <div class="cover-sub">How Sales Teams Are Using AI Vibe Coding<br>to Close More Deals</div>
+
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="stat-number">20+</div>
+      <div class="stat-label">Years Enterprise Sales</div>
+      <div class="stat-desc">Fortune 500 experience across Informatica, Pivotree & more</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">$50MM+</div>
+      <div class="stat-label">AI & Cloud Deals Closed</div>
+      <div class="stat-desc">Enterprise transformations on Azure, GCP, and AWS</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">100%</div>
+      <div class="stat-label">Sales-First Approach</div>
+      <div class="stat-desc">We speak revenue, pipeline, and quota — not tech jargon</div>
+    </div>
+  </div>
+
+  <div class="cover-meta">
+    <span>© 2026 DTN Consulting — do-the-numbers.com</span>
+    <span>steve@do-the-numbers.com</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     PAGE 2 — FOUNDER'S NOTE + IMAGE
+═══════════════════════════════════════════════ -->
+<div class="page">
+  <div class="running-header">
+    <span>DTN Consulting</span>
+    <span>The Enterprise AI Playbook</span>
+  </div>
+
+  <div class="part-label">A Note from the Managing Partner</div>
+  <h2>Steve Sassi,<br><span class="accent">Managing Partner</span></h2>
+
+  <div class="founder-note">
+    <p>I've spent over 20 years in enterprise sales — at Informatica, Pivotree, and across dozens of Fortune 500 engagements. I've seen every wave of technology promise to "transform" the sales process. Most of them didn't.</p>
+    <p>AI is different. Your reps, vibe coding in plain language, in true collaboration with the bots, changes everything.</p>
+    <p>Forget the hype. Forget the headlines. That's for the stock market. We're going to teach you the nitty-gritty practical details of why AI — with the power of Vibe Coding — will change your bottom line. I've watched it change the day-to-day reality of what a sales rep can accomplish in an hour. The reps who are using AI correctly aren't working harder — they're working with a leverage that didn't exist even 6 months ago.</p>
+    <p>This playbook is not a tech manual. It's a sales leader's guide to understanding what AI actually does in a revenue organization, where it creates real competitive advantage, and how to bring your team along without the risk, the chaos, or the false starts.</p>
+    <p>The sales team that masters AI will win. This is how yours does it.</p>
+    <p class="founder-sig">— Steve Sassi, Managing Partner, DTN Consulting</p>
+  </div>
+
+  <img src="../images/Sales-Enablement-Agent.png" alt="AI Sales Enablement" class="hero-image">
+
+  <div class="doc-footer">
+    <span>do-the-numbers.com</span>
+    <span style="color:var(--neon)">The Enterprise AI Playbook for Sales Teams</span>
+    <span>© 2026 DTN Consulting</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     PAGE 3 — WHY THIS MOMENT MATTERS
+═══════════════════════════════════════════════ -->
+<div class="page">
+  <div class="running-header">
+    <span>DTN Consulting</span>
+    <span>Part One: Why This Moment Matters</span>
+  </div>
+
+  <div class="part-label">Part One</div>
+  <h2>Why This Moment <span class="accent">Matters</span></h2>
+
+  <h3>The Shift Is Already Happening</h3>
+  <p>Your competitors' sales teams are already experimenting with AI. Some of them are doing it well. Most of them are doing it wrong — pasting prompts into ChatGPT and calling it a strategy. But a small percentage are vibe coding in plain language and building real workflows that are changing how they prospect, prepare, follow up, and close.</p>
+  <p>That gap is going to widen fast.</p>
+  <p>The question for every sales leader right now is not <em>whether</em> to embrace AI. That decision has already been made by the market. The question is: <strong style="color:#fff">will your team be in front of this, or scrambling to catch up?</strong></p>
+
+  <h3>What AI Actually Does for a Sales Team</h3>
+  <p>Let's be precise, because this is where most of the confusion lives.</p>
+  <p>AI does not replace salespeople. It does not make calls, build relationships, or earn trust. What it does is eliminate the administrative burden that keeps your best reps from doing the things only humans can do.</p>
+
+  <p><strong style="color:#fff">Think about where your reps' time actually goes in a given week:</strong></p>
+  <ul>
+    <li>Writing follow-up emails after meetings</li>
+    <li>Researching prospects before calls</li>
+    <li>Updating CRM records</li>
+    <li>Preparing for QBRs and pipeline reviews</li>
+    <li>Building custom decks and proposals</li>
+    <li>Summarizing calls and sending recaps</li>
+  </ul>
+
+  <p>These tasks are necessary. They are also not selling. AI can handle most of them — faster, more consistently, and without draining the energy your reps need to close.</p>
+  <p>The result is not a smaller team. It's a more effective one. We think of it as bringing back the dedicated executive assistant — except this one works around the clock, never forgets a detail, and integrates directly into the tools your team already uses.</p>
+
+  <div class="doc-footer">
+    <span>do-the-numbers.com</span>
+    <span style="color:var(--neon)">The Enterprise AI Playbook for Sales Teams</span>
+    <span>© 2026 DTN Consulting</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     PAGE 4 — USE CASES 1–3
+═══════════════════════════════════════════════ -->
+<div class="page">
+  <div class="running-header">
+    <span>DTN Consulting</span>
+    <span>Part Two: The Five AI Use Cases</span>
+  </div>
+
+  <div class="part-label">Part Two</div>
+  <h2>The Five AI Use Cases<br><span class="accent">That Are Changing Sales</span></h2>
+  <p class="lead">These are the highest-impact areas where enterprise sales teams are deploying AI right now, listed in order of ease of implementation.</p>
+
+  <div class="use-case">
+    <div class="use-case-number">Use Case 01</div>
+    <h3>AI-Assisted Prospect Research</h3>
+    <div class="uc-row">
+      <div class="uc-col">
+        <div class="uc-col-label">The Problem</div>
+        <p>Reps spend 30–60 minutes researching a prospect before a first call — pulling from LinkedIn, company websites, news, and CRM. The result is inconsistent and time-consuming.</p>
+      </div>
+      <div class="uc-col">
+        <div class="uc-col-label">The AI Solution</div>
+        <p>A well-designed AI workflow generates a comprehensive prospect brief in under two minutes — covering recent news, background, pain points, and talking points aligned to your solution.</p>
+      </div>
+      <div class="uc-col">
+        <div class="uc-col-label">The Result</div>
+        <p>Reps walk into every call more prepared. Call quality improves. Conversion from first call to second meeting increases immediately.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="use-case">
+    <div class="use-case-number">Use Case 02</div>
+    <h3>AI-Powered Follow-Up and Email Drafting</h3>
+    <div class="uc-row">
+      <div class="uc-col">
+        <div class="uc-col-label">The Problem</div>
+        <p>Post-meeting follow-up is critical — and one of the most inconsistently executed touchpoints. Some reps send detailed follow-ups in an hour. Others send generic notes two days later.</p>
+      </div>
+      <div class="uc-col">
+        <div class="uc-col-label">The AI Solution</div>
+        <p>An AI workflow triggered after a meeting drafts a personalized follow-up referencing specific conversation points, next steps, and relevant resources. The rep reviews and sends in minutes.</p>
+      </div>
+      <div class="uc-col">
+        <div class="uc-col-label">The Result</div>
+        <p>Follow-up quality becomes consistent across the entire team. Speed to follow-up improves dramatically. Prospects receive a more professional, attentive experience every time.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="use-case">
+    <div class="use-case-number">Use Case 03</div>
+    <h3>AI-Driven Pipeline Management and Forecasting</h3>
+    <div class="uc-row">
+      <div class="uc-col">
+        <div class="uc-col-label">The Problem</div>
+        <p>CRM hygiene is the bane of every sales leader's existence. Reps don't update records consistently. Forecast accuracy suffers. Deal reviews become exercises in data archaeology.</p>
+      </div>
+      <div class="uc-col">
+        <div class="uc-col-label">The AI Solution</div>
+        <p>AI workflows listen to call recordings, read email threads, and automatically update CRM records — flagging deals that have gone quiet and surfacing next steps that haven't been actioned.</p>
+      </div>
+      <div class="uc-col">
+        <div class="uc-col-label">The Result</div>
+        <p>CRM data stays current without manual rep effort. Forecast accuracy improves. Sales leaders spend deal reviews on strategy, not data cleanup.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    <span>do-the-numbers.com</span>
+    <span style="color:var(--neon)">The Enterprise AI Playbook for Sales Teams</span>
+    <span>© 2026 DTN Consulting</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     PAGE 5 — USE CASES 4–5
+═══════════════════════════════════════════════ -->
+<div class="page">
+  <div class="running-header">
+    <span>DTN Consulting</span>
+    <span>Part Two: The Five AI Use Cases (continued)</span>
+  </div>
+
+  <div class="use-case">
+    <div class="use-case-number">Use Case 04</div>
+    <h3>AI-Assisted Proposal and Deck Creation</h3>
+    <div class="uc-row">
+      <div class="uc-col">
+        <div class="uc-col-label">The Problem</div>
+        <p>Building custom proposals is one of the most time-intensive tasks in enterprise sales. A rep might spend 4–8 hours building a proposal for a single deal.</p>
+      </div>
+      <div class="uc-col">
+        <div class="uc-col-label">The AI Solution</div>
+        <p>AI workflows take a deal brief as input and generate a first-draft proposal or deck — pre-populated with case studies, customized messaging, and a financial model. The rep refines rather than builds from scratch.</p>
+      </div>
+      <div class="uc-col">
+        <div class="uc-col-label">The Result</div>
+        <p>Proposal creation drops from hours to minutes. Quality and consistency improve. Reps respond to RFPs faster and pursue more opportunities simultaneously.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="use-case">
+    <div class="use-case-number">Use Case 05</div>
+    <h3>Custom AI Agents Integrated Into Your Sales Stack</h3>
+    <div class="uc-row">
+      <div class="uc-col">
+        <div class="uc-col-label">The Problem</div>
+        <p>Most sales teams use Salesforce or HubSpot, Outreach or Salesloft, LinkedIn Sales Navigator, Slack, and more. These tools don't talk to each other intelligently. Data sits in silos. Context is lost.</p>
+      </div>
+      <div class="uc-col">
+        <div class="uc-col-label">The AI Solution</div>
+        <p>Custom AI agents built across your existing stack — connecting your CRM, communication tools, calendar, and data sources — give your reps a single intelligent interface that surfaces the right information at the right moment.</p>
+      </div>
+      <div class="uc-col">
+        <div class="uc-col-label">The Result</div>
+        <p>This is the executive assistant model at scale. The agent handles the orchestration. The rep handles the relationship. This is the use case that transforms the entire workflow.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="testimonial">
+    <div class="testimonial-quote">"DTN Consulting held us accountable every single day. We came up with a plan together, and they made sure we stuck to it. The result helped us grow very quickly."</div>
+    <div class="testimonial-name">Truda Stockenstrom</div>
+    <div class="testimonial-title">Chief Financial Officer, Quantum Global Advisors & Business Sweden</div>
+  </div>
+
+  <div class="doc-footer">
+    <span>do-the-numbers.com</span>
+    <span style="color:var(--neon)">The Enterprise AI Playbook for Sales Teams</span>
+    <span>© 2026 DTN Consulting</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     PAGE 6 — TRIPLE A APPROACH
+═══════════════════════════════════════════════ -->
+<div class="page">
+  <div class="running-header">
+    <span>DTN Consulting</span>
+    <span>Part Three: The Triple A Approach</span>
+  </div>
+
+  <div class="part-label">Part Three</div>
+  <h2>The DTN <span class="accent">Triple A Approach</span></h2>
+  <p class="lead">Every engagement we run — whether it's a one-day workshop or a full custom implementation — follows the same three-part framework.</p>
+
+  <div class="triple-a-grid">
+    <div class="triple-a-card">
+      <div class="triple-a-letter">A</div>
+      <h4>Aim</h4>
+      <p>Before we touch a single tool, we sit down with your leadership team and define success in measurable terms. Which part of your sales process has the most friction? What would a 20% reduction in admin time mean for your pipeline? The Aim phase ensures we're solving the right problem — not just implementing technology for its own sake.</p>
+    </div>
+    <div class="triple-a-card">
+      <div class="triple-a-letter">A</div>
+      <h4>Architecture</h4>
+      <p>There is no universal AI sales solution. We design a solution that fits your team — your tools, your process, your culture, your compliance requirements. We select the right AI models, build the right integrations, and create the right experience for your reps. We come to this as sales practitioners, not technologists — we know what reps will actually use.</p>
+    </div>
+    <div class="triple-a-card">
+      <div class="triple-a-letter">A</div>
+      <h4>Accountability</h4>
+      <p>The most common failure in AI adoption isn't the technology. It's the change management. Teams get excited in the kickoff, struggle through the learning curve, and quietly revert to old habits within 90 days. We don't let that happen. We set targets, track them weekly, and hold ourselves — and your team — to them.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="part-label">Part Four</div>
+  <h2>AI Adoption <span class="accent">Without the Risk</span></h2>
+  <p class="lead">We hear the same concerns from sales leaders across every industry. They're valid. Here's how we address them.</p>
+
+  <div class="objection">
+    <div class="objection-q">"I'm worried about data security and compliance."</div>
+    <p>Every workflow we design is built with your data governance requirements in mind. We don't connect tools that shouldn't be connected, we don't store sensitive data in unsecured environments, and we work within your existing IT and legal frameworks. If you're in a regulated industry, we've worked in regulated environments.</p>
+  </div>
+
+  <div class="objection">
+    <div class="objection-q">"My reps won't adopt new tools."</div>
+    <p>The reason reps don't adopt new tools is usually one of two things: the tool doesn't actually make their job easier, or they weren't trained in a way that made it click. We solve both. Every workflow we build is tested with actual reps before rollout, and our training is built by salespeople — not instructional designers who've never run a pipeline review.</p>
+  </div>
+
+  <div class="objection">
+    <div class="objection-q">"We tried AI before and it didn't work."</div>
+    <p>Usually, what happened was that someone subscribed to a tool, turned it on, and hoped for the best. AI implementation requires intentional design. The tool is 20% of the outcome. The workflow, the training, and the accountability are the other 80%. That's what we provide.</p>
+  </div>
+
+  <div class="objection">
+    <div class="objection-q">"How do we know if it's working?"</div>
+    <p>We establish baseline metrics before we start and track against them throughout the engagement — time-to-follow-up, call prep time, CRM update frequency, pipeline coverage ratio. You'll know it's working because you'll see it in the numbers.</p>
+  </div>
+
+  <div class="doc-footer">
+    <span>do-the-numbers.com</span>
+    <span style="color:var(--neon)">The Enterprise AI Playbook for Sales Teams</span>
+    <span>© 2026 DTN Consulting</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     PAGE 7 — GET STARTED + TEAM + CTA
+═══════════════════════════════════════════════ -->
+<div class="page">
+  <div class="running-header">
+    <span>DTN Consulting</span>
+    <span>Part Five: How to Get Started</span>
+  </div>
+
+  <div class="part-label">Part Five</div>
+  <h2>How to <span class="accent">Get Started</span></h2>
+  <p>Getting started with AI sales enablement doesn't require a massive infrastructure overhaul or a six-month implementation. Most teams can see meaningful results in 30 to 60 days.</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-marker">WK<br>1–2</div>
+      <div class="timeline-content">
+        <h4>Discovery & Aim</h4>
+        <p>We meet with your sales leadership and a cross-section of reps. We map your current workflow, identify the highest-friction areas, and define success metrics that matter to your business.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-marker">WK<br>3–4</div>
+      <div class="timeline-content">
+        <h4>Design & Pilot</h4>
+        <p>We design the first workflows and deploy them with a small pilot group — typically 3 to 5 reps. We gather feedback and refine before broader rollout.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-marker">WK<br>5–8</div>
+      <div class="timeline-content">
+        <h4>Rollout & Training</h4>
+        <p>We roll out to the full team with structured training, manager enablement, and ongoing support. We track adoption metrics weekly and address friction in real time.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-marker">WK<br>9+</div>
+      <div class="timeline-content">
+        <h4>Optimization & Expansion</h4>
+        <p>We review what's working, optimize underperforming workflows, and identify the next area to automate. Most teams find 2–3 additional high-value use cases within the first 90 days.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="part-label">About DTN Consulting</div>
+  <h2>The Team <span class="accent">Behind the Playbook</span></h2>
+
+  <div class="bio-grid">
+    <div class="bio-card">
+      <div class="bio-name">Steve Sassi</div>
+      <div class="bio-title">Managing Partner & Principal Transformation Strategist</div>
+      <p>20+ years of enterprise sales leadership at Informatica, Pivotree, and Fortune 500 organizations. Recognized multiple times as a top global sales performer. Specializes in AI-powered go-to-market strategy and sales team enablement.</p>
+    </div>
+    <div class="bio-card">
+      <div class="bio-name">Nick Bianco</div>
+      <div class="bio-title">Partner & Technical Advisor</div>
+      <p>15+ years as an Enterprise IT Executive at IBM and Merative. Deep expertise in cloud architecture, AI integration, and enterprise systems. Co-Founder of Spiritus Coffee Co. Brings ground-level technical precision to every engagement.</p>
+    </div>
+  </div>
+
+  <div class="cta-block">
+    <h2>Ready to Build Your <span class="accent">AI-Enabled Sales Team?</span></h2>
+    <p>Book a free 30-minute strategy call. We'll identify your highest-impact starting point and map out a 90-day plan to get there.</p>
+    <span class="cta-url">do-the-numbers.com/book</span>
+  </div>
+
+  <div class="doc-footer" style="margin-top:24px;">
+    <span>do-the-numbers.com</span>
+    <span style="color:var(--neon)">© 2026 DTN Consulting. All rights reserved.</span>
+    <span>steve@do-the-numbers.com</span>
+  </div>
+</div>
+
+</body>
+</html>
