@@ -129,12 +129,35 @@
     <main>
         <!-- Hero Section -->
         <section id="hero" class="text-center container mx-auto pt-16 pb-24 md:pt-24 md:pb-32 px-4">
-            <h1 class="text-5xl md:text-7xl font-black mb-2 leading-tight">The Sales Team that Masters AI Will Win.</h1>
-            <p class="text-3xl md:text-5xl font-black mb-4 neon-text">With Us, Yours Will.</p>
-            <p class="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto">
-                DTN Consulting helps enterprise sales organizations harness AI to sell smarter, move faster, and close more. With 20+ years of enterprise sales experience and deep expertise in AI implementation, we don't just teach tools — we transform how your team competes.
-            </p>
-            <div class="mt-10 flex justify-center gap-4">
+            <div id="hero-carousel" class="relative" style="min-height: 220px;">
+
+                <!-- Slide 1 -->
+                <div class="hero-slide transition-opacity duration-700" id="slide-1">
+                    <h1 class="text-5xl md:text-7xl font-black mb-2 leading-tight">The Sales Team that Masters AI Will Win.</h1>
+                    <p class="text-3xl md:text-5xl font-black mb-4 neon-text">With Us, Yours Will.</p>
+                    <p class="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto">
+                        DTN Consulting helps enterprise sales organizations harness AI to sell smarter, move faster, and close more. With 20+ years of enterprise sales experience and deep expertise in AI implementation, we don't just teach tools — we transform how your team competes.
+                    </p>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="hero-slide transition-opacity duration-700 opacity-0 absolute inset-0" id="slide-2">
+                    <h1 class="text-5xl md:text-7xl font-black mb-2 leading-tight">Vibe Coding is a Revolution.</h1>
+                    <p class="text-3xl md:text-5xl font-black mb-4 neon-text">Free yourself from Million Dollar legacy software.</p>
+                    <p class="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto">
+                        Enterprise software has held businesses hostage for decades — bloated platforms, locked contracts, and IT bottlenecks that slow everything down. AI-powered development breaks that cycle. We teach your team to build fast, purpose-built tools that do exactly what you need at a fraction of the cost. No more paying for what you don't use. Just lean, intelligent solutions that put the power back in your hands.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Dot indicators -->
+            <div class="flex justify-center gap-2 mt-8 mb-2">
+                <button class="hero-dot w-3 h-3 rounded-full bg-green-400 transition-all" data-slide="0" aria-label="Slide 1"></button>
+                <button class="hero-dot w-3 h-3 rounded-full bg-gray-600 transition-all" data-slide="1" aria-label="Slide 2"></button>
+            </div>
+
+            <div class="mt-6 flex justify-center gap-4">
                 <a href="#services" class="inline-block bg-green-500 text-gray-900 font-bold py-3 px-6 md:px-8 rounded-lg hover:bg-green-400 transition-colors transform hover:scale-105">
                     Explore Services
                 </a>
@@ -143,6 +166,43 @@
                 </a>
             </div>
         </section>
+
+        <script>
+            (function() {
+                var slides = document.querySelectorAll('.hero-slide');
+                var dots = document.querySelectorAll('.hero-dot');
+                var current = 0;
+
+                function goTo(index) {
+                    slides[current].classList.remove('opacity-100');
+                    slides[current].classList.add('opacity-0');
+                    if (current !== 0) slides[current].classList.add('absolute', 'inset-0');
+                    dots[current].classList.remove('bg-green-400');
+                    dots[current].classList.add('bg-gray-600');
+
+                    current = index;
+
+                    slides[current].classList.remove('opacity-0', 'absolute', 'inset-0');
+                    slides[current].classList.add('opacity-100');
+                    dots[current].classList.remove('bg-gray-600');
+                    dots[current].classList.add('bg-green-400');
+                }
+
+                dots.forEach(function(dot) {
+                    dot.addEventListener('click', function() {
+                        goTo(parseInt(this.getAttribute('data-slide')));
+                        resetTimer();
+                    });
+                });
+
+                var timer = setInterval(function() { goTo((current + 1) % slides.length); }, 6000);
+
+                function resetTimer() {
+                    clearInterval(timer);
+                    timer = setInterval(function() { goTo((current + 1) % slides.length); }, 6000);
+                }
+            })();
+        </script>
 
         <!-- Modern Sales Assistant Section -->
         <section id="sales-assistant" class="py-12 md:py-16">
