@@ -129,10 +129,10 @@
     <main>
         <!-- Hero Section -->
         <section id="hero" class="text-center container mx-auto pt-16 pb-24 md:pt-24 md:pb-32 px-4">
-            <div id="hero-carousel" class="relative" style="min-height: 220px;">
+            <div id="hero-carousel" style="display:grid;">
 
                 <!-- Slide 1 -->
-                <div class="hero-slide transition-opacity duration-700" id="slide-1">
+                <div class="hero-slide" id="slide-1" style="grid-area:1/1; transition:opacity 0.7s; opacity:1;">
                     <h1 class="text-5xl md:text-7xl font-black mb-2 leading-tight">The Sales Team that Masters AI Will Win.</h1>
                     <p class="text-3xl md:text-5xl font-black mb-4 neon-text">With Us, Yours Will.</p>
                     <p class="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto">
@@ -141,7 +141,7 @@
                 </div>
 
                 <!-- Slide 2 -->
-                <div class="hero-slide transition-opacity duration-700 opacity-0 absolute inset-0" id="slide-2">
+                <div class="hero-slide" id="slide-2" style="grid-area:1/1; transition:opacity 0.7s; opacity:0;">
                     <h1 class="text-5xl md:text-7xl font-black mb-2 leading-tight">Vibe Coding is a Revolution.</h1>
                     <p class="text-3xl md:text-5xl font-black mb-4 neon-text">Free yourself from Million Dollar legacy software.</p>
                     <p class="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto">
@@ -174,18 +174,11 @@
                 var current = 0;
 
                 function goTo(index) {
-                    slides[current].classList.remove('opacity-100');
-                    slides[current].classList.add('opacity-0');
-                    if (current !== 0) slides[current].classList.add('absolute', 'inset-0');
-                    dots[current].classList.remove('bg-green-400');
-                    dots[current].classList.add('bg-gray-600');
-
+                    slides[current].style.opacity = '0';
+                    dots[current].classList.replace('bg-green-400', 'bg-gray-600');
                     current = index;
-
-                    slides[current].classList.remove('opacity-0', 'absolute', 'inset-0');
-                    slides[current].classList.add('opacity-100');
-                    dots[current].classList.remove('bg-gray-600');
-                    dots[current].classList.add('bg-green-400');
+                    slides[current].style.opacity = '1';
+                    dots[current].classList.replace('bg-gray-600', 'bg-green-400');
                 }
 
                 dots.forEach(function(dot) {
