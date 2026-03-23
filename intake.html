@@ -1,492 +1,991 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pre-Call Intake | DTN Consulting</title>
-    <meta name="robots" content="noindex, nofollow">
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --neon-green: #39ff14;
-            --font-primary: 'Inter', 'ui-sans-serif', 'system-ui', sans-serif;
-        }
-        body { background-color: #0A0A0A; color: #E5E7EB; font-family: var(--font-primary); }
-        .neon-text { color: var(--neon-green); text-shadow: 0 0 5px var(--neon-green), 0 0 15px rgba(57, 255, 20, 0.7); }
-        .neon-btn { background-color: var(--neon-green); color: #0A0A0A; }
-        .neon-btn:hover { background-color: #2fd912; }
-        .form-card { background-color: #111827; border: 1px solid #1F2937; }
-        .field-input {
-            background-color: #0A0A0A;
-            border: 1px solid #374151;
-            color: #E5E7EB;
-            width: 100%;
-            padding: 0.625rem 0.875rem;
-            border-radius: 0.5rem;
-            font-family: var(--font-primary);
-            font-size: 0.95rem;
-            transition: border-color 0.2s;
-        }
-        .field-input:focus { outline: none; border-color: var(--neon-green); }
-        .field-input::placeholder { color: #6B7280; }
-        textarea.field-input { resize: vertical; min-height: 90px; }
-        .choice-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-            padding: 0.75rem 1rem;
-            border: 1px solid #374151;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            transition: border-color 0.2s, background-color 0.2s;
-            background-color: #0A0A0A;
-        }
-        .choice-item:hover { border-color: #4B5563; }
-        .choice-item input[type="radio"],
-        .choice-item input[type="checkbox"] {
-            margin-top: 2px;
-            accent-color: var(--neon-green);
-            flex-shrink: 0;
-            width: 1rem;
-            height: 1rem;
-        }
-        .choice-item input[type="radio"]:checked ~ span,
-        .choice-item input[type="checkbox"]:checked ~ span { color: #fff; }
-        .choice-item:has(input:checked) { border-color: var(--neon-green); background-color: rgba(57,255,20,0.05); }
-        .section-block { display: none; }
-        .section-block.active { display: block; }
-        .progress-bar { height: 4px; background-color: #1F2937; border-radius: 2px; overflow: hidden; }
-        .progress-fill { height: 100%; background-color: var(--neon-green); border-radius: 2px; transition: width 0.4s ease; }
-        select.field-input { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236B7280' d='M1 1l5 5 5-5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.875rem center; padding-right: 2.5rem; }
-        .scale-wrap { display: flex; gap: 0.5rem; }
-        .scale-btn {
-            flex: 1;
-            padding: 0.625rem 0;
-            border: 1px solid #374151;
-            border-radius: 0.5rem;
-            background-color: #0A0A0A;
-            color: #9CA3AF;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            text-align: center;
-            transition: border-color 0.2s, color 0.2s, background-color 0.2s;
-        }
-        .scale-btn:hover { border-color: #4B5563; color: #E5E7EB; }
-        .scale-btn.selected { border-color: var(--neon-green); color: var(--neon-green); background-color: rgba(57,255,20,0.05); }
-        #thank-you { display: none; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pre-Call Intake — DTN Consulting</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f0d;
+    --surface: #171714;
+    --border: #2a2a26;
+    --border-active: #4a7c59;
+    --text: #e8e4dc;
+    --muted: #7a7870;
+    --accent: #4a7c59;
+    --accent-light: #6aaa7a;
+    --accent-glow: rgba(74, 124, 89, 0.12);
+    --warn: #c8a84b;
+    --warn-bg: rgba(200, 168, 75, 0.08);
+    --label: #a0a098;
+    --input-bg: #1c1c19;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Instrument Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* BACKGROUND TEXTURE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+      radial-gradient(ellipse 60% 40% at 80% 20%, rgba(74,124,89,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(74,124,89,0.04) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 60px 28px 100px;
+  }
+
+  /* HEADER */
+  .header {
+    margin-bottom: 52px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .brand-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .brand-mark {
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid var(--accent);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+
+  .brand-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .header h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 38px;
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+
+  .header h1 em {
+    font-style: italic;
+    color: var(--accent-light);
+  }
+
+  .header .sub {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 500px;
+  }
+
+  .header .sub strong {
+    color: var(--label);
+    font-weight: 500;
+  }
+
+  /* TRUST NOTE */
+  .trust-note {
+    background: var(--warn-bg);
+    border: 1px solid rgba(200,168,75,0.2);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 44px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.1s ease forwards;
+  }
+
+  .trust-note .icon {
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .trust-note p {
+    font-size: 13.5px;
+    color: var(--warn);
+    line-height: 1.55;
+  }
+
+  /* PROGRESS */
+  .progress-bar {
+    height: 2px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-bottom: 48px;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.15s ease forwards;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-light));
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* SECTIONS */
+  .form-section {
+    margin-bottom: 44px;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards;
+  }
+
+  .form-section:nth-child(1) { animation-delay: 0.2s; }
+  .form-section:nth-child(2) { animation-delay: 0.28s; }
+  .form-section:nth-child(3) { animation-delay: 0.36s; }
+  .form-section:nth-child(4) { animation-delay: 0.44s; }
+  .form-section:nth-child(5) { animation-delay: 0.52s; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    background: var(--accent-glow);
+    border: 1px solid rgba(74,124,89,0.25);
+    border-radius: 4px;
+    padding: 3px 8px;
+    flex-shrink: 0;
+    letter-spacing: 0.06em;
+  }
+
+  .section-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--text);
+  }
+
+  .section-divider {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* FIELDS */
+  .field {
+    margin-bottom: 22px;
+  }
+
+  .field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--label);
+    margin-bottom: 7px;
+    letter-spacing: 0.01em;
+  }
+
+  .field .hint {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+
+  .field input[type="text"],
+  .field input[type="email"],
+  .field textarea,
+  .field select {
+    width: 100%;
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 14.5px;
+    padding: 12px 14px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .field textarea {
+    resize: vertical;
+    min-height: 96px;
+    line-height: 1.6;
+  }
+
+  .field input:focus,
+  .field textarea:focus,
+  .field select:focus {
+    border-color: var(--border-active);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+    background: #1f1f1c;
+  }
+
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: #3a3a36;
+  }
+
+  .field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a7870' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    cursor: pointer;
+  }
+
+  .field select option {
+    background: #1c1c19;
+    color: var(--text);
+  }
+
+  /* RADIO / CHECKBOX GROUP */
+  .choice-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .choice-group.horizontal {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .choice-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 11px 14px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .choice-item:hover {
+    border-color: #3a3a36;
+    background: #1f1f1c;
+  }
+
+  .choice-item input[type="radio"],
+  .choice-item input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--accent);
+    flex-shrink: 0;
+    margin-top: 2px;
+    cursor: pointer;
+  }
+
+  .choice-item.selected {
+    border-color: var(--border-active);
+    background: var(--accent-glow);
+  }
+
+  .choice-item .choice-label {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .choice-item .choice-desc {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* SCALE */
+  .scale-row {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .scale-btn {
+    flex: 1;
+    height: 38px;
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .scale-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent-light);
+  }
+
+  .scale-btn.active {
+    background: var(--accent-glow);
+    border-color: var(--accent);
+    color: var(--accent-light);
+  }
+
+  .scale-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.04em;
+  }
+
+  /* TWO COL */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  /* SUBMIT */
+  .submit-section {
+    margin-top: 52px;
+    border-top: 1px solid var(--border);
+    padding-top: 36px;
+    opacity: 0;
+    animation: fadeUp 0.5s 0.6s ease forwards;
+  }
+
+  .submit-note {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  .submit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 28px;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .submit-btn:hover {
+    background: var(--accent-light);
+    box-shadow: 0 4px 20px rgba(74,124,89,0.3);
+    transform: translateY(-1px);
+  }
+
+  .submit-btn:active {
+    transform: translateY(0);
+  }
+
+  .submit-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* THANK YOU STATE */
+  .thankyou {
+    display: none;
+    text-align: center;
+    padding: 60px 20px;
+    animation: fadeUp 0.5s ease forwards;
+  }
+
+  .thankyou .ty-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .thankyou h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 30px;
+    font-weight: 400;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .thankyou p {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .thankyou .ty-details {
+    margin-top: 32px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    max-width: 400px;
+    margin: 32px auto 0;
+    text-align: left;
+  }
+
+  .thankyou .ty-details h3 {
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .thankyou .ty-row {
+    display: flex;
+    gap: 10px;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+
+  .thankyou .ty-row span:first-child {
+    color: var(--muted);
+    min-width: 80px;
+  }
+
+  /* FOOTER */
+  .form-footer {
+    margin-top: 64px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .form-footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 560px) {
+    .page-wrap { padding: 36px 18px 80px; }
+    .header h1 { font-size: 28px; }
+    .two-col { grid-template-columns: 1fr; }
+    .choice-group.horizontal { flex-direction: column; }
+  }
+</style>
 </head>
-<body class="antialiased">
+<body>
 
-    <header class="p-4 md:p-6">
-        <nav class="container mx-auto flex justify-between items-center">
-            <a href="index.html" class="flex items-center space-x-3" aria-label="Homepage">
-                <svg class="w-10 h-10 text-white" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 80V20 L40 20 L40 60 L60 20 L80 20 L50 65 L80 65 L80 80 L20 80Z" fill="currentColor"/><path d="M50 65L80 65L80 80L20 80V75" stroke="#39ff14" stroke-width="4"/></svg>
-                <span class="text-2xl font-black neon-text">DTN Consulting</span>
-            </a>
-        </nav>
-    </header>
+<div class="page-wrap">
 
-    <main class="container mx-auto px-4 py-12 max-w-2xl">
+  <!-- HEADER -->
+  <div class="header">
+    <div class="brand-line">
+      <div class="brand-mark">DTN</div>
+      <div class="brand-name">DTN Consulting &nbsp;·&nbsp; do-the-numbers.com</div>
+    </div>
+    <h1>Before we talk,<br><em>tell us what's going on.</em></h1>
+    <p class="sub">This takes about <strong>5 minutes</strong> and helps us skip the small talk and get straight to what matters on our call.</p>
+  </div>
 
-        <!-- Intro -->
-        <div class="text-center mb-10">
-            <h1 class="text-4xl md:text-5xl font-black mb-4 leading-tight">Before We <span class="neon-text">Talk</span></h1>
-            <p class="text-gray-400 text-lg max-w-xl mx-auto">Help us show up prepared. This takes about 5 minutes and makes our conversation 10x more useful.</p>
+  <!-- TRUST NOTE -->
+  <div class="trust-note">
+    <span class="icon">🔒</span>
+    <p>Your answers are shared only with Steve and Nick — the people on your call. We use this to prepare, not to pitch you before we've earned it.</p>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+    <div class="progress-label">
+      <span id="progressText">0 of 5 sections</span>
+      <span id="progressPct">0%</span>
+    </div>
+  </div>
+
+  <div id="formContent">
+
+    <!-- SECTION 1: BASICS -->
+    <div class="form-section">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <span class="section-title">About You &amp; Your Business</span>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="two-col">
+        <div class="field">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="Jane Smith" data-section="1">
         </div>
-
-        <!-- Progress -->
-        <div class="mb-8">
-            <div class="flex justify-between items-center mb-2">
-                <span id="progress-label" class="text-sm text-gray-500">0 of 5 sections</span>
-                <span id="progress-pct" class="text-sm font-bold neon-text">0%</span>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
-            </div>
+        <div class="field">
+          <label for="title">Your Title</label>
+          <input type="text" id="title" name="title" placeholder="President" data-section="1">
         </div>
+      </div>
 
-        <!-- Form -->
-        <form id="intake-form" action="https://formspree.io/f/mnjgeaba" method="POST">
-
-            <!-- Section 01 -->
-            <div class="section-block active form-card rounded-xl p-6 md:p-8 mb-6" id="section-1">
-                <div class="flex items-center gap-3 mb-6">
-                    <span class="text-xs font-bold tracking-widest text-gray-500 uppercase">Section 01</span>
-                </div>
-                <h2 class="text-2xl font-bold mb-6">About You &amp; Your Business</h2>
-
-                <div class="space-y-5">
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-1.5" for="name">Your Name</label>
-                        <input class="field-input" type="text" id="name" name="name" placeholder="First and last name" required>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-1.5" for="title">Your Title</label>
-                        <input class="field-input" type="text" id="title" name="title" placeholder="e.g. VP of Sales">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-1.5" for="company">Company</label>
-                        <input class="field-input" type="text" id="company" name="company" placeholder="Company name">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-1.5" for="email">Email</label>
-                        <input class="field-input" type="email" id="email" name="email" placeholder="you@company.com" required>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-1.5" for="company-desc">In one sentence, what does your company do?</label>
-                        <textarea class="field-input" id="company-desc" name="company_description" placeholder="We help [who] do [what]..."></textarea>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-1.5" for="who-sell">Who do you sell to, and what are you selling them?</label>
-                        <textarea class="field-input" id="who-sell" name="who_you_sell_to" placeholder="Buyer type, deal size, product/service..."></textarea>
-                    </div>
-                </div>
-
-                <div class="flex justify-end mt-8">
-                    <button type="button" class="neon-btn font-bold py-3 px-8 rounded-lg transition-colors" onclick="nextSection(1)">Next →</button>
-                </div>
-            </div>
-
-            <!-- Section 02 -->
-            <div class="section-block form-card rounded-xl p-6 md:p-8 mb-6" id="section-2">
-                <div class="flex items-center gap-3 mb-6">
-                    <span class="text-xs font-bold tracking-widest text-gray-500 uppercase">Section 02</span>
-                </div>
-                <h2 class="text-2xl font-bold mb-6">The Problem You're Trying to Solve</h2>
-
-                <div class="space-y-5">
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-1">What's the #1 challenge in your sales process right now?</label>
-                        <p class="text-xs text-gray-500 mb-1.5">Don't filter — we want the real answer.</p>
-                        <textarea class="field-input" name="top_challenge" placeholder="Be direct — the more specific, the better."></textarea>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-1">How are you finding and working leads today?</label>
-                        <p class="text-xs text-gray-500 mb-1.5">What's your current process, even if it's manual or messy?</p>
-                        <textarea class="field-input" name="current_lead_process" placeholder="Tools, steps, who's doing what..."></textarea>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-2">Where does it break down?</label>
-                        <div class="space-y-2">
-                            <label class="choice-item">
-                                <input type="checkbox" name="breakdown[]" value="Not enough leads in the pipeline">
-                                <span class="text-sm text-gray-300">Not enough leads in the pipeline — volume is the problem, we need more at the top</span>
-                            </label>
-                            <label class="choice-item">
-                                <input type="checkbox" name="breakdown[]" value="Leads aren't qualified enough">
-                                <span class="text-sm text-gray-300">Leads aren't qualified enough — we're talking to the wrong people or wrong size companies</span>
-                            </label>
-                            <label class="choice-item">
-                                <input type="checkbox" name="breakdown[]" value="Reps spend too much time on early outreach">
-                                <span class="text-sm text-gray-300">Reps spend too much time on early outreach — the first few touches are killing productivity</span>
-                            </label>
-                            <label class="choice-item">
-                                <input type="checkbox" name="breakdown[]" value="Hard to reach decision makers">
-                                <span class="text-sm text-gray-300">Hard to reach decision makers — we get the wrong person or no answer at all</span>
-                            </label>
-                            <label class="choice-item">
-                                <input type="checkbox" name="breakdown[]" value="Something else">
-                                <span class="text-sm text-gray-300">Something else</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex justify-between mt-8">
-                    <button type="button" class="border border-gray-600 text-gray-300 font-bold py-3 px-6 rounded-lg hover:border-gray-400 transition-colors" onclick="prevSection(2)">← Back</button>
-                    <button type="button" class="neon-btn font-bold py-3 px-8 rounded-lg transition-colors" onclick="nextSection(2)">Next →</button>
-                </div>
-            </div>
-
-            <!-- Section 03 -->
-            <div class="section-block form-card rounded-xl p-6 md:p-8 mb-6" id="section-3">
-                <div class="flex items-center gap-3 mb-6">
-                    <span class="text-xs font-bold tracking-widest text-gray-500 uppercase">Section 03</span>
-                </div>
-                <h2 class="text-2xl font-bold mb-6">Your Target Customer</h2>
-
-                <div class="space-y-5">
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-1">Who are you selling to?</label>
-                        <p class="text-xs text-gray-500 mb-2">Select all that apply.</p>
-                        <div class="space-y-2">
-                            <label class="choice-item">
-                                <input type="checkbox" name="target_market[]" value="Small Business">
-                                <span class="text-sm text-gray-300">Small Business</span>
-                            </label>
-                            <label class="choice-item">
-                                <input type="checkbox" name="target_market[]" value="Mid-Market">
-                                <span class="text-sm text-gray-300">Mid-Market</span>
-                            </label>
-                            <label class="choice-item">
-                                <input type="checkbox" name="target_market[]" value="Enterprise / Industrial">
-                                <span class="text-sm text-gray-300">Enterprise / Industrial</span>
-                            </label>
-                            <label class="choice-item">
-                                <input type="checkbox" name="target_market[]" value="Consumer">
-                                <span class="text-sm text-gray-300">Consumer</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-1" for="geography">Geography</label>
-                        <p class="text-xs text-gray-500 mb-1.5">States, metro areas, or regions you focus on</p>
-                        <input class="field-input" type="text" id="geography" name="geography" placeholder="e.g. Midwest, Texas, nationwide">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-1" for="team-size">Team size</label>
-                        <p class="text-xs text-gray-500 mb-1.5">How many reps doing outbound today?</p>
-                        <select class="field-input" id="team-size" name="team_size">
-                            <option value="" disabled selected>Select team size</option>
-                            <option value="Just me">Just me</option>
-                            <option value="2–5 reps">2–5 reps</option>
-                            <option value="6–15 reps">6–15 reps</option>
-                            <option value="15+ reps">15+ reps</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-1" for="qualified">What makes a prospect "qualified"?</label>
-                        <p class="text-xs text-gray-500 mb-1.5">Company size, energy usage, contract renewal window — what signals that someone is worth calling?</p>
-                        <textarea class="field-input" id="qualified" name="qualified_prospect" placeholder="The signals that tell you it's worth a call..."></textarea>
-                    </div>
-                </div>
-
-                <div class="flex justify-between mt-8">
-                    <button type="button" class="border border-gray-600 text-gray-300 font-bold py-3 px-6 rounded-lg hover:border-gray-400 transition-colors" onclick="prevSection(3)">← Back</button>
-                    <button type="button" class="neon-btn font-bold py-3 px-8 rounded-lg transition-colors" onclick="nextSection(3)">Next →</button>
-                </div>
-            </div>
-
-            <!-- Section 04 -->
-            <div class="section-block form-card rounded-xl p-6 md:p-8 mb-6" id="section-4">
-                <div class="flex items-center gap-3 mb-6">
-                    <span class="text-xs font-bold tracking-widest text-gray-500 uppercase">Section 04</span>
-                </div>
-                <h2 class="text-2xl font-bold mb-6">AI, Urgency &amp; Expectations</h2>
-
-                <div class="space-y-6">
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-2">What outcome are you most hoping AI can help with?</label>
-                        <div class="space-y-2">
-                            <label class="choice-item">
-                                <input type="radio" name="ai_outcome" value="Find and research qualified leads automatically">
-                                <span class="text-sm text-gray-300">Find and research qualified leads automatically</span>
-                            </label>
-                            <label class="choice-item">
-                                <input type="radio" name="ai_outcome" value="Make the first calls and qualify live">
-                                <span class="text-sm text-gray-300">Make the first calls and qualify live</span>
-                            </label>
-                            <label class="choice-item">
-                                <input type="radio" name="ai_outcome" value="Follow up consistently without dropping the ball">
-                                <span class="text-sm text-gray-300">Follow up consistently without dropping the ball</span>
-                            </label>
-                            <label class="choice-item">
-                                <input type="radio" name="ai_outcome" value="Get reps on the phone faster with less prep work">
-                                <span class="text-sm text-gray-300">Get reps on the phone faster with less prep work</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-2">After we build this — what do you want to happen with it?</label>
-                        <div class="space-y-2">
-                            <label class="choice-item">
-                                <input type="radio" name="post_build" value="Build it and hand it to us — we'll run it">
-                                <span class="text-sm text-gray-300">Build it and hand it to us — we'll run it</span>
-                            </label>
-                            <label class="choice-item">
-                                <input type="radio" name="post_build" value="We want to own and operate it internally">
-                                <span class="text-sm text-gray-300">We want to own and operate it internally</span>
-                            </label>
-                            <label class="choice-item">
-                                <input type="radio" name="post_build" value="Build it and manage it for us">
-                                <span class="text-sm text-gray-300">Build it and manage it for us</span>
-                            </label>
-                            <label class="choice-item">
-                                <input type="radio" name="post_build" value="We want DTN involved ongoing — maintenance, tuning, support">
-                                <span class="text-sm text-gray-300">We want DTN involved ongoing — maintenance, tuning, support</span>
-                            </label>
-                            <label class="choice-item">
-                                <input type="radio" name="post_build" value="Train our team to build and manage it ourselves">
-                                <span class="text-sm text-gray-300">Train our team to build and manage it ourselves</span>
-                            </label>
-                            <label class="choice-item">
-                                <input type="radio" name="post_build" value="Not sure yet — help me figure it out">
-                                <span class="text-sm text-gray-300">Not sure yet — help me figure it out</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-2">How urgent is this for you?</label>
-                        <div class="scale-wrap mb-2" id="urgency-scale">
-                            <button type="button" class="scale-btn" data-val="1" onclick="setScale(this)">1</button>
-                            <button type="button" class="scale-btn" data-val="2" onclick="setScale(this)">2</button>
-                            <button type="button" class="scale-btn" data-val="3" onclick="setScale(this)">3</button>
-                            <button type="button" class="scale-btn" data-val="4" onclick="setScale(this)">4</button>
-                            <button type="button" class="scale-btn" data-val="5" onclick="setScale(this)">5</button>
-                        </div>
-                        <div class="flex justify-between text-xs text-gray-500">
-                            <span>No rush</span>
-                            <span>Need it yesterday</span>
-                        </div>
-                        <input type="hidden" name="urgency" id="urgency-value">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-1" for="timeline">What's driving the timeline?</label>
-                        <textarea class="field-input" id="timeline" name="timeline_driver" placeholder="Optional — but context helps us prioritize."></textarea>
-                    </div>
-                </div>
-
-                <div class="flex justify-between mt-8">
-                    <button type="button" class="border border-gray-600 text-gray-300 font-bold py-3 px-6 rounded-lg hover:border-gray-400 transition-colors" onclick="prevSection(4)">← Back</button>
-                    <button type="button" class="neon-btn font-bold py-3 px-8 rounded-lg transition-colors" onclick="nextSection(4)">Next →</button>
-                </div>
-            </div>
-
-            <!-- Section 05 -->
-            <div class="section-block form-card rounded-xl p-6 md:p-8 mb-6" id="section-5">
-                <div class="flex items-center gap-3 mb-6">
-                    <span class="text-xs font-bold tracking-widest text-gray-500 uppercase">Section 05</span>
-                </div>
-                <h2 class="text-2xl font-bold mb-6">Anything Else We Should Know</h2>
-
-                <div class="space-y-5">
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-1" for="prior-ai">Have you looked at or tried other AI solutions?</label>
-                        <p class="text-xs text-gray-500 mb-1.5">Even a bad experience is useful context for us.</p>
-                        <textarea class="field-input" id="prior-ai" name="prior_ai_experience" placeholder="Tools tried, what worked, what didn't..."></textarea>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-1" for="success">What would make this engagement a success for you?</label>
-                        <p class="text-xs text-gray-500 mb-1.5">If you could describe the win — what does it look like 90 days from now?</p>
-                        <textarea class="field-input" id="success" name="success_definition" placeholder="The result that would make this worth every penny..."></textarea>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-1" for="anything-else">Anything else you want us to know before the call?</label>
-                        <textarea class="field-input" id="anything-else" name="anything_else" placeholder="Constraints, context, questions — anything goes."></textarea>
-                    </div>
-                </div>
-
-                <!-- Submit -->
-                <div class="mt-8 pt-6 border-t border-gray-800">
-                    <p class="text-sm text-gray-500 mb-5">Steve and Nick will review this before our call and come prepared — no rehashing basics, just a real conversation about what's possible.</p>
-                    <button type="submit" id="submit-btn" class="neon-btn w-full font-black text-lg py-4 px-8 rounded-lg transition-colors">
-                        Send to DTN Consulting
-                    </button>
-                    <div id="submit-error" class="hidden mt-4 text-red-400 text-sm text-center">Something went wrong. Please try again or email <a href="mailto:steve@do-the-numbers.com" class="underline">steve@do-the-numbers.com</a>.</div>
-                </div>
-
-                <div class="flex justify-start mt-4">
-                    <button type="button" class="border border-gray-600 text-gray-300 font-bold py-3 px-6 rounded-lg hover:border-gray-400 transition-colors" onclick="prevSection(5)">← Back</button>
-                </div>
-            </div>
-
-        </form>
-
-        <!-- Thank You State -->
-        <div id="thank-you" class="form-card rounded-xl p-8 md:p-12 text-center">
-            <div class="flex justify-center mb-6">
-                <div class="w-16 h-16 rounded-full flex items-center justify-center" style="background: rgba(57,255,20,0.1); border: 2px solid #39ff14;">
-                    <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="#39ff14" stroke-width="2.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
-                    </svg>
-                </div>
-            </div>
-            <h2 class="text-3xl font-black mb-2">You're all set, <span id="thank-you-name" class="neon-text"></span>.</h2>
-            <p class="text-gray-400 mt-4 mb-8 max-w-md mx-auto">We've got everything we need. Steve and Nick will review your answers before the call — expect a real conversation, not a discovery call from scratch.</p>
-            <div class="text-sm text-gray-500 space-y-1">
-                <p>Questions? Reach us at <a href="mailto:steve@do-the-numbers.com" class="text-green-400 hover:underline">steve@do-the-numbers.com</a></p>
-                <p>or call <a href="tel:3124859891" class="text-green-400 hover:underline">312.485.9891</a></p>
-            </div>
+      <div class="two-col">
+        <div class="field">
+          <label for="company">Company</label>
+          <input type="text" id="company" name="company" placeholder="Acme Corp" data-section="1">
         </div>
-
-    </main>
-
-    <footer class="border-t border-gray-800 mt-16 py-8">
-        <div class="container mx-auto px-4 text-center">
-            <p class="text-gray-500">&copy; 2026 DTN Consulting. All rights reserved.</p>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="jane@acmecorp.com" data-section="1">
         </div>
-    </footer>
+      </div>
 
-    <script>
-        let currentSection = 1;
-        const totalSections = 5;
+      <div class="field">
+        <label for="business_description">In one sentence, what does your company do?</label>
+        <div class="hint">Who do you sell to, and what are you selling them?</div>
+        <textarea id="business_description" name="business_description" placeholder="We help commercial businesses in the Midwest find lower electricity rates by..." data-section="1"></textarea>
+      </div>
+    </div>
 
-        function updateProgress(section) {
-            const completed = section - 1;
-            const pct = Math.round((completed / totalSections) * 100);
-            document.getElementById('progress-label').textContent = completed + ' of ' + totalSections + ' sections';
-            document.getElementById('progress-pct').textContent = pct + '%';
-            document.getElementById('progress-fill').style.width = pct + '%';
-        }
+    <!-- SECTION 2: THE PROBLEM -->
+    <div class="form-section">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <span class="section-title">The Problem You're Trying to Solve</span>
+        <div class="section-divider"></div>
+      </div>
 
-        function showSection(n) {
-            document.querySelectorAll('.section-block').forEach(el => el.classList.remove('active'));
-            const target = document.getElementById('section-' + n);
-            if (target) {
-                target.classList.add('active');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-            updateProgress(n);
-            currentSection = n;
-        }
+      <div class="field">
+        <label for="top_challenge">What's the #1 challenge in your sales process right now?</label>
+        <div class="hint">Don't filter — we want the real answer.</div>
+        <textarea id="top_challenge" name="top_challenge" placeholder="We can't find enough qualified leads fast enough. Our reps spend too much time on calls that go nowhere..." data-section="2"></textarea>
+      </div>
 
-        function nextSection(current) {
-            if (current < totalSections) showSection(current + 1);
-        }
+      <div class="field">
+        <label for="current_process">How are you finding and working leads today?</label>
+        <div class="hint">What's your current process, even if it's manual or messy?</div>
+        <textarea id="current_process" name="current_process" placeholder="Reps source their own lists, we use some LinkedIn, referrals..." data-section="2"></textarea>
+      </div>
 
-        function prevSection(current) {
-            if (current > 1) showSection(current - 1);
-        }
+      <div class="field">
+        <label>Where does it break down?</label>
+        <div class="hint">Volume, quality, follow-through, or something else?</div>
+        <div class="choice-group">
+          <label class="choice-item" onclick="toggleChoice(this)">
+            <input type="checkbox" name="breakdown[]" value="Not enough leads in the pipeline" data-section="2">
+            <div><div class="choice-label">Not enough leads in the pipeline</div><div class="choice-desc">Volume is the problem — we need more at the top</div></div>
+          </label>
+          <label class="choice-item" onclick="toggleChoice(this)">
+            <input type="checkbox" name="breakdown[]" value="Leads aren't qualified enough" data-section="2">
+            <div><div class="choice-label">Leads aren't qualified enough</div><div class="choice-desc">We're talking to the wrong people or wrong size companies</div></div>
+          </label>
+          <label class="choice-item" onclick="toggleChoice(this)">
+            <input type="checkbox" name="breakdown[]" value="Reps spend too much time on early outreach" data-section="2">
+            <div><div class="choice-label">Reps spend too much time on early outreach</div><div class="choice-desc">The first few touches are killing productivity</div></div>
+          </label>
+          <label class="choice-item" onclick="toggleChoice(this)">
+            <input type="checkbox" name="breakdown[]" value="Hard to reach decision makers" data-section="2">
+            <div><div class="choice-label">Hard to reach decision makers</div><div class="choice-desc">We get the wrong person or no answer at all</div></div>
+          </label>
+          <label class="choice-item" onclick="toggleChoice(this)">
+            <input type="checkbox" name="breakdown[]" value="Something else" data-section="2">
+            <div><div class="choice-label">Something else</div></div>
+          </label>
+        </div>
+      </div>
+    </div>
 
-        function setScale(btn) {
-            document.querySelectorAll('#urgency-scale .scale-btn').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
-            document.getElementById('urgency-value').value = btn.getAttribute('data-val');
-        }
+    <!-- SECTION 3: THE CUSTOMER -->
+    <div class="form-section">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <span class="section-title">Your Target Customer</span>
+        <div class="section-divider"></div>
+      </div>
 
-        // Formspree AJAX submission
-        document.getElementById('intake-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('submit-btn');
-            const errEl = document.getElementById('submit-error');
-            btn.disabled = true;
-            btn.textContent = 'Sending...';
-            errEl.classList.add('hidden');
+      <div class="field">
+        <label>Who are you selling to?</label>
+        <div class="hint">Select all that apply.</div>
+        <div class="choice-group horizontal">
+          <label class="choice-item" onclick="toggleChoice(this, false)">
+            <input type="checkbox" name="customer_type[]" value="Small Business" data-section="3">
+            <div class="choice-label">Small Business</div>
+          </label>
+          <label class="choice-item" onclick="toggleChoice(this, false)">
+            <input type="checkbox" name="customer_type[]" value="Mid-Market" data-section="3">
+            <div class="choice-label">Mid-Market</div>
+          </label>
+          <label class="choice-item" onclick="toggleChoice(this, false)">
+            <input type="checkbox" name="customer_type[]" value="Enterprise / Industrial" data-section="3">
+            <div class="choice-label">Enterprise / Industrial</div>
+          </label>
+          <label class="choice-item" onclick="toggleChoice(this, false)">
+            <input type="checkbox" name="customer_type[]" value="Consumer" data-section="3">
+            <div class="choice-label">Consumer</div>
+          </label>
+        </div>
+      </div>
 
-            const firstName = (document.getElementById('name').value || '').split(' ')[0];
+      <div class="two-col">
+        <div class="field">
+          <label for="geography">Geography</label>
+          <div class="hint">States, metro areas, or regions you focus on</div>
+          <input type="text" id="geography" name="geography" placeholder="Illinois, Midwest, MISO territory..." data-section="3">
+        </div>
+        <div class="field">
+          <label for="team_size">Team size</label>
+          <div class="hint">How many reps doing outbound today?</div>
+          <select id="team_size" name="team_size" data-section="3">
+            <option value="" disabled selected>Select...</option>
+            <option value="Just me">Just me</option>
+            <option value="2-5 reps">2–5 reps</option>
+            <option value="6-15 reps">6–15 reps</option>
+            <option value="15+ reps">15+ reps</option>
+          </select>
+        </div>
+      </div>
 
-            try {
-                const response = await fetch(this.action, {
-                    method: 'POST',
-                    body: new FormData(this),
-                    headers: { 'Accept': 'application/json' }
-                });
-                if (response.ok) {
-                    document.getElementById('intake-form').style.display = 'none';
-                    document.querySelector('.mb-8').style.display = 'none'; // hide progress bar
-                    document.querySelector('.text-center.mb-10').style.display = 'none'; // hide intro
-                    document.getElementById('thank-you-name').textContent = firstName || 'there';
-                    document.getElementById('thank-you').style.display = 'block';
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                } else {
-                    throw new Error('Server error');
-                }
-            } catch (err) {
-                btn.disabled = false;
-                btn.textContent = 'Send to DTN Consulting';
-                errEl.classList.remove('hidden');
-            }
-        });
+      <div class="field">
+        <label for="qualified_prospect">What makes a prospect "qualified"?</label>
+        <div class="hint">Company size, energy usage, contract renewal window — what signals that someone is worth calling?</div>
+        <textarea id="qualified_prospect" name="qualified_prospect" placeholder="Commercial building, 50k+ sq ft, coming off a fixed-rate contract in the next 6 months..." data-section="3"></textarea>
+      </div>
+    </div>
 
-        // Init
-        updateProgress(1);
-    </script>
+    <!-- SECTION 4: AI + URGENCY -->
+    <div class="form-section">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <span class="section-title">AI, Urgency &amp; Expectations</span>
+        <div class="section-divider"></div>
+      </div>
 
+      <div class="field">
+        <label>What outcome are you most hoping AI can help with?</label>
+        <div class="choice-group">
+          <label class="choice-item" onclick="toggleChoice(this)">
+            <input type="checkbox" name="desired_outcomes[]" value="Find and research qualified leads automatically" data-section="4">
+            <div><div class="choice-label">Find and research qualified leads automatically</div><div class="choice-desc">AI scrapes and scores prospects so reps start with a hot list</div></div>
+          </label>
+          <label class="choice-item" onclick="toggleChoice(this)">
+            <input type="checkbox" name="desired_outcomes[]" value="Make the first calls and qualify live" data-section="4">
+            <div><div class="choice-label">Make the first calls and qualify live</div><div class="choice-desc">AI voice agent handles initial outreach and gates the good leads through</div></div>
+          </label>
+          <label class="choice-item" onclick="toggleChoice(this)">
+            <input type="checkbox" name="desired_outcomes[]" value="Follow up consistently without dropping the ball" data-section="4">
+            <div><div class="choice-label">Follow up consistently without dropping the ball</div><div class="choice-desc">Automated sequences so nothing falls through the cracks</div></div>
+          </label>
+          <label class="choice-item" onclick="toggleChoice(this)">
+            <input type="checkbox" name="desired_outcomes[]" value="Get reps on the phone faster with less prep work" data-section="4">
+            <div><div class="choice-label">Get reps on the phone faster with less prep work</div></div>
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>After we build this — what do you want to happen with it?</label>
+        <div class="hint">There's no wrong answer. This changes how we scope and price.</div>
+        <div class="choice-group">
+          <label class="choice-item" onclick="toggleChoice(this, true)">
+            <input type="radio" name="engagement_model" value="Build it and hand it to us" data-section="4">
+            <div><div class="choice-label">Build it and hand it to us — we'll run it</div><div class="choice-desc">We want to own and operate it internally</div></div>
+          </label>
+          <label class="choice-item" onclick="toggleChoice(this, true)">
+            <input type="radio" name="engagement_model" value="Build it and manage it for us" data-section="4">
+            <div><div class="choice-label">Build it and manage it for us</div><div class="choice-desc">We want DTN involved ongoing — maintenance, tuning, support</div></div>
+          </label>
+          <label class="choice-item" onclick="toggleChoice(this, true)">
+            <input type="radio" name="engagement_model" value="Train our team" data-section="4">
+            <div><div class="choice-label">Train our team to build and manage it ourselves</div><div class="choice-desc">We want to learn how to do this — not depend on outside help long-term</div></div>
+          </label>
+          <label class="choice-item" onclick="toggleChoice(this, true)">
+            <input type="radio" name="engagement_model" value="Not sure yet" data-section="4">
+            <div><div class="choice-label">Not sure yet — help me figure it out</div></div>
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>How urgent is this for you? (1 = no rush, 5 = need it yesterday)</label>
+        <div class="scale-row" id="urgencyScale">
+          <button class="scale-btn" type="button" onclick="setScale('urgencyScale', 1)">1</button>
+          <button class="scale-btn" type="button" onclick="setScale('urgencyScale', 2)">2</button>
+          <button class="scale-btn" type="button" onclick="setScale('urgencyScale', 3)">3</button>
+          <button class="scale-btn" type="button" onclick="setScale('urgencyScale', 4)">4</button>
+          <button class="scale-btn" type="button" onclick="setScale('urgencyScale', 5)">5</button>
+        </div>
+        <div class="scale-labels"><span>No rush</span><span>Need it yesterday</span></div>
+      </div>
+
+      <div class="field">
+        <label for="timeline_driver">What's driving the timeline? <span style="color:var(--muted);font-weight:400">(optional)</span></label>
+        <input type="text" id="timeline_driver" name="timeline_driver" placeholder="Selling season starting, board meeting, competitive pressure..." data-section="4">
+      </div>
+    </div>
+
+    <!-- SECTION 5: ANYTHING ELSE -->
+    <div class="form-section">
+      <div class="section-header">
+        <span class="section-num">05</span>
+        <span class="section-title">Anything Else We Should Know</span>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="field">
+        <label for="prior_ai_experience">Have you looked at or tried other AI solutions? What happened?</label>
+        <div class="hint">Even a bad experience is useful context for us.</div>
+        <textarea id="prior_ai_experience" name="prior_ai_experience" placeholder="We explored a vendor last year that didn't work out..." data-section="5"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="success_definition">What would make this engagement a success for you?</label>
+        <div class="hint">If you could describe the win — what does it look like 90 days from now?</div>
+        <textarea id="success_definition" name="success_definition" placeholder="Our reps are spending their time only on qualified opportunities and we're booking 2x the calls..." data-section="5"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="anything_else">Anything else you want us to know before the call?</label>
+        <textarea id="anything_else" name="anything_else" placeholder="Other stakeholders, concerns, timing constraints, questions for us..." data-section="5"></textarea>
+      </div>
+    </div>
+
+    <!-- SUBMIT -->
+    <div class="submit-section">
+      <p class="submit-note">That's it. Steve and Nick will review this before our call and come prepared — no rehashing basics, just a real conversation about what's possible.</p>
+      <button class="submit-btn" onclick="handleSubmit()">
+        Send to DTN Consulting
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 8h10M9 4l4 4-4 4"/>
+        </svg>
+      </button>
+    </div>
+
+  </div><!-- end formContent -->
+
+  <!-- THANK YOU STATE -->
+  <div class="thankyou" id="thankYou">
+    <span class="ty-icon">✅</span>
+    <h2>You're all set.</h2>
+    <p>Steve and Nick have your answers. Expect a real conversation, not a sales pitch.</p>
+    <div class="ty-details">
+      <h3>What's Next</h3>
+      <div class="ty-row"><span>With</span><span>Steve Sassi &amp; Nick Bianco</span></div>
+      <div class="ty-row"><span>Contact</span><span>steve@do-the-numbers.com</span></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="form-footer">
+    <div>DTN Consulting &nbsp;·&nbsp; <a href="mailto:steve@do-the-numbers.com">steve@do-the-numbers.com</a></div>
+    <div>312.485.9891</div>
+  </div>
+
+</div><!-- end page-wrap -->
+
+<script>
+  // Toggle choice selection styling
+  function toggleChoice(el, isRadio) {
+    if (isRadio) {
+      const name = el.querySelector('input').name;
+      document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+        r.closest('.choice-item').classList.remove('selected');
+      });
+      el.classList.add('selected');
+    } else {
+      const cb = el.querySelector('input[type="checkbox"]');
+      setTimeout(() => {
+        el.classList.toggle('selected', cb.checked);
+      }, 0);
+    }
+    updateProgress();
+  }
+
+  // Scale buttons
+  function setScale(containerId, value) {
+    const container = document.getElementById(containerId);
+    container.querySelectorAll('.scale-btn').forEach((btn, i) => {
+      btn.classList.toggle('active', i < value);
+    });
+    container.dataset.value = value;
+    updateProgress();
+  }
+
+  // Progress calculation
+  function updateProgress() {
+    const sections = [1, 2, 3, 4, 5];
+    let filled = 0;
+    sections.forEach(s => {
+      const inputs = document.querySelectorAll(`[data-section="${s}"]`);
+      let sectionFilled = false;
+      inputs.forEach(inp => {
+        if (inp.value && inp.value.trim()) sectionFilled = true;
+      });
+      const checked = document.querySelectorAll(`[data-section="${s}"]:checked`);
+      if (checked.length > 0) sectionFilled = true;
+      if (sectionFilled) filled++;
+    });
+    const urgency = document.getElementById('urgencyScale');
+    if (urgency.dataset.value) filled = Math.max(filled, 0);
+
+    const pct = Math.round((filled / 5) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressText').textContent = `${filled} of 5 sections`;
+    document.getElementById('progressPct').textContent = pct + '%';
+  }
+
+  // Listen for input changes
+  document.querySelectorAll('input[type="text"], input[type="email"], textarea, select').forEach(el => {
+    el.addEventListener('input', updateProgress);
+    el.addEventListener('change', updateProgress);
+  });
+
+  // Collect all form data using name attributes
+  function collectFormData() {
+    const data = {};
+
+    // Text inputs, email, textareas, selects
+    document.querySelectorAll('input[name][type="text"], input[name][type="email"], textarea[name], select[name]').forEach(el => {
+      if (el.value && el.value.trim()) data[el.name] = el.value.trim();
+    });
+
+    // Radio buttons (single selection per group)
+    document.querySelectorAll('input[type="radio"]:checked').forEach(el => {
+      if (el.name && el.value) data[el.name] = el.value;
+    });
+
+    // Checkboxes (multiple selections, joined as comma-separated)
+    const checkboxGroups = {};
+    document.querySelectorAll('input[type="checkbox"]:checked').forEach(el => {
+      const key = el.name.replace('[]', '');
+      if (!checkboxGroups[key]) checkboxGroups[key] = [];
+      if (el.value) checkboxGroups[key].push(el.value);
+    });
+    Object.entries(checkboxGroups).forEach(([key, values]) => {
+      data[key] = values.join(', ');
+    });
+
+    // Urgency scale
+    const urgency = document.getElementById('urgencyScale');
+    if (urgency && urgency.dataset.value) data['urgency'] = urgency.dataset.value + ' / 5';
+
+    return data;
+  }
+
+  // Submit to Formspree
+  async function handleSubmit() {
+    const btn = document.querySelector('.submit-btn');
+    const prospectName = document.getElementById('name')?.value?.trim() || '';
+    const prospectEmail = document.getElementById('email')?.value?.trim() || '';
+    const prospectCompany = document.getElementById('company')?.value?.trim() || '';
+
+    if (!prospectName || !prospectEmail) {
+      alert('Please fill in at least your name and email.');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = 'Sending...';
+
+    const data = collectFormData();
+
+    // Formspree special fields
+    data['_subject'] = 'DTN Pre-Call Intake: ' + prospectName + (prospectCompany ? ' // ' + prospectCompany : '');
+    data['_replyto'] = prospectEmail;
+
+    try {
+      const response = await fetch('https://formspree.io/f/mnjgeaba', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      if (!response.ok) throw new Error('Submission failed');
+
+      // Update thank-you with actual prospect name
+      document.querySelector('.thankyou h2').textContent = "You're all set, " + prospectName.split(' ')[0] + ".";
+
+      document.getElementById('formContent').style.display = 'none';
+      document.querySelector('.submit-section').style.display = 'none';
+      const ty = document.getElementById('thankYou');
+      ty.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (err) {
+      // Fallback: mailto
+      const subject = encodeURIComponent('DTN Pre-Call Intake: ' + prospectName);
+      const body = encodeURIComponent(
+        Object.entries(data).filter(([k]) => !k.startsWith('_')).map(([k,v]) => k.toUpperCase() + ': ' + v).join('\n\n')
+      );
+      window.location.href = 'mailto:steve@do-the-numbers.com?cc=nick@nickbianco.com&subject=' + subject + '&body=' + body;
+
+      btn.disabled = false;
+      btn.innerHTML = 'Send to DTN Consulting';
+    }
+  }
+</script>
 </body>
 </html>
