@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reveal Network POC — Steve Sassi LinkedIn Analysis</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --bg: #0d0f14;
+    --surface: #13161e;
+    --surface2: #1a1e28;
+    --border: #252a38;
+    --accent: #c8a96e;
+    --accent2: #4e9d8e;
+    --hot: #e05252;
+    --warm: #e08a40;
+    --mild: #c8a96e;
+    --cool: #4e9d8e;
+    --text: #e8e4dc;
+    --muted: #7a8090;
+    --partner: #5b7de8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* HEADER */
+  .header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 32px;
+    margin-bottom: 40px;
+  }
+  .header-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 16px;
+  }
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 42px;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .header h1 em {
+    color: var(--accent);
+    font-style: italic;
+  }
+  .header-sub {
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 640px;
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 48px;
+  }
+  .stat {
+    background: var(--surface);
+    padding: 20px 24px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: var(--accent);
+    display: block;
+  }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
+
+  /* METHODOLOGY NOTE */
+  .method-note {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin-bottom: 48px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .method-note strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-header h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: var(--text);
+  }
+  .section-header .badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .badge-prospect { background: rgba(224,82,82,0.12); color: var(--hot); border: 1px solid rgba(224,82,82,0.3); }
+  .badge-partner { background: rgba(91,125,232,0.12); color: var(--partner); border: 1px solid rgba(91,125,232,0.3); }
+
+  /* CARDS */
+  .cards { display: flex; flex-direction: column; gap: 12px; margin-bottom: 56px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: #3a3f52; }
+
+  .card-main {
+    display: grid;
+    grid-template-columns: 48px 1fr auto;
+    gap: 0;
+    align-items: stretch;
+  }
+
+  .card-rank {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    background: var(--surface2);
+    border-right: 1px solid var(--border);
+    min-height: 72px;
+  }
+
+  .card-body {
+    padding: 16px 20px;
+  }
+
+  .card-name {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+
+  .card-title-company {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .card-title-company span {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .tag-sap { background: rgba(91,125,232,0.15); color: #8aa4f0; }
+  .tag-verified { background: rgba(78,157,142,0.15); color: var(--accent2); }
+  .tag-unverified { background: rgba(200,169,110,0.1); color: var(--accent); }
+  .tag-s4 { background: rgba(224,82,82,0.12); color: #e08080; }
+  .tag-mfg { background: rgba(130,100,200,0.12); color: #a080d0; }
+  .tag-dist { background: rgba(80,160,120,0.12); color: #60c090; }
+  .tag-lhf { background: rgba(224,138,64,0.15); color: var(--warm); }
+
+  .card-score-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    border-left: 1px solid var(--border);
+    text-align: center;
+    min-width: 80px;
+  }
+  .score-dots {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 6px;
+  }
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--border);
+  }
+  .dot.hot { background: var(--hot); }
+  .dot.warm { background: var(--warm); }
+  .dot.mild { background: var(--mild); }
+  .dot.cool { background: var(--partner); }
+
+  .score-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .card-reasoning {
+    padding: 0 20px 16px 68px;
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.5;
+    border-top: 1px solid var(--border);
+  }
+  .card-reasoning strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+  .card-reasoning .lhf-flag {
+    display: inline-block;
+    margin-top: 6px;
+    background: rgba(224,138,64,0.1);
+    border: 1px solid rgba(224,138,64,0.25);
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--warm);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* PARTNER ADDITIONS */
+  .partner-additions {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--partner);
+    border-radius: 6px;
+    padding: 24px;
+    margin-bottom: 48px;
+  }
+  .partner-additions h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .partner-additions .sub {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+  .add-row {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 12px 24px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .add-row:last-child { border-bottom: none; }
+  .add-company { font-weight: 600; color: var(--text); font-size: 13px; }
+  .add-why { font-size: 12.5px; color: var(--muted); }
+
+  /* NEXT STEPS */
+  .next-steps {
+    background: linear-gradient(135deg, rgba(200,169,110,0.06), rgba(91,125,232,0.04));
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px;
+  }
+  .next-steps h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .step-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    min-width: 24px;
+    padding-top: 2px;
+  }
+  .step-text {
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  .step-text strong { color: var(--text); }
+
+  .footer-note {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-align: center;
+    letter-spacing: 0.06em;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-meta">Reveal Network POC &nbsp;|&nbsp; Steve Sassi 1st-Degree LinkedIn Analysis &nbsp;|&nbsp; April 2026</div>
+    <h1>Back-Door Network<br><em>Intelligence Report</em></h1>
+    <p class="header-sub">Stack-ranked prospects and partners for Reveal, filtered from 3,232 first-degree LinkedIn connections. Zero Apollo credits spent. Pre-enrichment local analysis only.</p>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat"><span class="stat-num">3,232</span><span class="stat-label">Total Connections</span></div>
+    <div class="stat"><span class="stat-num">4</span><span class="stat-label">Verified S/4HANA Prospects</span></div>
+    <div class="stat"><span class="stat-num">6</span><span class="stat-label">Additional ICP Prospects</span></div>
+    <div class="stat"><span class="stat-num">12</span><span class="stat-label">Top Partner Contacts</span></div>
+    <div class="stat"><span class="stat-num">0</span><span class="stat-label">Apollo Credits Used</span></div>
+  </div>
+
+  <!-- METHOD NOTE -->
+  <div class="method-note">
+    <strong>Methodology:</strong> 4-pass local filter (title knockout, company size proxy, industry signal, recency) applied before any enrichment tool. Contacts categorized into Prospect (Mfg/Dist SAP ECC/S4 companies) and Partner (SIs, ISVs, SAP ecosystem firms) buckets. SAP verification layer applied via web research on top-ranked companies only. Low-hanging fruit (LHF) flags assigned where S4 migration signals, CXO changes, or public optimization intent were found. Contacts at unverified-but-plausible SAP companies are noted and ranked one tier lower.
+  </div>
+
+  <!-- PROSPECTS -->
+  <div class="section-header">
+    <h2>Top Prospects</h2>
+    <span class="badge badge-prospect">Reveal ICP — Mfg / Distribution / SAP</span>
+  </div>
+  <div class="cards">
+
+    <!-- 1 -->
+    <div class="card">
+      <div class="card-main">
+        <div class="card-rank">01</div>
+        <div class="card-body">
+          <div class="card-name">Steeve Yammine</div>
+          <div class="card-title-company">VP of Global Supply Chain &nbsp;&bull;&nbsp; <span>Medtronic</span></div>
+          <div class="card-tags">
+            <span class="tag tag-sap">SAP Verified</span>
+            <span class="tag tag-s4">SAP HANA Active</span>
+            <span class="tag tag-mfg">Medical Device Mfg</span>
+            <span class="tag tag-lhf">Low-Hanging Fruit</span>
+          </div>
+        </div>
+        <div class="card-score-side">
+          <div class="score-dots"><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div></div>
+          <div class="score-label">Hottest</div>
+        </div>
+      </div>
+      <div class="card-reasoning">
+        <strong>Why:</strong> Medtronic is a confirmed, decades-long SAP customer — selected mySAP Business Suite in 2003, adopted SAP ECC 6.0 in 2016, and is an early SAP HANA adopter running 13-node HANA for global supply chain and inventory optimization. Steeve owns the global supply chain function directly. That's Reveal's exact buyer. $31B+ revenue, 90,000 employees, 160 countries. Connected Sep 2025 — recent and warm.
+        <span class="lhf-flag">LHF: HANA active, S4 migration decision likely in-flight, supply chain exec directly in seat</span>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="card">
+      <div class="card-main">
+        <div class="card-rank">02</div>
+        <div class="card-body">
+          <div class="card-name">Brandon Ward</div>
+          <div class="card-title-company">Sr. Director, Digital CX &amp; eCommerce &nbsp;&bull;&nbsp; <span>Honeywell</span></div>
+          <div class="card-tags">
+            <span class="tag tag-sap">SAP Verified</span>
+            <span class="tag tag-s4">S/4HANA Active</span>
+            <span class="tag tag-mfg">Industrial / Aerospace Mfg</span>
+            <span class="tag tag-lhf">Low-Hanging Fruit</span>
+          </div>
+        </div>
+        <div class="card-score-side">
+          <div class="score-dots"><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div></div>
+          <div class="score-label">Hottest</div>
+        </div>
+      </div>
+      <div class="card-reasoning">
+        <strong>Why:</strong> Honeywell is a confirmed SAP S/4HANA customer — publicly documented SAP Innovation Award winner (2024), running S/4HANA for billing/revenue management, SAP BRIM, SAP CPQ, and SAP Ariba across its supply chain. SAP is Honeywell's primary ERP across all Strategic Business Groups. Brandon owns digital and CX transformation — adjacent to the process optimization conversation Reveal opens. $36B revenue, global mfg/industrial. Connected Sep 2025.
+        <span class="lhf-flag">LHF: Active S/4HANA deployment confirmed, digital transformation explicitly underway</span>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="card">
+      <div class="card-main">
+        <div class="card-rank">03</div>
+        <div class="card-body">
+          <div class="card-name">Brian Smith, MBA</div>
+          <div class="card-title-company">Director of eCommerce &nbsp;&bull;&nbsp; <span>MATHESON</span></div>
+          <div class="card-tags">
+            <span class="tag tag-sap">SAP Verified</span>
+            <span class="tag tag-mfg">Industrial Gas Mfg</span>
+            <span class="tag tag-dist">Distribution</span>
+          </div>
+        </div>
+        <div class="card-score-side">
+          <div class="score-dots"><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot warm"></div></div>
+          <div class="score-label">Hot</div>
+        </div>
+      </div>
+      <div class="card-reasoning">
+        <strong>Why:</strong> MATHESON (Matheson Tri-Gas) is a confirmed SAP customer — $1.85B industrial gas manufacturer and distributor, SAP confirmed in their tech stack via multiple intelligence sources alongside SAP BPC. Classic ECC-era customer in heavy industrial/chemical distribution with a massive physical footprint (300+ US sites). Brian is in a Director-level digital operations role. SAP version unconfirmed as ECC vs S4 — ranked one tier lower on that basis, but the ICP fit is nearly perfect. Connected Sep 2025.
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="card">
+      <div class="card-main">
+        <div class="card-rank">04</div>
+        <div class="card-body">
+          <div class="card-name">Kevin Karol</div>
+          <div class="card-title-company">VP IT, Divisional CIO &nbsp;&bull;&nbsp; <span>Baxter International</span></div>
+          <div class="card-tags">
+            <span class="tag tag-sap">SAP Verified — Career Page</span>
+            <span class="tag tag-s4">S/4HANA Active</span>
+            <span class="tag tag-mfg">Medical Device / Pharma Mfg</span>
+            <span class="tag tag-lhf">Low-Hanging Fruit</span>
+          </div>
+        </div>
+        <div class="card-score-side">
+          <div class="score-dots"><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div></div>
+          <div class="score-label">Hottest</div>
+        </div>
+      </div>
+      <div class="card-reasoning">
+        <strong>Why:</strong> Baxter International is a confirmed S/4HANA customer — verified via their own careers page, which lists an active SAP Basis Sr. Consultant role requiring "10+ years of S/4HANA project lifecycle experience" across ECC, S/4HANA, BW4/HANA, BTP, and Fiori. This is not a migration candidate; Baxter is actively running S/4. Kevin is VP IT/CIO — the technology decision-maker for an ongoing optimization and adoption conversation. $15B medical device and pharma manufacturer, global supply chain. Connected Oct 2010 — older relationship but a genuinely senior door.
+        <span class="lhf-flag">LHF: Confirmed S/4HANA active, CIO title = adoption and optimization budget authority</span>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="card">
+      <div class="card-main">
+        <div class="card-rank">05</div>
+        <div class="card-body">
+          <div class="card-name">Heather Bowman</div>
+          <div class="card-title-company">Director, DTC Operations, Customer Service &amp; PMO &nbsp;&bull;&nbsp; <span>Abbott</span></div>
+          <div class="card-tags">
+            <span class="tag tag-sap">SAP Verified — Career Page</span>
+            <span class="tag tag-s4">S/4HANA SCM Active</span>
+            <span class="tag tag-mfg">Medical Device / Life Sciences</span>
+            <span class="tag tag-lhf">Low-Hanging Fruit</span>
+          </div>
+        </div>
+        <div class="card-score-side">
+          <div class="score-dots"><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot warm"></div></div>
+          <div class="score-label">Hot</div>
+        </div>
+      </div>
+      <div class="card-reasoning">
+        <strong>Why:</strong> Abbott is a confirmed SAP S/4HANA SCM customer — verified via their careers page, which lists an active Senior Business Analyst role specifically for "SAP S4 SCM," confirming live S/4HANA Supply Chain Management deployment. $43B global medical device and nutrition company with one of the most complex supply chains in life sciences. Heather owns operations and PMO — directly in the process optimization and execution layer that Reveal addresses. Connected Dec 2014 — established relationship.
+        <span class="lhf-flag">LHF: Confirmed S/4HANA SCM active, operations title maps directly to Reveal's oVo engagement layer</span>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="card">
+      <div class="card-main">
+        <div class="card-rank">06</div>
+        <div class="card-body">
+          <div class="card-name">Uday Kuppam</div>
+          <div class="card-title-company">Senior SAP Consultant &nbsp;&bull;&nbsp; <span>John Deere</span></div>
+          <div class="card-tags">
+            <span class="tag tag-sap">SAP Verified — Internal</span>
+            <span class="tag tag-mfg">Agriculture / Heavy Equipment Mfg</span>
+          </div>
+        </div>
+        <div class="card-score-side">
+          <div class="score-dots"><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot warm"></div><div class="dot warm"></div></div>
+          <div class="score-label">Hot</div>
+        </div>
+      </div>
+      <div class="card-reasoning">
+        <strong>Why:</strong> John Deere is a confirmed, major SAP customer. Uday is an internal SAP consultant at Deere — he lives inside the SAP ecosystem at the end customer. This is a back-door intelligence contact, not a direct sales target. He can tell you the version they're on, the pain points, whether migration is in flight, and who owns the supply chain transformation budget. That conversation is worth more than a cold call to a VP. Connected Aug 2023.
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="card">
+      <div class="card-main">
+        <div class="card-rank">07</div>
+        <div class="card-body">
+          <div class="card-name">Jeff Salamon</div>
+          <div class="card-title-company">Chief Operating Officer &nbsp;&bull;&nbsp; <span>YS Distributors</span></div>
+          <div class="card-tags">
+            <span class="tag tag-sap">SAP Unverified</span>
+            <span class="tag tag-dist">Distribution</span>
+          </div>
+        </div>
+        <div class="card-score-side">
+          <div class="score-dots"><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot warm"></div><div class="dot warm"></div></div>
+          <div class="score-label">Warm-Hot</div>
+        </div>
+      </div>
+      <div class="card-reasoning">
+        <strong>Why:</strong> YS Distributors is a distribution company — right industry vertical. Jeff is COO, which is the exact operational authority Reveal engages. SAP use unverified — YS Distributors is a smaller regional player; could be SAP, JDE, or NetSuite. Worth a conversation to qualify, especially given the COO title. Connected Jul 2017 — established relationship.
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="card">
+      <div class="card-main">
+        <div class="card-rank">08</div>
+        <div class="card-body">
+          <div class="card-name">Diane Arena</div>
+          <div class="card-title-company">VP Operations &nbsp;&bull;&nbsp; <span>Spec-Tech Industrial Electric</span></div>
+          <div class="card-tags">
+            <span class="tag tag-sap">SAP Unverified</span>
+            <span class="tag tag-dist">Industrial Distribution</span>
+          </div>
+        </div>
+        <div class="card-score-side">
+          <div class="score-dots"><div class="dot hot"></div><div class="dot hot"></div><div class="dot warm"></div><div class="dot warm"></div><div class="dot warm"></div></div>
+          <div class="score-label">Warm</div>
+        </div>
+      </div>
+      <div class="card-reasoning">
+        <strong>Why:</strong> Industrial electric distribution — fits Reveal's ICP vertical. VP Operations title is the right buyer level. SAP unverified for a company of this size. Worth an outreach to qualify; if they're SAP, this is a warm door at the right title. Connected Sep 2015.
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="card">
+      <div class="card-main">
+        <div class="card-rank">09</div>
+        <div class="card-body">
+          <div class="card-name">Andrew Park</div>
+          <div class="card-title-company">President &nbsp;&bull;&nbsp; <span>P.B. Industries</span></div>
+          <div class="card-tags">
+            <span class="tag tag-sap">SAP Unverified</span>
+            <span class="tag tag-mfg">Manufacturing</span>
+          </div>
+        </div>
+        <div class="card-score-side">
+          <div class="score-dots"><div class="dot hot"></div><div class="dot warm"></div><div class="dot warm"></div><div class="dot warm"></div><div class="dot warm"></div></div>
+          <div class="score-label">Warm</div>
+        </div>
+      </div>
+      <div class="card-reasoning">
+        <strong>Why:</strong> Manufacturing company, President title. SAP status unknown — P.B. Industries is a smaller manufacturer; SAP is possible but unverified. President is the right authority level if SAP is confirmed. Connected Jan 2024 — recent-ish. Worth qualifying.
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="card">
+      <div class="card-main">
+        <div class="card-rank">10</div>
+        <div class="card-body">
+          <div class="card-name">Pratik Shah</div>
+          <div class="card-title-company">Director &nbsp;&bull;&nbsp; <span>Viana Chemicals</span></div>
+          <div class="card-tags">
+            <span class="tag tag-sap">SAP Likely</span>
+            <span class="tag tag-mfg">Chemical Manufacturing</span>
+          </div>
+        </div>
+        <div class="card-score-side">
+          <div class="score-dots"><div class="dot hot"></div><div class="dot warm"></div><div class="dot warm"></div><div class="dot warm"></div><div class="dot warm"></div></div>
+          <div class="score-label">Warm</div>
+        </div>
+      </div>
+      <div class="card-reasoning">
+        <strong>Why:</strong> Chemical manufacturing — strong ICP vertical fit with $100M+ inventory profiles common in the sector. SAP is dominant in chemicals; highly probable but unverified for Viana specifically. Director title is relevant. Connected Jan 2019 — established relationship. Recommend a soft qualifying reach-out.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PARTNERS -->
+  <div class="section-header">
+    <h2>Top Partner Contacts</h2>
+    <span class="badge badge-partner">SIs, ISVs, SAP Ecosystem</span>
+  </div>
+  <div class="cards">
+
+    <!-- P1 -->
+    <div class="card">
+      <div class="card-main">
+        <div class="card-rank">P1</div>
+        <div class="card-body">
+          <div class="card-name">Colin Baker</div>
+          <div class="card-title-company">VP SAP Alliance, Finance, Spend &amp; Sustainability &nbsp;&bull;&nbsp; <span>Deloitte</span></div>
+          <div class="card-tags">
+            <span class="tag tag-sap">SAP Alliance Lead</span>
+            <span class="tag tag-verified">High Seniority</span>
+          </div>
+        </div>
+        <div class="card-score-side">
+          <div class="score-dots"><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div></div>
+          <div class="score-label">Hottest</div>
+        </div>
+      </div>
+      <div class="card-reasoning">
+        <strong>Why:</strong> VP of SAP Alliance at Deloitte — this person literally manages the Deloitte/SAP partnership relationship. Deloitte is one of the top SAP implementation partners in North America. If Reveal wants a co-sell or referral motion through a Big 4 SI, this is the door. Supply chain and finance lens matches Reveal's oVo methodology. Connected Jun 2011 — long-established connection.
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="card">
+      <div class="card-main">
+        <div class="card-rank">P2</div>
+        <div class="card-body">
+          <div class="card-name">Matthew Ross</div>
+          <div class="card-title-company">NA Director, Ecosystem Development — Cloud ERP &nbsp;&bull;&nbsp; <span>SAP</span></div>
+          <div class="card-tags">
+            <span class="tag tag-sap">SAP Internal</span>
+            <span class="tag tag-verified">Ecosystem / Channel</span>
+          </div>
+        </div>
+        <div class="card-score-side">
+          <div class="score-dots"><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div></div>
+          <div class="score-label">Hottest</div>
+        </div>
+      </div>
+      <div class="card-reasoning">
+        <strong>Why:</strong> SAP's own NA Director of Ecosystem Development for Cloud ERP. This is the person at SAP who builds the partner ecosystem for cloud ERP — exactly the orbit Reveal operates in. A warm introduction here could open co-marketing, partner listing, or referral relationships with SAP directly. Connected Jul 2014.
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="card">
+      <div class="card-main">
+        <div class="card-rank">P3</div>
+        <div class="card-body">
+          <div class="card-name">Jennifer M. Guskey</div>
+          <div class="card-title-company">Global Chief Business Officer, SAP Software Partner Solutions (ISV) &nbsp;&bull;&nbsp; <span>SAP</span></div>
+          <div class="card-tags">
+            <span class="tag tag-sap">SAP Internal — ISV</span>
+            <span class="tag tag-verified">C-Suite</span>
+          </div>
+        </div>
+        <div class="card-score-side">
+          <div class="score-dots"><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div></div>
+          <div class="score-label">Hottest</div>
+        </div>
+      </div>
+      <div class="card-reasoning">
+        <strong>Why:</strong> Global CBO for SAP's ISV partner program — this is the executive who runs how SAP manages its software partner ecosystem worldwide. Reveal, as an SAP Partner Advisory Council member since 2016, has a story to tell to this audience. A reactivated relationship here could mean expanded co-sell, AppExchange visibility, or ISV partner tier discussions. Connected Apr 2012.
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div class="card">
+      <div class="card-main">
+        <div class="card-rank">P4</div>
+        <div class="card-body">
+          <div class="card-name">Sharon Ruddock</div>
+          <div class="card-title-company">SVP, SAP Customer Success Learning &nbsp;&bull;&nbsp; <span>SAP</span></div>
+          <div class="card-tags">
+            <span class="tag tag-sap">SAP Internal</span>
+            <span class="tag tag-verified">Customer Success</span>
+          </div>
+        </div>
+        <div class="card-score-side">
+          <div class="score-dots"><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot warm"></div></div>
+          <div class="score-label">Hot</div>
+        </div>
+      </div>
+      <div class="card-reasoning">
+        <strong>Why:</strong> SVP of Customer Success Learning at SAP — the organizational change and adoption layer. DTN's AI Sales Enablement program and Reveal's oVo methodology both live in the human adoption space. This is a potential co-development or referral relationship for change management post go-live. Connected Aug 2017.
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="card">
+      <div class="card-main">
+        <div class="card-rank">P5</div>
+        <div class="card-body">
+          <div class="card-name">Amy MacPhail</div>
+          <div class="card-title-company">Regional Sales Director, SAP ADVANCE &nbsp;&bull;&nbsp; <span>Accenture</span></div>
+          <div class="card-tags">
+            <span class="tag tag-sap">SAP ADVANCE</span>
+            <span class="tag tag-verified">SI — Accenture</span>
+          </div>
+        </div>
+        <div class="card-score-side">
+          <div class="score-dots"><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot warm"></div></div>
+          <div class="score-label">Hot</div>
+        </div>
+      </div>
+      <div class="card-reasoning">
+        <strong>Why:</strong> Accenture's SAP ADVANCE practice is one of the largest SAP implementation organizations in the world. Amy is in a regional sales director role — she sees which clients are buying SAP implementations, and where the post-go-live adoption gap exists. That gap is Reveal's front door. A referral motion with Accenture could be highly scalable. Connected Dec 2010.
+      </div>
+    </div>
+
+    <!-- P6 -->
+    <div class="card">
+      <div class="card-main">
+        <div class="card-rank">P6</div>
+        <div class="card-body">
+          <div class="card-name">Nawaz Gorme</div>
+          <div class="card-title-company">SAP C4C/FSM Consultant &nbsp;&bull;&nbsp; <span>Deloitte</span></div>
+          <div class="card-tags">
+            <span class="tag tag-sap">SAP Consultant</span>
+            <span class="tag tag-verified">SI — Deloitte</span>
+          </div>
+        </div>
+        <div class="card-score-side">
+          <div class="score-dots"><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot warm"></div><div class="dot warm"></div></div>
+          <div class="score-label">Hot</div>
+        </div>
+      </div>
+      <div class="card-reasoning">
+        <strong>Why:</strong> Active SAP consultant at Deloitte — in the field on SAP implementations. Can see firsthand where clients struggle post go-live. A peer-level relationship here is a referral pipeline, not just a warm call. Connected Dec 2019.
+      </div>
+    </div>
+
+    <!-- P7 -->
+    <div class="card">
+      <div class="card-main">
+        <div class="card-rank">P7</div>
+        <div class="card-body">
+          <div class="card-name">Ron Sachs</div>
+          <div class="card-title-company">VP of Sales &nbsp;&bull;&nbsp; <span>Celonis</span></div>
+          <div class="card-tags">
+            <span class="tag tag-sap">Process Mining — SAP Adjacent</span>
+            <span class="tag tag-verified">ISV Partner</span>
+          </div>
+        </div>
+        <div class="card-score-side">
+          <div class="score-dots"><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot warm"></div><div class="dot warm"></div></div>
+          <div class="score-label">Hot</div>
+        </div>
+      </div>
+      <div class="card-reasoning">
+        <strong>Why [Steve's suggestion unlocked]:</strong> Celonis is a process mining ISV deeply embedded in SAP environments — they diagnose process inefficiencies in SAP systems. Reveal executes the fix. Celonis and Reveal are complementary, not competitive. A co-sell motion here — Celonis surfaces the waste, Reveal eliminates it — is a natural referral story. Ron at VP Sales is the right conversation. Connected Apr 2025 — fresh relationship.
+      </div>
+    </div>
+
+    <!-- P8 -->
+    <div class="card">
+      <div class="card-main">
+        <div class="card-rank">P8</div>
+        <div class="card-body">
+          <div class="card-name">Ralf Dillmann</div>
+          <div class="card-title-company">Partner &nbsp;&bull;&nbsp; <span>BearingPoint</span></div>
+          <div class="card-tags">
+            <span class="tag tag-sap">SAP Advisory / SI</span>
+            <span class="tag tag-verified">European SI — Partner Level</span>
+          </div>
+        </div>
+        <div class="card-score-side">
+          <div class="score-dots"><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot warm"></div><div class="dot warm"></div></div>
+          <div class="score-label">Hot</div>
+        </div>
+      </div>
+      <div class="card-reasoning">
+        <strong>Why [Steve's suggestion unlocked]:</strong> BearingPoint is a major European management and technology consulting firm with a significant SAP practice, strong in manufacturing and supply chain. Partner-level contact. As Reveal expands its partner network, BearingPoint is a natural fit for cross-sell into European or global manufacturing clients where Reveal's oVo methodology can follow post-implementation. Connected Apr 2025 — recent.
+      </div>
+    </div>
+
+    <!-- P9 -->
+    <div class="card">
+      <div class="card-main">
+        <div class="card-rank">P9</div>
+        <div class="card-body">
+          <div class="card-name">Jo Dodd</div>
+          <div class="card-title-company">Principal Consultant &nbsp;&bull;&nbsp; <span>asobbi</span></div>
+          <div class="card-tags">
+            <span class="tag tag-sap">SAP Specialist Boutique</span>
+            <span class="tag tag-verified">Niche SI</span>
+          </div>
+        </div>
+        <div class="card-score-side">
+          <div class="score-dots"><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot warm"></div><div class="dot warm"></div></div>
+          <div class="score-label">Hot</div>
+        </div>
+      </div>
+      <div class="card-reasoning">
+        <strong>Why:</strong> asobbi is a niche SAP specialist consulting firm. Jo is a Principal Consultant — senior, delivery-focused. Niche SAP boutiques are Reveal's natural referral network; they do implementations, and clients need what Reveal does afterward. Jo is the type of practitioner who would see firsthand where clients struggle to realize value post go-live. Connected Sep 2025 — recent.
+      </div>
+    </div>
+
+    <!-- P10 -->
+    <div class="card">
+      <div class="card-main">
+        <div class="card-rank">P10</div>
+        <div class="card-body">
+          <div class="card-name">Joseph Kiernan</div>
+          <div class="card-title-company">VP of Sales Northeast SAP &nbsp;&bull;&nbsp; <span>SAP</span></div>
+          <div class="card-tags">
+            <span class="tag tag-sap">SAP Internal — Sales</span>
+            <span class="tag tag-verified">Regional VP</span>
+          </div>
+        </div>
+        <div class="card-score-side">
+          <div class="score-dots"><div class="dot hot"></div><div class="dot hot"></div><div class="dot warm"></div><div class="dot warm"></div><div class="dot warm"></div></div>
+          <div class="score-label">Warm-Hot</div>
+        </div>
+      </div>
+      <div class="card-reasoning">
+        <strong>Why:</strong> VP of Sales at SAP for the Northeast region — this is a field sales executive who is closing SAP deals at manufacturing and distribution companies right now. Every customer he closes is a future Reveal prospect. A relationship here is a referral pipeline from inside SAP's own sales org; Joe sees who just went live and where the post-implementation gap is widest. Connected Jul 2012 — long-established relationship.
+      </div>
+    </div>
+
+    <!-- P11 -->
+    <div class="card">
+      <div class="card-main">
+        <div class="card-rank">P11</div>
+        <div class="card-body">
+          <div class="card-name">Bret Belfor</div>
+          <div class="card-title-company">SAP SD/QTC Solution Architect &nbsp;&bull;&nbsp; <span>Syntax</span></div>
+          <div class="card-tags">
+            <span class="tag tag-sap">Managed SAP Services</span>
+            <span class="tag tag-verified">Niche SI</span>
+          </div>
+        </div>
+        <div class="card-score-side">
+          <div class="score-dots"><div class="dot hot"></div><div class="dot hot"></div><div class="dot warm"></div><div class="dot warm"></div><div class="dot warm"></div></div>
+          <div class="score-label">Warm-Hot</div>
+        </div>
+      </div>
+      <div class="card-reasoning">
+        <strong>Why:</strong> Syntax is a major SAP managed services and cloud hosting provider — their entire customer base is SAP. Bret is a solution architect in sales and distribution, which directly overlaps with Reveal's supply chain and order-to-cash focus. Syntax clients post-go-live are prime Reveal targets. Connected May 2009 — long relationship.
+      </div>
+    </div>
+
+    <!-- P12 -->
+    <div class="card">
+      <div class="card-main">
+        <div class="card-rank">P12</div>
+        <div class="card-body">
+          <div class="card-name">Francisco Verdesoto</div>
+          <div class="card-title-company">Managing Director &nbsp;&bull;&nbsp; <span>Cognitus</span></div>
+          <div class="card-tags">
+            <span class="tag tag-sap">SAP SI — Mid-Market</span>
+            <span class="tag tag-verified">Niche SI</span>
+          </div>
+        </div>
+        <div class="card-score-side">
+          <div class="score-dots"><div class="dot hot"></div><div class="dot hot"></div><div class="dot warm"></div><div class="dot warm"></div><div class="dot warm"></div></div>
+          <div class="score-label">Warm-Hot</div>
+        </div>
+      </div>
+      <div class="card-reasoning">
+        <strong>Why:</strong> Cognitus is a mid-market SAP implementation partner — the type of firm doing S/4HANA implementations at companies in Reveal's ICP sweet spot ($100M-$1B). Francisco is Managing Director. Mid-market SI partners are Reveal's best referral channel because their clients go live and immediately need what Reveal does. Connected Sep 2008 — very long relationship.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PARTNER ADDITIONS -->
+  <div class="partner-additions">
+    <h3>Additional Partner Categories Worth Exploring</h3>
+    <p class="sub">Beyond your existing connections, these partner archetypes are worth adding to the outreach strategy based on the Reveal ICP — even where current 1st-degree coverage is thin.</p>
+
+    <div class="add-row">
+      <div class="add-company">Celonis (extended)</div>
+      <div class="add-why">Process mining and task mining tool for SAP — reveals inefficiency, Reveal eliminates it. Natural co-sell story. Your Ron Sachs connection is the activation point.</div>
+    </div>
+    <div class="add-row">
+      <div class="add-company">Avantra</div>
+      <div class="add-why">SAP Basis monitoring and AMS — keeps the system running. Zero business outcome focus. Reveal fills the gap. Complementary, not competitive. Worth prospecting directly via Apollo.</div>
+    </div>
+    <div class="add-row">
+      <div class="add-company">Resulting IT</div>
+      <div class="add-why">Mid-market SAP implementation boutique — clients are fresh off go-live and immediately in Reveal's wheelhouse. Strong referral flywheel. No current 1st-degree connection; Apollo outreach warranted.</div>
+    </div>
+    <div class="add-row">
+      <div class="add-company">SNP Group</div>
+      <div class="add-why">SAP data migration and transformation specialist — they move clients from ECC to S/4. Medtronic case study confirms their orbit. Clients post-SNP migration need adoption support — that's Reveal.</div>
+    </div>
+    <div class="add-row">
+      <div class="add-company">Lemongrass / Nitor Infotech</div>
+      <div class="add-why">Niche SAP cloud migration boutiques doing RISE with SAP migrations. Same post-go-live gap. Worth adding to Apollo outreach pool as partner targets.</div>
+    </div>
+  </div>
+
+  <!-- NEXT STEPS -->
+  <div class="next-steps">
+    <h3>Recommended Next Steps</h3>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><div class="step-text"><strong>Share this POC deliverable with Ed and Martin.</strong> This is the live demo of the methodology — AI-filtered, scored, and researched, without a single Apollo credit spent.</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-text"><strong>Run Apollo enrichment on the 10 verified/likely prospects only.</strong> Company-level enrichment first; person-level only on confirmed SAP hits. Estimated 10-20 credits max.</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-text"><strong>Activate the partner contacts first.</strong> Colin Baker (Deloitte SAP Alliance VP), Matthew Ross (SAP NA Ecosystem Director), and Jennifer Guskey (SAP ISV CBO) are three of your warmest doors into the SAP partner ecosystem. A reintroduction conversation with each opens co-sell pipeline.</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-text"><strong>Add Martin's network as Phase 2.</strong> Once the engagement is formalized and NDA is in place, combine both networks and run the same model. The combined dataset doubles the pipeline surface area.</div></div>
+      <div class="step"><div class="step-num">05</div><div class="step-text"><strong>Run low-hanging fruit research on Medtronic and Honeywell.</strong> Both are confirmed SAP HANA/S4 customers with active transformation programs. A warm reintroduction to Steeve Yammine and Brandon Ward, framed around supply chain performance optimization, is the highest-probability first meeting in this dataset.</div></div>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Generated by DTN Consulting AI &nbsp;|&nbsp; Proprietary &amp; Confidential &nbsp;|&nbsp; Not for distribution &nbsp;|&nbsp; April 2026
+  </div>
+
+</div>
+</body>
+</html>
