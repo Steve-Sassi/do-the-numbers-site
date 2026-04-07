@@ -805,6 +805,11 @@
       grid-template-columns: 1fr;
     }
 
+    /* Monthly review card inner grid: single column */
+    .ms-card[style*="grid-column"] .ms-desc {
+      grid-template-columns: 1fr !important;
+    }
+
     /* Savings hero */
     .savings-hero-amount {
       font-size: 34px;
@@ -1457,6 +1462,45 @@
         <span class="ms-icon">⚡</span>
         <div class="ms-title">Scaling Support</div>
         <div class="ms-desc">Ready to spin up additional concurrent agents on demand. DTN manages all configuration as call volume and fronter-equivalent count grows.</div>
+      </div>
+      <div class="ms-card" style="grid-column: 1 / -1; border-color: rgba(200,169,110,0.3);">
+        <span class="ms-icon">📅</span>
+        <div class="ms-title" style="color: var(--accent);">Monthly Review &amp; Report</div>
+        <div class="ms-desc" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 24px; margin-top: 10px;">
+          <div>
+            <div style="font-family:'DM Mono',monospace; font-size:10px; text-transform:uppercase; letter-spacing:0.08em; color:var(--accent); margin-bottom:6px;">Performance Metrics</div>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:4px;">
+              <li>· Total calls made &amp; attempted</li>
+              <li>· Connect rate (calls answered / dialed)</li>
+              <li>· Qualification rate (qualified leads / connects)</li>
+              <li>· Handoff rate (handoffs / qualified)</li>
+              <li>· Average call duration</li>
+              <li>· Call outcome breakdown by disposition</li>
+            </ul>
+          </div>
+          <div>
+            <div style="font-family:'DM Mono',monospace; font-size:10px; text-transform:uppercase; letter-spacing:0.08em; color:var(--accent); margin-bottom:6px;">Script &amp; Agent Review</div>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:4px;">
+              <li>· Call recording sample review (wins &amp; misses)</li>
+              <li>· Objection pattern analysis</li>
+              <li>· Drop-off point identification</li>
+              <li>· Prompt changes made this month</li>
+              <li>· Voice &amp; tone assessment</li>
+              <li>· Compliance flag review</li>
+            </ul>
+          </div>
+          <div>
+            <div style="font-family:'DM Mono',monospace; font-size:10px; text-transform:uppercase; letter-spacing:0.08em; color:var(--accent); margin-bottom:6px;">Tasks &amp; Next Month</div>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:4px;">
+              <li>· Completed tasks this month</li>
+              <li>· Open items &amp; carry-forwards</li>
+              <li>· Recommended script changes</li>
+              <li>· Lead list refresh status &amp; next pull</li>
+              <li>· Scaling recommendations</li>
+              <li>· Priority task list for next 30 days</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
