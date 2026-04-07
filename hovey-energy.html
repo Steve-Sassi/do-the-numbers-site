@@ -668,6 +668,175 @@
     color: var(--muted);
     line-height: 1.55;
   }
+
+  /* ─── TABLET (≤768px) ─── */
+  @media (max-width: 768px) {
+    .page {
+      padding: 28px 16px 64px;
+    }
+
+    .header h1 {
+      font-size: 30px;
+    }
+
+    /* Section headers: let badge wrap below title */
+    .section-header {
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* Nav: 2 columns */
+    .nav-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Stats bar: 2×2 */
+    .stats-bar {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Investment cards: stack */
+    .investment-grid {
+      grid-template-columns: 1fr;
+    }
+
+    /* Timeline: 2×2 */
+    .timeline {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Comparison hero: stack vertically */
+    .comparison-hero {
+      grid-template-columns: 1fr;
+    }
+    .vs-badge {
+      text-align: center;
+      padding: 4px;
+    }
+
+    /* Savings hero: shrink big number */
+    .savings-hero-amount {
+      font-size: 40px;
+    }
+
+    /* Break-even: stack */
+    .breakeven-grid {
+      grid-template-columns: 1fr;
+    }
+
+    /* Managed services: 2 columns */
+    .ms-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Tech stack: vertical flow */
+    .tech-stack {
+      flex-direction: column;
+    }
+    .tech-arrow {
+      justify-content: center;
+      padding: 4px 0;
+      font-size: 14px;
+      transform: rotate(90deg);
+    }
+
+    /* Compliance: stack */
+    .compliance-grid {
+      grid-template-columns: 1fr;
+    }
+
+    /* Team: stack */
+    .team-grid {
+      grid-template-columns: 1fr;
+    }
+
+    /* Reduce large display font sizes */
+    .comp-box-amount {
+      font-size: 32px;
+    }
+    .invest-amount {
+      font-size: 30px;
+    }
+    .stat-num {
+      font-size: 22px;
+    }
+  }
+
+  /* ─── MOBILE (≤480px) ─── */
+  @media (max-width: 480px) {
+    .page {
+      padding: 20px 12px 48px;
+    }
+
+    .header h1 {
+      font-size: 26px;
+    }
+
+    .header-sub {
+      font-size: 13px;
+    }
+
+    /* Nav: single column */
+    .nav-grid {
+      grid-template-columns: 1fr;
+    }
+
+    /* Stats bar: single column */
+    .stats-bar {
+      grid-template-columns: 1fr;
+    }
+
+    .stat {
+      padding: 16px 20px;
+    }
+
+    /* Timeline: single column */
+    .timeline {
+      grid-template-columns: 1fr;
+    }
+
+    /* Managed services: single column */
+    .ms-grid {
+      grid-template-columns: 1fr;
+    }
+
+    /* Savings hero */
+    .savings-hero-amount {
+      font-size: 34px;
+    }
+    .savings-hero {
+      padding: 20px 16px;
+    }
+
+    /* Callout padding */
+    .callout {
+      padding: 16px 14px;
+    }
+
+    /* Table font smaller */
+    table {
+      font-size: 12px;
+    }
+    thead th {
+      font-size: 9px;
+      padding: 10px 10px;
+    }
+    td {
+      padding: 10px 10px;
+    }
+
+    /* Confidential banner: let it wrap */
+    .confidential-banner {
+      flex-wrap: wrap;
+      font-size: 9px;
+      letter-spacing: 0.06em;
+    }
+
+    /* Section header badge: wrap to new line */
+    .section-header h2 {
+      font-size: 20px;
+    }
+  }
 </style>
 </head>
 <body>
