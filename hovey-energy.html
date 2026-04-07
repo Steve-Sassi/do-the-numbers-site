@@ -912,43 +912,262 @@
   <div class="section" id="your-investment">
     <div class="section-header">
       <h2>Your Investment</h2>
-      <span class="badge badge-gold">Pricing</span>
+      <span class="badge badge-gold">Itemized Pricing</span>
     </div>
 
-    <div class="investment-grid">
-      <div class="invest-card featured">
-        <div class="invest-label">One-Time Project Fee</div>
-        <div class="invest-amount">$24,000</div>
-        <div class="invest-sub">80 hours total @ $300/hr</div>
-        <ul class="invest-includes">
-          <li><strong>Discovery &amp; Blueprint (10 hrs)</strong> — script design, qualification logic, objection matrix, KPI definition, compliance review</li>
-          <li><strong>Architecture &amp; Build (30 hrs)</strong> — production AI agent configuration, prompt engineering for Hovey ICP, telephony setup, CRM integration</li>
-          <li><strong>Pilot &amp; Launch (25 hrs)</strong> — live pilot on defined call segment, QA, prompt tuning, go/no-go assessment, full outbound launch</li>
-          <li><strong>Compliance Setup (5 hrs)</strong> — do-not-call list workflow, AI disclosure language, call log retention, opt-out handling</li>
-          <li><strong>Training &amp; Onboarding (5 hrs)</strong> — Hovey team walkthrough, dashboard access, reporting setup</li>
-          <li><strong>Website &amp; Inbound (5 hrs)</strong> — lead capture updates, inbound AI call handler, click-to-call integration</li>
-        </ul>
-      </div>
-      <div class="invest-card">
-        <div class="invest-label">Monthly Managed Services (All-In)</div>
-        <div class="invest-amount" style="color:var(--accent2);">$2,390<span style="font-size:18px;color:var(--muted)">/mo</span></div>
-        <div class="invest-sub">Includes all platform costs, API usage, and 10 hours/month of active management. One invoice. Nothing else to pay.</div>
-        <ul class="invest-includes">
-          <li><strong>Script &amp; Prompt Tuning (3 hrs)</strong> — monthly call recording review, qualification logic refinement, objection response updates</li>
-          <li><strong>Performance Reporting (2 hrs)</strong> — call volume, connect rate, qualification rate, handoff rate, monthly dashboard</li>
-          <li><strong>Compliance Monitoring (2 hrs)</strong> — DNC list updates, opt-out log review, disclosure verification</li>
-          <li><strong>System Health &amp; Monitoring (1 hr)</strong> — connection verification, data sync checks, uptime monitoring</li>
-          <li><strong>Optimization &amp; Scaling (2 hrs)</strong> — campaign adjustments, volume scaling, AI model updates as released</li>
-        </ul>
-      </div>
+    <!-- PROJECT FEE: ITEMIZED TABLE -->
+    <div class="section-header" style="font-size:14px; margin-top:8px;">
+      <h2 style="font-size:18px;">One-Time Project Fee: $24,000</h2>
+      <span class="badge badge-gold">80 Hours @ $300/hr</span>
     </div>
 
-    <div class="callout teal">
-      <strong>One number. One invoice.</strong> The $2,390/month covers everything: AI platform, telephony, API usage, and DTN management. There are no surprise line items, no pass-through costs, and no separate vendor invoices. If something breaks, you call DTN.
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Phase</th>
+            <th>Deliverables</th>
+            <th>Hours</th>
+            <th>DTN Cost</th>
+            <th>Market Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="5" style="background:var(--surface2);color:var(--muted);font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;padding:10px 16px;">Phase 1: Discovery &amp; Blueprint</td>
+          </tr>
+          <tr>
+            <td class="val-label">Script &amp; Qualification Design</td>
+            <td>Call script, qualification logic, buyer persona mapping, lead scoring criteria</td>
+            <td>4 hrs</td>
+            <td class="val-ai">$1,200</td>
+            <td class="val-human">$3,000&ndash;$5,000</td>
+          </tr>
+          <tr>
+            <td class="val-label">Objection Matrix &amp; Handoff Triggers</td>
+            <td>Full objection response library, live transfer rules, escalation paths</td>
+            <td>3 hrs</td>
+            <td class="val-ai">$900</td>
+            <td class="val-human">$2,000&ndash;$4,000</td>
+          </tr>
+          <tr>
+            <td class="val-label">KPI Definition &amp; Success Metrics</td>
+            <td>Connect rate, qualification rate, handoff rate targets, reporting framework</td>
+            <td>2 hrs</td>
+            <td class="val-ai">$600</td>
+            <td class="val-human">$1,500&ndash;$3,000</td>
+          </tr>
+          <tr>
+            <td class="val-label">Compliance Review</td>
+            <td>DNC requirements, AI disclosure language, call recording obligations</td>
+            <td>1 hr</td>
+            <td class="val-ai">$300</td>
+            <td class="val-human">$2,000&ndash;$5,000</td>
+          </tr>
+          <tr>
+            <td colspan="5" style="background:var(--surface2);color:var(--muted);font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;padding:10px 16px;">Phase 2: Architecture &amp; Build</td>
+          </tr>
+          <tr>
+            <td class="val-label">Production AI Agent Configuration</td>
+            <td>Voice agent build, conversation flow, turn-taking behavior, error handling</td>
+            <td>10 hrs</td>
+            <td class="val-ai">$3,000</td>
+            <td class="val-human">$10,000&ndash;$25,000</td>
+          </tr>
+          <tr>
+            <td class="val-label">Prompt Engineering for Hovey ICP</td>
+            <td>Custom prompts tuned to energy broker buyer personas, Illinois market context, Hovey value props</td>
+            <td>8 hrs</td>
+            <td class="val-ai">$2,400</td>
+            <td class="val-human">$8,000&ndash;$15,000</td>
+          </tr>
+          <tr>
+            <td class="val-label">Telephony &amp; Call Routing</td>
+            <td>Outbound calling infrastructure, caller ID setup, call routing, live transfer configuration</td>
+            <td>6 hrs</td>
+            <td class="val-ai">$1,800</td>
+            <td class="val-human">$5,000&ndash;$10,000</td>
+          </tr>
+          <tr>
+            <td class="val-label">CRM Integration</td>
+            <td>Lead data sync, call outcome logging, disposition tracking, reporting pipeline</td>
+            <td>4 hrs</td>
+            <td class="val-ai">$1,200</td>
+            <td class="val-human">$4,000&ndash;$8,000</td>
+          </tr>
+          <tr>
+            <td class="val-label">End-to-End Testing</td>
+            <td>Full system QA, edge case testing, failure mode verification, load testing</td>
+            <td>2 hrs</td>
+            <td class="val-ai">$600</td>
+            <td class="val-human">$2,000&ndash;$4,000</td>
+          </tr>
+          <tr>
+            <td colspan="5" style="background:var(--surface2);color:var(--muted);font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;padding:10px 16px;">Phase 3: Pilot &amp; Launch</td>
+          </tr>
+          <tr>
+            <td class="val-label">Live Pilot Campaign</td>
+            <td>Run AI agent on controlled call segment, monitor in real time, capture baseline metrics</td>
+            <td>8 hrs</td>
+            <td class="val-ai">$2,400</td>
+            <td class="val-human">$5,000&ndash;$10,000</td>
+          </tr>
+          <tr>
+            <td class="val-label">Call Quality &amp; QA Review</td>
+            <td>Listen to pilot recordings, score call quality, identify failure points, grade handoff accuracy</td>
+            <td>6 hrs</td>
+            <td class="val-ai">$1,800</td>
+            <td class="val-human">$3,000&ndash;$6,000</td>
+          </tr>
+          <tr>
+            <td class="val-label">Prompt Tuning &amp; Refinement</td>
+            <td>Adjust prompts based on pilot data, fix objection gaps, optimize transfer timing</td>
+            <td>6 hrs</td>
+            <td class="val-ai">$1,800</td>
+            <td class="val-human">$4,000&ndash;$8,000</td>
+          </tr>
+          <tr>
+            <td class="val-label">Go/No-Go &amp; Full Launch</td>
+            <td>Performance review, launch decision, full outbound deployment, monitoring setup</td>
+            <td>5 hrs</td>
+            <td class="val-ai">$1,500</td>
+            <td class="val-human">$2,000&ndash;$4,000</td>
+          </tr>
+          <tr>
+            <td colspan="5" style="background:var(--surface2);color:var(--muted);font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;padding:10px 16px;">Phase 4: Compliance, Training &amp; Website</td>
+          </tr>
+          <tr>
+            <td class="val-label">DNC &amp; Compliance Build</td>
+            <td>Do-not-call list workflow, opt-out handling, AI disclosure enforcement, call log retention</td>
+            <td>5 hrs</td>
+            <td class="val-ai">$1,500</td>
+            <td class="val-human">$3,000&ndash;$8,000</td>
+          </tr>
+          <tr>
+            <td class="val-label">Team Training &amp; Onboarding</td>
+            <td>Hovey team walkthrough, dashboard training, reporting access, operational playbook</td>
+            <td>5 hrs</td>
+            <td class="val-ai">$1,500</td>
+            <td class="val-human">$2,000&ndash;$5,000</td>
+          </tr>
+          <tr>
+            <td class="val-label">Website &amp; Inbound Setup</td>
+            <td>Lead capture page updates, inbound AI call handler, click-to-call, web form integration</td>
+            <td>5 hrs</td>
+            <td class="val-ai">$1,500</td>
+            <td class="val-human">$10,000&ndash;$25,000</td>
+          </tr>
+          <tr class="total-row">
+            <td colspan="2">Project Total</td>
+            <td style="font-weight:700;">80 hrs</td>
+            <td style="color:var(--accent2);font-weight:700;font-size:15px;">$24,000</td>
+            <td style="color:var(--hot);font-weight:700;font-size:15px;">$65,500&ndash;$145,000</td>
+          </tr>
+          <tr class="savings-row">
+            <td colspan="3" style="text-align:right;font-weight:600;">You save vs. market rate:</td>
+            <td colspan="2" style="color:var(--accent2);font-weight:700;font-size:14px;">$41,500&ndash;$121,000 (63&ndash;83%)</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <div class="callout gold">
-      <strong>How this pays for itself:</strong> At $9,062/month in savings over your current fronting costs, the $24,000 project fee is recovered by Month 3. Close one deal from an AI-generated lead and the entire first year is paid for.
+      <strong>Why this costs $24,000 and not $100,000+:</strong> DTN has already built a functional demo and validated the approach. The research, architecture decisions, and platform selection are done. You are paying for the last mile: production-grade configuration, compliance framework, and a managed launch for your specific operation. An agency starting from scratch would charge 3&ndash;5x for the same deliverables and take 3&ndash;6 months instead of 5 weeks.
+    </div>
+
+    <!-- MONTHLY FEE: ITEMIZED TABLE -->
+    <div class="section-header" style="font-size:14px; margin-top:48px;">
+      <h2 style="font-size:18px;">Monthly Managed Services: $2,390/mo (All-In)</h2>
+      <span class="badge badge-teal">10 Hours/Month + Platform + API</span>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Service</th>
+            <th>What You Get</th>
+            <th>Hours/Mo</th>
+            <th>Included In Fee</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="val-label">Script &amp; Prompt Tuning</td>
+            <td>Monthly call recording review, qualification logic refinement, objection response updates based on live results</td>
+            <td>3 hrs</td>
+            <td class="val-ai">$900</td>
+          </tr>
+          <tr>
+            <td class="val-label">Performance Reporting</td>
+            <td>Call volume, connect rate, qualification rate, handoff rate; clean monthly dashboard delivered to your team</td>
+            <td>2 hrs</td>
+            <td class="val-ai">$600</td>
+          </tr>
+          <tr>
+            <td class="val-label">Compliance Monitoring</td>
+            <td>DNC list updates, opt-out log review, disclosure verification, flag anything before it becomes a problem</td>
+            <td>2 hrs</td>
+            <td class="val-ai">$600</td>
+          </tr>
+          <tr>
+            <td class="val-label">System Health &amp; Monitoring</td>
+            <td>Connection verification, data sync checks, uptime monitoring, resolve issues before they affect calls</td>
+            <td>1 hr</td>
+            <td class="val-ai">$300</td>
+          </tr>
+          <tr>
+            <td class="val-label">Optimization &amp; Scaling</td>
+            <td>Campaign adjustments, volume scaling, AI model updates applied as released</td>
+            <td>2 hrs</td>
+            <td class="val-ai">$600</td>
+          </tr>
+          <tr>
+            <td class="val-label">AI Platform &amp; API Costs</td>
+            <td>All voice AI, telephony, and API usage bundled in. No separate vendor invoices.</td>
+            <td></td>
+            <td class="val-ai">$390</td>
+          </tr>
+          <tr class="total-row">
+            <td colspan="2">Monthly Total (All-In)</td>
+            <td style="font-weight:700;">10 hrs</td>
+            <td style="color:var(--accent2);font-weight:700;font-size:15px;">$2,390/mo</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout teal">
+      <strong>One number. One invoice.</strong> The $2,390/month covers everything: AI platform, telephony, API usage, and DTN management. There are no surprise line items, no pass-through costs, and no separate vendor invoices. If something breaks, you call DTN. One point of contact.
+    </div>
+
+    <!-- VALUE COMPARISON -->
+    <div class="savings-hero" style="margin-top: 32px;">
+      <div class="savings-hero-label">Your Investment vs. What You Get Back</div>
+      <div class="savings-hero-amount" style="font-size:42px;">$24,000 in &rarr; $108,742 back</div>
+      <div class="savings-hero-sub">Year 1 savings of $84,742 on fronter costs alone. Year 2 at scale: $643,671 in annual savings.<br>Close one deal from an AI-generated lead and the entire first year is paid for.</div>
+    </div>
+
+    <div class="chart-container">
+      <div class="chart-title">Project Cost vs. Value Returned</div>
+      <div class="bar-row">
+        <div class="bar-label">Your cost</div>
+        <div class="bar-track">
+          <div class="bar-fill ai" style="width: 22%;">$24,000 (project)</div>
+        </div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Year 1 savings</div>
+        <div class="bar-track">
+          <div class="bar-fill ai" style="width: 78%; background: rgba(78,157,142,0.5);">$84,742</div>
+        </div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Market value</div>
+        <div class="bar-track">
+          <div class="bar-fill human" style="width: 100%;">$65,500&ndash;$145,000</div>
+        </div>
+      </div>
     </div>
   </div>
 
