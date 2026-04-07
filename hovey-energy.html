@@ -729,15 +729,20 @@
       grid-template-columns: repeat(2, 1fr);
     }
 
-    /* Tech stack: vertical flow */
+    /* Tech stack: vertical flow — hide arrows, stack nodes cleanly */
     .tech-stack {
       flex-direction: column;
+      overflow: visible;
+      background: transparent;
+      gap: 8px;
+      border: none;
     }
     .tech-arrow {
-      justify-content: center;
-      padding: 4px 0;
-      font-size: 14px;
-      transform: rotate(90deg);
+      display: none;
+    }
+    .tech-node {
+      border-radius: 8px;
+      border: 1px solid var(--border);
     }
 
     /* Compliance: stack */
