@@ -1,0 +1,1742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DTN × Hovey Energy — AI Voice Agent | Project Estimate & TCO</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --bg: #0d0f14;
+    --surface: #13161e;
+    --surface2: #1a1e28;
+    --border: #252a38;
+    --accent: #c8a96e;
+    --accent2: #4e9d8e;
+    --hot: #e05252;
+    --warm: #e08a40;
+    --mild: #c8a96e;
+    --cool: #4e9d8e;
+    --text: #e8e4dc;
+    --muted: #7a8090;
+    --partner: #5b7de8;
+    --energy: #f0a030;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 32px 100px;
+  }
+
+  /* CONFIDENTIAL BANNER */
+  .confidential-banner {
+    background: rgba(200,169,110,0.07);
+    border: 1px solid rgba(200,169,110,0.2);
+    border-radius: 6px;
+    padding: 10px 18px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .confidential-banner::before {
+    content: '●';
+    font-size: 8px;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* HEADER */
+  .header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 32px;
+    margin-bottom: 40px;
+  }
+  .header-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 16px;
+  }
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 42px;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .header h1 em {
+    color: var(--accent);
+    font-style: italic;
+  }
+  .header-sub {
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 640px;
+  }
+
+  /* NAV INDEX */
+  .nav-index {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-bottom: 48px;
+  }
+  .nav-index-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 16px;
+  }
+  .nav-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px 24px;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 13px;
+    padding: 6px 0;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .nav-item:hover { color: var(--text); border-color: var(--border); }
+  .nav-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    min-width: 20px;
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 48px;
+  }
+  .stat {
+    background: var(--surface);
+    padding: 20px 24px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: var(--accent);
+    display: block;
+  }
+  .stat-num.teal { color: var(--accent2); }
+  .stat-num.red { color: var(--hot); }
+  .stat-num.blue { color: var(--partner); }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-header h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: var(--text);
+  }
+  .badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .badge-gold { background: rgba(200,169,110,0.12); color: var(--accent); border: 1px solid rgba(200,169,110,0.3); }
+  .badge-teal { background: rgba(78,157,142,0.12); color: var(--accent2); border: 1px solid rgba(78,157,142,0.3); }
+  .badge-blue { background: rgba(91,125,232,0.12); color: var(--partner); border: 1px solid rgba(91,125,232,0.3); }
+  .badge-red { background: rgba(224,82,82,0.12); color: var(--hot); border: 1px solid rgba(224,82,82,0.3); }
+
+  .section { margin-bottom: 64px; }
+
+  /* CALLOUT NOTE */
+  .callout {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .callout.gold { border-left: 3px solid var(--accent); }
+  .callout.teal { border-left: 3px solid var(--accent2); }
+  .callout.red { border-left: 3px solid var(--hot); }
+  .callout.blue { border-left: 3px solid var(--partner); }
+  .callout strong { color: var(--text); font-weight: 600; }
+  .callout p + p { margin-top: 8px; }
+
+  /* INVESTMENT CARDS */
+  .investment-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .invest-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px;
+  }
+  .invest-card.featured {
+    border-color: rgba(200,169,110,0.35);
+    background: linear-gradient(135deg, rgba(200,169,110,0.04), var(--surface));
+  }
+  .invest-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 12px;
+  }
+  .invest-amount {
+    font-family: 'DM Serif Display', serif;
+    font-size: 38px;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .invest-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  .invest-includes {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .invest-includes li {
+    font-size: 12.5px;
+    color: var(--muted);
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .invest-includes li::before {
+    content: '→';
+    color: var(--accent);
+    font-size: 11px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  .invest-includes li strong { color: var(--text); }
+
+  /* TIMELINE */
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .phase {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .phase-header {
+    padding: 14px 16px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .phase-week {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+  .phase-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .phase-tagline {
+    font-size: 11px;
+    color: var(--muted);
+    font-style: italic;
+  }
+  .phase-body { padding: 14px 16px; }
+  .phase-tasks {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .phase-tasks li {
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    gap: 6px;
+    align-items: flex-start;
+  }
+  .phase-tasks li::before {
+    content: '·';
+    color: var(--accent);
+    font-size: 16px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .phase-hours {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    padding: 4px 10px;
+    background: rgba(200,169,110,0.08);
+    border-radius: 20px;
+    display: inline-block;
+  }
+  .phase.purple .phase-header { border-top: 2px solid var(--partner); }
+  .phase.gold .phase-header { border-top: 2px solid var(--accent); }
+  .phase.teal .phase-header { border-top: 2px solid var(--accent2); }
+  .phase.warm .phase-header { border-top: 2px solid var(--warm); }
+
+  /* TABLES */
+  .table-wrap {
+    overflow-x: auto;
+    margin-bottom: 24px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  thead tr {
+    background: var(--surface2);
+  }
+  thead th {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  tbody tr {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--surface2); }
+  tbody tr.total-row {
+    background: rgba(200,169,110,0.05);
+    border-top: 1px solid rgba(200,169,110,0.2);
+  }
+  tbody tr.total-row td {
+    font-weight: 600;
+    color: var(--text);
+  }
+  tbody tr.savings-row {
+    background: rgba(78,157,142,0.05);
+  }
+  tbody tr.savings-row td { color: var(--accent2); }
+  td {
+    padding: 12px 16px;
+    color: var(--muted);
+    vertical-align: top;
+  }
+  td.val-human { color: var(--hot); }
+  td.val-ai { color: var(--accent2); }
+  td.val-savings { color: var(--accent); font-weight: 600; }
+  td.val-label { color: var(--text); font-weight: 500; }
+  td strong { color: var(--text); }
+  td em { color: var(--accent); font-style: normal; }
+
+  /* COMPARISON HERO */
+  .comparison-hero {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+  .comp-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px;
+    text-align: center;
+  }
+  .comp-box.human { border-color: rgba(224,82,82,0.3); }
+  .comp-box.ai { border-color: rgba(78,157,142,0.35); background: linear-gradient(135deg, rgba(78,157,142,0.04), var(--surface)); }
+  .comp-box-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .comp-box-amount {
+    font-family: 'DM Serif Display', serif;
+    font-size: 42px;
+    margin-bottom: 4px;
+  }
+  .comp-box.human .comp-box-amount { color: var(--hot); }
+  .comp-box.ai .comp-box-amount { color: var(--accent2); }
+  .comp-box-sub { font-size: 12px; color: var(--muted); }
+  .vs-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+    padding: 12px;
+  }
+
+  /* SAVINGS CALLOUT */
+  .savings-hero {
+    background: linear-gradient(135deg, rgba(78,157,142,0.07), rgba(200,169,110,0.04));
+    border: 1px solid rgba(78,157,142,0.25);
+    border-radius: 8px;
+    padding: 28px;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .savings-hero-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 8px;
+  }
+  .savings-hero-amount {
+    font-family: 'DM Serif Display', serif;
+    font-size: 56px;
+    color: var(--accent2);
+    margin-bottom: 6px;
+  }
+  .savings-hero-sub { font-size: 14px; color: var(--muted); }
+
+  /* BREAKEVEN */
+  .breakeven-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .be-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+  }
+  .be-val {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .be-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* MANAGED SERVICES GRID */
+  .ms-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .ms-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .ms-icon {
+    font-size: 20px;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .ms-title {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .ms-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* TECH STACK */
+  .tech-stack {
+    display: flex;
+    gap: 2px;
+    align-items: stretch;
+    margin-bottom: 24px;
+    background: var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .tech-node {
+    background: var(--surface);
+    padding: 20px 22px;
+    flex: 1;
+    text-align: center;
+  }
+  .tech-name {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .tech-role {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .tech-cost {
+    font-size: 11.5px;
+    color: var(--muted);
+  }
+  .tech-arrow {
+    display: flex;
+    align-items: center;
+    padding: 0 6px;
+    background: var(--surface2);
+    color: var(--muted);
+    font-size: 16px;
+  }
+
+  /* MARKET RATES */
+  .market-val-high { color: var(--hot); }
+  .market-val-dtn { color: var(--accent2); font-weight: 600; }
+
+  /* COMPLIANCE */
+  .compliance-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .compliance-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent2);
+    border-radius: 6px;
+    padding: 16px 20px;
+  }
+  .compliance-title {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .compliance-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* FOOTNOTE */
+  .footnote {
+    font-size: 11px;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 8px;
+    line-height: 1.5;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+  }
+  .footnote strong { color: var(--text); font-style: normal; }
+
+  /* FOOTER */
+  .footer-note {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-align: center;
+    letter-spacing: 0.06em;
+    line-height: 1.8;
+  }
+  .footer-note a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* TEAM */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .team-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+  }
+  .team-name {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+  .team-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+  .team-bio {
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- CONFIDENTIAL BANNER -->
+  <div class="confidential-banner">
+    Private &amp; Confidential &nbsp;|&nbsp; Prepared for Hovey Energy &nbsp;|&nbsp; DTN Consulting &nbsp;|&nbsp; April 2026 &nbsp;|&nbsp; Link-Only Access
+  </div>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-meta">DTN Consulting &nbsp;×&nbsp; Hovey Energy &nbsp;|&nbsp; AI Voice Agent Program &nbsp;|&nbsp; Project Estimate &amp; Total Cost of Ownership</div>
+    <h1>AI Voice Agent<br><em>Project Estimate & TCO</em></h1>
+    <p class="header-sub">A complete picture of investment, timeline, cost savings, and what it takes to replace your fronting operation with an always-on AI voice agent — built and managed by DTN.</p>
+  </div>
+
+  <!-- NAV INDEX -->
+  <div class="nav-index">
+    <div class="nav-index-label">Contents — Jump to Section</div>
+    <div class="nav-grid">
+      <a class="nav-item" href="#executive-summary"><span class="nav-num">01</span> Executive Summary</a>
+      <a class="nav-item" href="#your-investment"><span class="nav-num">02</span> Your Investment</a>
+      <a class="nav-item" href="#project-timeline"><span class="nav-num">03</span> Project Timeline</a>
+      <a class="nav-item" href="#cost-comparison"><span class="nav-num">04</span> Fronter vs. AI Cost Comparison</a>
+      <a class="nav-item" href="#tco"><span class="nav-num">05</span> 3-Year &amp; 5-Year TCO</a>
+      <a class="nav-item" href="#breakeven"><span class="nav-num">06</span> Break-Even Analysis</a>
+      <a class="nav-item" href="#managed-services"><span class="nav-num">07</span> Monthly Managed Services</a>
+      <a class="nav-item" href="#tech-stack"><span class="nav-num">08</span> Tech Stack &amp; Platform</a>
+      <a class="nav-item" href="#market-rates"><span class="nav-num">09</span> Market Rate Comparison</a>
+      <a class="nav-item" href="#fronter-costs"><span class="nav-num">10</span> Fronter Cost Breakdown</a>
+      <a class="nav-item" href="#compliance"><span class="nav-num">11</span> TCPA Compliance Architecture</a>
+      <a class="nav-item" href="#team"><span class="nav-num">12</span> The DTN Team</a>
+    </div>
+  </div>
+
+  <!-- ──────────────────────────────────────── -->
+  <!-- 01 EXECUTIVE SUMMARY -->
+  <!-- ──────────────────────────────────────── -->
+  <div class="section" id="executive-summary">
+    <div class="section-header">
+      <h2>Executive Summary</h2>
+      <span class="badge badge-gold">The Bottom Line</span>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stat">
+        <span class="stat-num">$24K</span>
+        <span class="stat-label">One-Time Project Cost</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num teal">$2K/mo</span>
+        <span class="stat-label">DTN Managed Services</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">2.7 mo</span>
+        <span class="stat-label">Break-Even (2 fronters)</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num teal">91%</span>
+        <span class="stat-label">3-Year Cost Reduction</span>
+      </div>
+    </div>
+
+    <div class="callout gold">
+      <strong>The one-sentence case:</strong> Replacing 2 fronters with a DTN AI Voice Agent costs $2,390/month vs. $11,452/month for the human equivalent — and the $24,000 project investment pays for itself in under 3 months. By Year 2, at 10-fronter scale, you're saving over $643,000 per year.
+    </div>
+
+    <div class="callout teal">
+      <p><strong>What DTN delivers:</strong> A complete, production-grade AI outbound voice agent — built on ElevenLabs + Twilio + Vici Dialer — configured for Hovey Energy's specific ICP, compliance requirements, and sales handoff process. This is not a platform license or a tech demo. It is a fully managed, revenue-generating system.</p>
+      <p style="margin-top:8px;"><strong>POC status:</strong> Nick has already built the first-cut AI Voice Agent at <em>github.com/spiritusnick/hov_caller</em>. Phase 1 discovery is underway. The build is ahead of schedule.</p>
+    </div>
+  </div>
+
+  <!-- ──────────────────────────────────────── -->
+  <!-- 02 YOUR INVESTMENT -->
+  <!-- ──────────────────────────────────────── -->
+  <div class="section" id="your-investment">
+    <div class="section-header">
+      <h2>Your Investment</h2>
+      <span class="badge badge-gold">Pricing</span>
+    </div>
+
+    <div class="investment-grid">
+      <div class="invest-card featured">
+        <div class="invest-label">One-Time Project Fee</div>
+        <div class="invest-amount">$24,000</div>
+        <div class="invest-sub">80 hours total @ $300/hr &nbsp;·&nbsp; 4–5 weeks to live production</div>
+        <ul class="invest-includes">
+          <li><strong>Discovery &amp; Blueprint</strong> — script, qualification logic, objection matrix, KPIs</li>
+          <li><strong>AI Agent Build</strong> — ElevenLabs configuration, prompt engineering for Hovey ICP</li>
+          <li><strong>Vici Dialer + CRM Integration</strong> — full system connectivity</li>
+          <li><strong>TCPA Compliance Architecture</strong> — DNC scrub workflow, disclosure framework</li>
+          <li><strong>Live Pilot Campaign</strong> — QA, tuning, go/no-go before full launch</li>
+          <li><strong>Website Revamp</strong> — lead capture, inbound AI call handler, click-to-call</li>
+          <li><strong>Training &amp; Onboarding</strong> — Hovey team handoff session</li>
+        </ul>
+      </div>
+      <div class="invest-card">
+        <div class="invest-label">Monthly Managed Services</div>
+        <div class="invest-amount" style="color:var(--accent2);">$2,000<span style="font-size:18px;color:var(--muted)">/mo</span></div>
+        <div class="invest-sub">10 hours/month @ $200/hr &nbsp;·&nbsp; Includes 24/7 monitoring &amp; performance reporting</div>
+        <ul class="invest-includes">
+          <li><strong>Script &amp; Prompt Tuning</strong> — monthly call recording review and refinement</li>
+          <li><strong>Performance Reporting</strong> — call volume, connect rate, qualification rate, handoff rate</li>
+          <li><strong>TCPA Compliance Monitoring</strong> — DNC scrub updates, opt-out log review</li>
+          <li><strong>Integration Health Checks</strong> — Vici, CRM, ElevenLabs sync verification</li>
+          <li><strong>Voice &amp; AI Model Updates</strong> — ElevenLabs model improvements applied as released</li>
+          <li><strong>Scaling Support</strong> — spin up additional agents on demand, DTN manages config</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout blue">
+      <strong>Note on platform costs:</strong> AI platform costs (ElevenLabs + Twilio telephony) are separate from the DTN managed services fee and scale with call volume. These are passed through at cost with no markup. See Section 08 for full tech stack pricing.
+    </div>
+  </div>
+
+  <!-- ──────────────────────────────────────── -->
+  <!-- 03 PROJECT TIMELINE -->
+  <!-- ──────────────────────────────────────── -->
+  <div class="section" id="project-timeline">
+    <div class="section-header">
+      <h2>Project Timeline</h2>
+      <span class="badge badge-teal">80 Hours · 4–5 Weeks</span>
+    </div>
+
+    <div class="timeline">
+      <div class="phase gold">
+        <div class="phase-header">
+          <div class="phase-week">Week 1</div>
+          <div class="phase-name">Discovery &amp; Blueprint</div>
+          <div class="phase-tagline">POC in hand — accelerated</div>
+        </div>
+        <div class="phase-body">
+          <ul class="phase-tasks">
+            <li>Finalize script &amp; qualification logic</li>
+            <li>Map objection handling &amp; handoff triggers</li>
+            <li>Define success metrics &amp; KPIs</li>
+            <li>TCPA compliance review with counsel</li>
+          </ul>
+          <span class="phase-hours">10 Hours</span>
+        </div>
+      </div>
+
+      <div class="phase teal">
+        <div class="phase-header">
+          <div class="phase-week">Weeks 2 &amp; 3</div>
+          <div class="phase-name">Build &amp; Integration</div>
+          <div class="phase-tagline">ElevenLabs + Vici/CRM</div>
+        </div>
+        <div class="phase-body">
+          <ul class="phase-tasks">
+            <li>ElevenLabs outbound agent configuration</li>
+            <li>Prompt engineering for Hovey ICP</li>
+            <li>Vici Dialer + CRM integration</li>
+            <li>DNC scrub workflow setup</li>
+          </ul>
+          <span class="phase-hours">30 Hours</span>
+        </div>
+      </div>
+
+      <div class="phase warm">
+        <div class="phase-header">
+          <div class="phase-week">Weeks 3 &amp; 4</div>
+          <div class="phase-name">Pilot &amp; Launch</div>
+          <div class="phase-tagline">Live calls → full deployment</div>
+        </div>
+        <div class="phase-body">
+          <ul class="phase-tasks">
+            <li>Live pilot on defined call segment</li>
+            <li>QA call quality &amp; handoff timing</li>
+            <li>Tune &amp; refine prompts</li>
+            <li>Go/No-Go — full outbound launch</li>
+          </ul>
+          <span class="phase-hours">30 Hours</span>
+        </div>
+      </div>
+
+      <div class="phase purple">
+        <div class="phase-header">
+          <div class="phase-week">Week 5</div>
+          <div class="phase-name">Inbound &amp; Website</div>
+          <div class="phase-tagline">Close the inbound loop</div>
+        </div>
+        <div class="phase-body">
+          <ul class="phase-tasks">
+            <li>Revamp Hovey website for lead capture</li>
+            <li>Inbound AI call handler configuration</li>
+            <li>Click-to-call &amp; web form integration</li>
+            <li>End-to-end inbound flow testing</li>
+          </ul>
+          <span class="phase-hours">10 Hours</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout gold">
+      <strong>Timeline note:</strong> Timeline subject to refinement based on integrations confirmed during kickoff. Nick's POC (github.com/spiritusnick/hov_caller) means Phase 1 is already underway — the build has a head start.
+    </div>
+  </div>
+
+  <!-- ──────────────────────────────────────── -->
+  <!-- 04 COST COMPARISON -->
+  <!-- ──────────────────────────────────────── -->
+  <div class="section" id="cost-comparison">
+    <div class="section-header">
+      <h2>Fronter vs. AI — Cost Comparison</h2>
+      <span class="badge badge-teal">New Tables · Mixed-Source Analysis</span>
+    </div>
+
+    <div class="callout gold" style="margin-bottom:24px;">
+      <strong>How these numbers were built:</strong> Fronter costs use the fully loaded DTN Consulting analysis (base pay, FICA, FUTA/SUTA, workers' comp, benefits, management overhead, training, turnover, equipment, and office space — sourced from IRS, IDES, QATC, ContactBabel, and SHRM benchmarks). AI Agent platform costs use actual ElevenLabs + Twilio pricing at Hovey's projected call volumes.
+    </div>
+
+    <div class="section-header" style="font-size:14px; margin-top:32px;">
+      <h2 style="font-size:18px;">Year 1 — Monthly Comparison (2 Fronters vs. AI Start)</h2>
+    </div>
+
+    <div class="comparison-hero">
+      <div class="comp-box human">
+        <div class="comp-box-label">2 Fronters — Monthly</div>
+        <div class="comp-box-amount">$11,452</div>
+        <div class="comp-box-sub">2 × $5,726 fully loaded/mo</div>
+      </div>
+      <div class="vs-badge">VS</div>
+      <div class="comp-box ai">
+        <div class="comp-box-label">AI Agent — Monthly (Year 1)</div>
+        <div class="comp-box-amount">$2,390</div>
+        <div class="comp-box-sub">Platform $390 + DTN $2,000/mo</div>
+      </div>
+    </div>
+
+    <div class="savings-hero">
+      <div class="savings-hero-label">Year 1 Monthly Savings</div>
+      <div class="savings-hero-amount">$9,062</div>
+      <div class="savings-hero-sub">79% lower monthly cost — starting from day one of launch</div>
+    </div>
+
+    <div class="section-header" style="font-size:14px; margin-top:8px;">
+      <h2 style="font-size:18px;">Annual Cost — All Scales</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Scale</th>
+            <th>Fronters — Annual Cost</th>
+            <th>AI Agent — Year 1 Annual</th>
+            <th>AI Agent — Year 2+ Annual</th>
+            <th>Year 1 Savings</th>
+            <th>Year 2+ Annual Savings</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="val-label">2 fronters / 2,000 min/mo</td>
+            <td class="val-human">$137,422</td>
+            <td class="val-ai">$52,680 <span style="font-size:11px;color:var(--muted)">($24K project + $28,680)</span></td>
+            <td class="val-ai">$28,680</td>
+            <td class="val-savings">$84,742 (62%)</td>
+            <td class="val-savings">$108,742 (79%)</td>
+          </tr>
+          <tr>
+            <td class="val-label">10 fronters / 10,000 min/mo</td>
+            <td class="val-human">$687,111</td>
+            <td class="val-ai">$67,440 <span style="font-size:11px;color:var(--muted)">($24K project + $43,440)</span></td>
+            <td class="val-ai">$43,440</td>
+            <td class="val-savings">$619,671 (90%)</td>
+            <td class="val-savings">$643,671 (94%)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-header" style="font-size:14px; margin-top:32px;">
+      <h2 style="font-size:18px;">Monthly Cost by Scale (Post-Project, Ongoing)</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Scale</th>
+            <th>Fronters — Monthly</th>
+            <th>AI Agent — Year 1 Monthly</th>
+            <th>AI Agent — Year 2+ Monthly</th>
+            <th>Y1 Monthly Savings</th>
+            <th>Y2+ Monthly Savings</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="val-label">1 fronter / 1,000 min/mo</td>
+            <td class="val-human">$5,726</td>
+            <td class="val-ai">$2,390 <span style="font-size:11px;color:var(--muted)">(pro-rated)</span></td>
+            <td class="val-ai">$2,195 <span style="font-size:11px;color:var(--muted)">(pro-rated)</span></td>
+            <td class="val-savings">$3,336 (58%)</td>
+            <td class="val-savings">$3,531 (62%)</td>
+          </tr>
+          <tr>
+            <td class="val-label">2 fronters / 2,000 min/mo</td>
+            <td class="val-human">$11,452</td>
+            <td class="val-ai">$2,390</td>
+            <td class="val-ai">$2,390</td>
+            <td class="val-savings">$9,062 (79%)</td>
+            <td class="val-savings">$9,062 (79%)</td>
+          </tr>
+          <tr>
+            <td class="val-label">5 fronters / 5,000 min/mo</td>
+            <td class="val-human">$28,630</td>
+            <td class="val-ai">$2,997 <span style="font-size:11px;color:var(--muted)">(scaled platform)</span></td>
+            <td class="val-ai">$2,920</td>
+            <td class="val-savings">$25,633 (90%)</td>
+            <td class="val-savings">$25,710 (90%)</td>
+          </tr>
+          <tr>
+            <td class="val-label">10 fronters / 10,000 min/mo</td>
+            <td class="val-human">$57,259</td>
+            <td class="val-ai">$3,620</td>
+            <td class="val-ai">$3,620</td>
+            <td class="val-savings">$53,639 (94%)</td>
+            <td class="val-savings">$53,639 (94%)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="footnote">
+      <strong>AI Agent monthly cost components:</strong> ElevenLabs conversational AI (Scale tier $330/mo at 2,000 min; Business tier $1,320/mo at 10,000 min) + Twilio PSTN telephony ($0.03/min) + DTN Managed Services ($2,000/mo flat). Cost per minute: $0.195 (Year 1) → $0.162 (Year 2+). &nbsp;·&nbsp; <strong>Fronter costs:</strong> Fully loaded per DTN analysis — base pay $20/hr, FICA, FUTA/SUTA, workers' comp, health insurance, PTO, management overhead, training, 38% annual turnover, equipment, and office space. Full breakdown in Section 10.
+    </div>
+  </div>
+
+  <!-- ──────────────────────────────────────── -->
+  <!-- 05 TCO -->
+  <!-- ──────────────────────────────────────── -->
+  <div class="section" id="tco">
+    <div class="section-header">
+      <h2>Total Cost of Ownership</h2>
+      <span class="badge badge-gold">3-Year &amp; 5-Year Analysis</span>
+    </div>
+
+    <div class="callout blue">
+      <strong>Scale assumption:</strong> Year 1 = 2 fronters equivalent (2,000 min/mo). Year 2 onward = 10 fronters equivalent (10,000 min/mo), as the AI agent scales with Hovey's growth. This is the realistic deployment arc based on Hovey's fronting operation.
+    </div>
+
+    <div class="section-header" style="font-size:14px; margin-top:32px;">
+      <h2 style="font-size:18px;">3-Year Total Cost of Ownership</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Cost Element</th>
+            <th>Year 1</th>
+            <th>Year 2</th>
+            <th>Year 3</th>
+            <th>3-Year Human Total</th>
+            <th>3-Year AI Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="val-label">Scale</td>
+            <td>2 fronters / 2,000 min/mo</td>
+            <td>10 fronters / 10,000 min/mo</td>
+            <td>10 fronters / 10,000 min/mo</td>
+            <td>—</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td class="val-label">Human Annual Labor Cost</td>
+            <td class="val-human">$137,422</td>
+            <td class="val-human">$687,111</td>
+            <td class="val-human">$687,111</td>
+            <td class="val-human" style="font-weight:600;">$1,511,644</td>
+            <td style="color:var(--muted);">—</td>
+          </tr>
+          <tr>
+            <td class="val-label">DTN One-Time Project</td>
+            <td class="val-ai">$24,000</td>
+            <td class="val-ai">—</td>
+            <td class="val-ai">—</td>
+            <td style="color:var(--muted);">—</td>
+            <td class="val-ai">$24,000</td>
+          </tr>
+          <tr>
+            <td class="val-label">AI Platform (ElevenLabs + Twilio)</td>
+            <td class="val-ai">$4,680</td>
+            <td class="val-ai">$19,440</td>
+            <td class="val-ai">$19,440</td>
+            <td style="color:var(--muted);">—</td>
+            <td class="val-ai">$43,560</td>
+          </tr>
+          <tr>
+            <td class="val-label">DTN Managed Services</td>
+            <td class="val-ai">$24,000</td>
+            <td class="val-ai">$24,000</td>
+            <td class="val-ai">$24,000</td>
+            <td style="color:var(--muted);">—</td>
+            <td class="val-ai">$72,000</td>
+          </tr>
+          <tr class="total-row">
+            <td>Annual Total</td>
+            <td>Human: <span style="color:var(--hot)">$137,422</span> / AI: <span style="color:var(--accent2)">$52,680</span></td>
+            <td>Human: <span style="color:var(--hot)">$687,111</span> / AI: <span style="color:var(--accent2)">$43,440</span></td>
+            <td>Human: <span style="color:var(--hot)">$687,111</span> / AI: <span style="color:var(--accent2)">$43,440</span></td>
+            <td style="color:var(--hot);font-weight:700;font-size:15px;">$1,511,644</td>
+            <td style="color:var(--accent2);font-weight:700;font-size:15px;">$139,560</td>
+          </tr>
+          <tr class="savings-row">
+            <td colspan="4" style="text-align:right;font-weight:600;">3-Year Savings with AI Agent:</td>
+            <td colspan="2" style="color:var(--accent2);font-weight:700;font-size:16px;">$1,372,084 &nbsp;—&nbsp; 91% lower cost</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-header" style="font-size:14px; margin-top:32px;">
+      <h2 style="font-size:18px;">5-Year Total Cost of Ownership</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Scale</th>
+            <th>Human Annual</th>
+            <th>AI Agent Annual</th>
+            <th>Annual Savings</th>
+            <th>Cumulative Savings</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="val-label">Year 1</td>
+            <td>2 fronters / 2,000 min/mo</td>
+            <td class="val-human">$137,422</td>
+            <td class="val-ai">$52,680 <span style="font-size:11px;color:var(--muted)">(incl. project)</span></td>
+            <td class="val-savings">$84,742</td>
+            <td class="val-savings">$84,742</td>
+          </tr>
+          <tr>
+            <td class="val-label">Year 2</td>
+            <td>10 fronters / 10,000 min/mo</td>
+            <td class="val-human">$687,111</td>
+            <td class="val-ai">$43,440</td>
+            <td class="val-savings">$643,671</td>
+            <td class="val-savings">$728,413</td>
+          </tr>
+          <tr>
+            <td class="val-label">Year 3</td>
+            <td>10 fronters / 10,000 min/mo</td>
+            <td class="val-human">$687,111</td>
+            <td class="val-ai">$43,440</td>
+            <td class="val-savings">$643,671</td>
+            <td class="val-savings">$1,372,084</td>
+          </tr>
+          <tr>
+            <td class="val-label">Year 4</td>
+            <td>10 fronters / 10,000 min/mo</td>
+            <td class="val-human">$687,111</td>
+            <td class="val-ai">$43,440</td>
+            <td class="val-savings">$643,671</td>
+            <td class="val-savings">$2,015,755</td>
+          </tr>
+          <tr>
+            <td class="val-label">Year 5</td>
+            <td>10 fronters / 10,000 min/mo</td>
+            <td class="val-human">$687,111</td>
+            <td class="val-ai">$43,440</td>
+            <td class="val-savings">$643,671</td>
+            <td class="val-savings">$2,659,426</td>
+          </tr>
+          <tr class="total-row">
+            <td colspan="2">5-Year Totals</td>
+            <td style="color:var(--hot);font-weight:700;font-size:15px;">$2,885,866</td>
+            <td style="color:var(--accent2);font-weight:700;font-size:15px;">$226,440</td>
+            <td colspan="2" style="color:var(--accent);font-weight:700;font-size:15px;">$2,659,426 — 92% lower cost</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="footnote">
+      <strong>Fronter cost methodology:</strong> $68,711.12/year per fully loaded fronter per DTN analysis (IRS, IDES, QATC, ContactBabel, SHRM benchmark sources). AI platform costs per actual ElevenLabs/Twilio pricing at stated volumes. Human costs do not include churn replacement costs ($10,000–$20,000 per turnover event at ~38% annual turnover), compliance violation risk, or absenteeism — all of which are eliminated by the AI agent.
+    </div>
+  </div>
+
+  <!-- ──────────────────────────────────────── -->
+  <!-- 06 BREAK-EVEN -->
+  <!-- ──────────────────────────────────────── -->
+  <div class="section" id="breakeven">
+    <div class="section-header">
+      <h2>Break-Even Analysis</h2>
+      <span class="badge badge-teal">When Does It Pay For Itself?</span>
+    </div>
+
+    <div class="breakeven-grid">
+      <div class="be-card">
+        <span class="be-val">$9,062</span>
+        <span class="be-label">Monthly Savings (2 fronters replaced)</span>
+      </div>
+      <div class="be-card">
+        <span class="be-val" style="color:var(--accent2);">2.7 mo</span>
+        <span class="be-label">Break-Even on $24,000 Project Cost</span>
+      </div>
+      <div class="be-card">
+        <span class="be-val" style="color:var(--partner);">Month 3</span>
+        <span class="be-label">Every Month After = Pure Savings</span>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Timeframe</th>
+            <th>Human Fronter Spend</th>
+            <th>AI Agent Spend</th>
+            <th>Net Savings</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="val-label">Month 1 (launch)</td>
+            <td class="val-human">$11,452</td>
+            <td class="val-ai">$26,390 <span style="font-size:11px;color:var(--muted)">(project + month 1)</span></td>
+            <td style="color:var(--hot);">–$14,938</td>
+          </tr>
+          <tr>
+            <td class="val-label">Month 3</td>
+            <td class="val-human">$34,356</td>
+            <td class="val-ai">$28,770 <span style="font-size:11px;color:var(--muted)">(project + 3 months)</span></td>
+            <td class="val-savings">$5,586 — Break-Even Crossed</td>
+          </tr>
+          <tr>
+            <td class="val-label">Month 6</td>
+            <td class="val-human">$68,712</td>
+            <td class="val-ai">$35,340</td>
+            <td class="val-savings">$33,372</td>
+          </tr>
+          <tr>
+            <td class="val-label">Month 12 (End of Year 1)</td>
+            <td class="val-human">$137,424</td>
+            <td class="val-ai">$52,680</td>
+            <td class="val-savings">$84,744</td>
+          </tr>
+          <tr>
+            <td class="val-label">Month 24 (End of Year 2)</td>
+            <td class="val-human">$824,535 <span style="font-size:11px;color:var(--muted)">(scales to 10 fronters)</span></td>
+            <td class="val-ai">$96,120</td>
+            <td class="val-savings">$728,415</td>
+          </tr>
+          <tr class="total-row">
+            <td>Month 36 (End of Year 3)</td>
+            <td style="color:var(--hot);">$1,511,644</td>
+            <td style="color:var(--accent2);">$139,560</td>
+            <td style="color:var(--accent);font-weight:700;">$1,372,084</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout teal">
+      <strong>The math in plain English:</strong> The $24,000 project cost is recovered by Month 3. After that, every single month Hovey runs the AI agent instead of 2 fronters, they keep $9,062. When the operation scales to 10 fronters in Year 2, that monthly savings jumps to $53,639. The AI agent doesn't take sick days, doesn't quit, doesn't need a supervisor, and runs 24/7.
+    </div>
+  </div>
+
+  <!-- ──────────────────────────────────────── -->
+  <!-- 07 MANAGED SERVICES -->
+  <!-- ──────────────────────────────────────── -->
+  <div class="section" id="managed-services">
+    <div class="section-header">
+      <h2>Monthly Managed Services</h2>
+      <span class="badge badge-blue">What DTN Does Every Month After Launch</span>
+    </div>
+
+    <div class="callout gold">
+      <strong>Always on. Always DTN-managed.</strong> 10 hours/month of active management at $200/hr, plus 24/7 infrastructure monitoring. Hovey's team never touches the AI system directly — DTN handles everything, surfaces the results, and brings recommendations.
+    </div>
+
+    <div class="ms-grid">
+      <div class="ms-card">
+        <span class="ms-icon">📋</span>
+        <div class="ms-title">Script &amp; Prompt Tuning</div>
+        <div class="ms-desc">Monthly review of call recordings. Refine qualification logic, objection responses, and handoff triggers based on live results.</div>
+      </div>
+      <div class="ms-card">
+        <span class="ms-icon">📊</span>
+        <div class="ms-title">Performance Reporting</div>
+        <div class="ms-desc">Calls made, connect rate, qualification rate, handoff rate. Clean monthly dashboard delivered to your team. No data interpretation required on your end.</div>
+      </div>
+      <div class="ms-card">
+        <span class="ms-icon">⚖️</span>
+        <div class="ms-title">TCPA Compliance Monitoring</div>
+        <div class="ms-desc">DNC list scrub updates, opt-out log review, and regulatory change tracking. Flag anything that needs attention before it becomes a problem.</div>
+      </div>
+      <div class="ms-card">
+        <span class="ms-icon">🔗</span>
+        <div class="ms-title">Integration Health Checks</div>
+        <div class="ms-desc">Verify Vici Dialer, CRM, and ElevenLabs connections are operating correctly. Resolve any sync or data issues before they affect call volume.</div>
+      </div>
+      <div class="ms-card">
+        <span class="ms-icon">🎙️</span>
+        <div class="ms-title">Voice &amp; AI Model Updates</div>
+        <div class="ms-desc">Apply ElevenLabs model improvements as released. Evaluate new voice and turn-taking upgrades for Hovey's specific use case and buyer profile.</div>
+      </div>
+      <div class="ms-card">
+        <span class="ms-icon">⚡</span>
+        <div class="ms-title">Scaling Support</div>
+        <div class="ms-desc">Ready to spin up additional concurrent agents on demand. DTN manages all configuration as call volume and fronter-equivalent count grows.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ──────────────────────────────────────── -->
+  <!-- 08 TECH STACK -->
+  <!-- ──────────────────────────────────────── -->
+  <div class="section" id="tech-stack">
+    <div class="section-header">
+      <h2>Tech Stack &amp; Platform Costs</h2>
+      <span class="badge badge-blue">Passed Through at Cost — No Markup</span>
+    </div>
+
+    <div class="tech-stack">
+      <div class="tech-node">
+        <div class="tech-name">ElevenLabs</div>
+        <span class="tech-role">AI Voice Engine</span>
+        <div class="tech-cost">ASR + LLM + TTS bundled<br>Scale: $330/mo (~2,000 min)<br>Business: $1,320/mo (~11,000 min)</div>
+      </div>
+      <div class="tech-arrow">→</div>
+      <div class="tech-node">
+        <div class="tech-name">Twilio</div>
+        <span class="tech-role">Telephony / PSTN</span>
+        <div class="tech-cost">Real phone call infrastructure<br>$0.03/min PSTN termination<br>Year 1: $60/mo · Year 2+: $300/mo</div>
+      </div>
+      <div class="tech-arrow">→</div>
+      <div class="tech-node">
+        <div class="tech-name">Vici Dialer</div>
+        <span class="tech-role">Outbound Dialer / CRM</span>
+        <div class="tech-cost">Campaign management<br>Call logging &amp; reporting<br>Handoff trigger routing</div>
+      </div>
+      <div class="tech-arrow">→</div>
+      <div class="tech-node">
+        <div class="tech-name">DTN</div>
+        <span class="tech-role">Build, Strategy &amp; Management</span>
+        <div class="tech-cost">Prompt engineering<br>Script &amp; qualification logic<br>Compliance architecture</div>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>Year 1 (2,000 min/mo)</th>
+            <th>Year 2+ (10,000 min/mo)</th>
+            <th>What Changes</th>
+            <th>Cost/Min</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="val-label">ElevenLabs Subscription</td>
+            <td>$330/mo (Scale tier)</td>
+            <td>$1,320/mo (Business tier)</td>
+            <td>Volume requires tier upgrade</td>
+            <td>$0.165 → $0.132</td>
+          </tr>
+          <tr>
+            <td class="val-label">Twilio PSTN Telephony</td>
+            <td>$60/mo</td>
+            <td>$300/mo</td>
+            <td>Same rate × 5× volume</td>
+            <td>$0.030 flat</td>
+          </tr>
+          <tr class="total-row">
+            <td>Platform Total (per month)</td>
+            <td style="color:var(--accent2);">$390/mo</td>
+            <td style="color:var(--accent2);">$1,620/mo</td>
+            <td>4.15× — volume, not price</td>
+            <td style="color:var(--accent);">$0.195 → $0.162</td>
+          </tr>
+          <tr>
+            <td class="val-label">DTN Managed Services</td>
+            <td>$2,000/mo</td>
+            <td>$2,000/mo</td>
+            <td>Flat — does not scale</td>
+            <td>—</td>
+          </tr>
+          <tr class="total-row">
+            <td>All-In Monthly (Platform + DTN)</td>
+            <td style="color:var(--accent2);font-size:15px;font-weight:700;">$2,390/mo</td>
+            <td style="color:var(--accent2);font-size:15px;font-weight:700;">$3,620/mo</td>
+            <td colspan="2">DTN managed services flat; platform scales with volume</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout gold">
+      <strong>Why the platform cost jumps from Year 1 to Year 2:</strong> The per-minute rate stays flat or drops (from $0.195 to $0.162). The jump from $390 to $1,620/mo is entirely explained by 5× more call volume and the corresponding ElevenLabs tier step-up. As you scale, the cost per minute actually gets cheaper — the Business tier's 11,000-minute allowance spreads the subscription across more volume.
+    </div>
+  </div>
+
+  <!-- ──────────────────────────────────────── -->
+  <!-- 09 MARKET RATES -->
+  <!-- ──────────────────────────────────────── -->
+  <div class="section" id="market-rates">
+    <div class="section-header">
+      <h2>Market Rate Comparison</h2>
+      <span class="badge badge-gold">What This Would Cost Elsewhere</span>
+    </div>
+
+    <div class="callout teal" style="margin-bottom:24px;">
+      <strong>The a-la-carte test:</strong> If Hovey tried to assemble this capability by purchasing each component separately from the market, the Year 1 tab runs $114,000–$288,000. DTN's all-in price is $44,000 Year 1 (project + 12 months managed). That's a 61–85% discount for a complete, managed solution.
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Competing AI Voice Platform</th>
+            <th>Pricing Model</th>
+            <th>Typical Monthly Cost</th>
+            <th>What's NOT Included</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="val-label">Bland.ai</td>
+            <td>Per-minute usage</td>
+            <td class="market-val-high">$2,100–$3,600/mo</td>
+            <td>No customization, no compliance, no strategy</td>
+          </tr>
+          <tr>
+            <td class="val-label">Air.ai</td>
+            <td>Per-min + platform fee</td>
+            <td class="market-val-high">$3,000–$5,000/mo</td>
+            <td>Self-service; requires internal team to configure</td>
+          </tr>
+          <tr>
+            <td class="val-label">Synthflow</td>
+            <td>Tiered subscription</td>
+            <td class="market-val-high">$450–$1,500/mo + overage</td>
+            <td>Minute limits, no strategic services</td>
+          </tr>
+          <tr>
+            <td class="val-label">Vapi.ai</td>
+            <td>Per-minute usage</td>
+            <td class="market-val-high">$1,500–$4,000/mo (fully stacked)</td>
+            <td>Developer-focused; requires engineering resources</td>
+          </tr>
+          <tr>
+            <td class="val-label">Custom Agency Development</td>
+            <td>Project-based</td>
+            <td class="market-val-high">$2,000–$5,000/mo maintenance</td>
+            <td>$30K–$100K+ build; 3–6 month timeline</td>
+          </tr>
+          <tr class="total-row">
+            <td>DTN All-Inclusive</td>
+            <td>Fixed fee</td>
+            <td class="market-val-dtn">$2,390/mo (Year 1)</td>
+            <td style="color:var(--accent2);">Everything included — script, TCPA, SEO, lead lists, reporting, tuning</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="table-wrap" style="margin-top:24px;">
+      <table>
+        <thead>
+          <tr>
+            <th>Service (A La Carte Market Rate)</th>
+            <th>Market Cost — Year 1</th>
+            <th>DTN Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="val-label">AI Voice Agent Platform (usage-based)</td>
+            <td class="market-val-high">$30,000–$50,000</td>
+            <td class="market-val-dtn">Included in setup</td>
+          </tr>
+          <tr>
+            <td class="val-label">Custom AI Development / Configuration</td>
+            <td class="market-val-high">$30,000–$75,000</td>
+            <td class="market-val-dtn">Included in $24K project</td>
+          </tr>
+          <tr>
+            <td class="val-label">Website Redesign</td>
+            <td class="market-val-high">$10,000–$25,000</td>
+            <td class="market-val-dtn">Included in project</td>
+          </tr>
+          <tr>
+            <td class="val-label">SEO (setup + 12 months maintenance)</td>
+            <td class="market-val-high">$12,000–$36,000</td>
+            <td class="market-val-dtn">Included in retainer</td>
+          </tr>
+          <tr>
+            <td class="val-label">Lead Generation / Data (12 months)</td>
+            <td class="market-val-high">$6,000–$30,000</td>
+            <td class="market-val-dtn">Included in retainer</td>
+          </tr>
+          <tr>
+            <td class="val-label">DNC Compliance / Scrubbing</td>
+            <td class="market-val-high">$1,000–$2,000</td>
+            <td class="market-val-dtn">Included in retainer</td>
+          </tr>
+          <tr>
+            <td class="val-label">Consulting (automation strategy, script design)</td>
+            <td class="market-val-high">$25,000–$75,000</td>
+            <td class="market-val-dtn">Included in project</td>
+          </tr>
+          <tr class="total-row">
+            <td>A La Carte Total — Year 1</td>
+            <td class="market-val-high" style="font-size:15px;font-weight:700;">$114,000–$288,000</td>
+            <td class="market-val-dtn" style="font-size:15px;font-weight:700;">DTN All-In: $44,000</td>
+          </tr>
+          <tr class="savings-row">
+            <td colspan="2" style="text-align:right;font-weight:600;">Year 1 Savings vs. A La Carte:</td>
+            <td style="color:var(--accent2);font-weight:700;">$70,000–$244,000 (61–85%)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ──────────────────────────────────────── -->
+  <!-- 10 FRONTER COST BREAKDOWN -->
+  <!-- ──────────────────────────────────────── -->
+  <div class="section" id="fronter-costs">
+    <div class="section-header">
+      <h2>Fronter Cost Breakdown</h2>
+      <span class="badge badge-red">Full Loaded Cost Analysis</span>
+    </div>
+
+    <div class="callout red">
+      <strong>The true cost of a fronter is not the base wage.</strong> Every cost below is the employer's cost — not what the employee takes home. The fully loaded annual cost per fronter is <strong>$68,711</strong>, or <strong>$5,726/month</strong>. This is the number the AI agent replaces.
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Cost Category</th>
+            <th>Calculation</th>
+            <th>Annual Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="3" style="background:var(--surface2);color:var(--muted);font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;padding:10px 16px;">Direct Compensation</td>
+          </tr>
+          <tr>
+            <td class="val-label">Base Pay</td>
+            <td>$20.00/hr × 2,080 hrs/yr</td>
+            <td>$41,600</td>
+          </tr>
+          <tr>
+            <td class="val-label">Employer FICA</td>
+            <td>7.65% × $41,600 (SS + Medicare)</td>
+            <td>$3,182</td>
+          </tr>
+          <tr>
+            <td class="val-label">Federal Unemployment (FUTA)</td>
+            <td>6.0% on first $7,000, net of state credit</td>
+            <td>$42</td>
+          </tr>
+          <tr>
+            <td class="val-label">Illinois SUTA</td>
+            <td>3.2% on first $12,960 (IDES 2025)</td>
+            <td>$415</td>
+          </tr>
+          <tr>
+            <td class="val-label">Workers' Compensation</td>
+            <td>2.0% × $41,600 (Telemarketing, NCCI)</td>
+            <td>$832</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="background:var(--surface2);color:var(--muted);font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;padding:10px 16px;">Benefits</td>
+          </tr>
+          <tr>
+            <td class="val-label">Health Insurance (employer portion)</td>
+            <td>$450/mo average (KFF 2025 Survey)</td>
+            <td>$5,400</td>
+          </tr>
+          <tr>
+            <td class="val-label">PTO / Sick Time</td>
+            <td>7 days × 8 hrs × $20/hr</td>
+            <td>$1,120</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="background:var(--surface2);color:var(--muted);font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;padding:10px 16px;">Management &amp; Overhead</td>
+          </tr>
+          <tr>
+            <td class="val-label">Supervisor Time</td>
+            <td>~10% of $55K supervisor / 5 reps</td>
+            <td>$1,100</td>
+          </tr>
+          <tr>
+            <td class="val-label">HR / Payroll Processing</td>
+            <td>~$150/mo per employee</td>
+            <td>$1,800</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="background:var(--surface2);color:var(--muted);font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;padding:10px 16px;">Training &amp; Turnover</td>
+          </tr>
+          <tr>
+            <td class="val-label">Initial Training</td>
+            <td>3 weeks at full pay, zero productivity</td>
+            <td>$2,400</td>
+          </tr>
+          <tr>
+            <td class="val-label">Ongoing Training / Coaching</td>
+            <td>2 hrs/week × 50 weeks × $20/hr</td>
+            <td>$2,000</td>
+          </tr>
+          <tr>
+            <td class="val-label">Turnover Replacement Cost</td>
+            <td>38% annual turnover (QATC/ContactBabel); $3,500 recruiting + onboarding + lost productivity</td>
+            <td>$3,500</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="background:var(--surface2);color:var(--muted);font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;padding:10px 16px;">Equipment &amp; Infrastructure</td>
+          </tr>
+          <tr>
+            <td class="val-label">Desk / Workstation</td>
+            <td>Amortized over 3 years ($1,500 setup)</td>
+            <td>$500</td>
+          </tr>
+          <tr>
+            <td class="val-label">Computer</td>
+            <td>Amortized over 3 years ($900)</td>
+            <td>$300</td>
+          </tr>
+          <tr>
+            <td class="val-label">Headset</td>
+            <td>$80, replaced annually</td>
+            <td>$80</td>
+          </tr>
+          <tr>
+            <td class="val-label">Phone / VoIP Line</td>
+            <td>$30/mo</td>
+            <td>$360</td>
+          </tr>
+          <tr>
+            <td class="val-label">ViciDial License / CRM Seat</td>
+            <td>$50/mo</td>
+            <td>$600</td>
+          </tr>
+          <tr>
+            <td class="val-label">Internet / Telecom (per seat)</td>
+            <td>$40/mo allocated</td>
+            <td>$480</td>
+          </tr>
+          <tr>
+            <td class="val-label">Office Space (per seat)</td>
+            <td>$250/mo (suburban IL, includes utilities)</td>
+            <td>$3,000</td>
+          </tr>
+          <tr class="total-row">
+            <td>Total Loaded Cost Per Fronter</td>
+            <td style="color:var(--muted);">Per year</td>
+            <td style="color:var(--hot);font-size:16px;font-weight:700;">$68,711</td>
+          </tr>
+          <tr>
+            <td style="color:var(--muted);">Monthly Equivalent</td>
+            <td>÷ 12</td>
+            <td style="color:var(--hot);font-size:15px;font-weight:600;">$5,726/mo</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout red">
+      <strong>Hidden costs not quantified above (but real):</strong>
+      Absenteeism (call centers average 8–12 absent days/year beyond PTO) · Performance inconsistency (Monday mornings, post-lunch dips, Friday afternoons) · TCPA/DNC compliance risk (fines from $500–$1,500 per willful violation; at call center volumes, this math gets ugly fast) · Morale and culture management · Scheduling complexity for coverage · Churn replacement at 38% annual turnover — recruiting, onboarding, and 60–90 days of ramp time at zero productivity, estimated at $10,000–$20,000 per replacement event.
+    </div>
+
+    <div class="footnote">
+      <strong>Sources:</strong> Base pay per client's current compensation structure · FICA per IRS guidelines · FUTA 6.0% on first $7,000 reduced to 0.6% with full state credit · Illinois SUTA 3.175% average new employer rate on $12,960 wage base (Illinois IDES, 2025) · Workers' comp telemarketing classification code 8742, IL average 1.5–2.5% (NCCI) · Health insurance per Kaiser Family Foundation 2025 Employer Health Benefits Survey · Call center turnover 30–45% annually (QATC, ContactBabel US Contact Centre Decision-Makers' Guide) · Replacement cost per SHRM, 50–60% of annual salary for entry-level positions
+    </div>
+  </div>
+
+  <!-- ──────────────────────────────────────── -->
+  <!-- 11 COMPLIANCE -->
+  <!-- ──────────────────────────────────────── -->
+  <div class="section" id="compliance">
+    <div class="section-header">
+      <h2>TCPA Compliance Architecture</h2>
+      <span class="badge badge-teal">Built In — Not an Afterthought</span>
+    </div>
+
+    <div class="callout gold">
+      <strong>Bottom line on B2B AI calling:</strong> AI voice calling for B2B energy sales is legal and workable. The FCC (Feb 2024) confirmed AI-generated voices are treated the same as robocalls under TCPA. B2B calls to business landlines enjoy significant exemptions — but cell phones, sole proprietors, and state "mini-TCPA" laws introduce landmines. DTN builds every required protection into Phase 1 of the engagement.
+    </div>
+
+    <div class="compliance-grid">
+      <div class="compliance-item">
+        <div class="compliance-title">Immediate AI Disclosure</div>
+        <div class="compliance-desc">Every call opens with AI identity disclosure in the first sentence. This is non-negotiable under FCC guidance and built directly into the agent's opening prompt. Example: "Hi, this is an AI calling on behalf of Hovey Energy…" It's also a differentiator — transparency builds trust faster than pretending.</div>
+      </div>
+      <div class="compliance-item">
+        <div class="compliance-title">DNC Scrub Before Every Dial</div>
+        <div class="compliance-desc">National DNC Registry scrub is integrated into the dialing workflow. No number is dialed without real-time verification. The National DNC Registry includes individual business numbers for sole proprietors — these are not exempt and must be scrubbed.</div>
+      </div>
+      <div class="compliance-item">
+        <div class="compliance-title">Real-Time Opt-Out Handling</div>
+        <div class="compliance-desc">The AI agent recognizes opt-out language ("take me off your list," "do not call," "remove me") and triggers immediate suppression. Opt-out requests are logged, and suppression takes effect within 24 hours. DTN tests this regularly as part of monthly compliance monitoring.</div>
+      </div>
+      <div class="compliance-item">
+        <div class="compliance-title">B2B Call Flow Design</div>
+        <div class="compliance-desc">Call targeting is designed for business landlines, not cell phones. Cell phone numbers for business contacts require documented consent regardless of B2B context. DTN's lead list design and calling protocols are structured to maintain the B2B exemption wherever applicable.</div>
+      </div>
+      <div class="compliance-item">
+        <div class="compliance-title">Four-Year Call Log Retention</div>
+        <div class="compliance-desc">Every call attempt, consent record, and opt-out event is logged and retained for a minimum of four years. ElevenLabs records and transcribes every call automatically. DTN maintains a structured compliance archive accessible for any regulatory review.</div>
+      </div>
+      <div class="compliance-item">
+        <div class="compliance-title">Counsel Review Checkpoint</div>
+        <div class="compliance-desc">Before go-live, DTN flags the full script and call flow for telecom compliance review by qualified counsel. This is built into Week 1 of the Discovery phase — not an optional add-on. TCPA violations start at $500/call and reach $1,500 for willful violations. Counsel review is a fixed cost that pays for itself on the first avoided violation.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ──────────────────────────────────────── -->
+  <!-- 12 TEAM -->
+  <!-- ──────────────────────────────────────── -->
+  <div class="section" id="team">
+    <div class="section-header">
+      <h2>The DTN Team</h2>
+      <span class="badge badge-gold">Who You're Working With</span>
+    </div>
+
+    <div class="callout gold">
+      <strong>"We didn't learn to sell from AI. We learned AI to sell."</strong> DTN is not a tech company that drifted into sales consulting. We're sales veterans — with enterprise CPQ, channel sales, IBM/Watson Health, and Merative pedigrees — who built real AI systems to solve the exact problem Hovey Energy faces.
+    </div>
+
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-name">Steve Sassi</div>
+        <div class="team-title">Co-Founder · Sales Veteran</div>
+        <div class="team-bio">15+ years in enterprise sales — Pivotree ecosystem, manufacturing and distribution CPQ, catalog, and channel sales. Built and managed complex B2B sales operations before mastering the AI systems that replace the most painful parts of the job.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-name">Nick</div>
+        <div class="team-title">Co-Founder · AI Architect</div>
+        <div class="team-bio">15+ years at IBM and Merative (IBM's Watson Health spin-off). Built the POC AI voice agent at github.com/spiritusnick/hov_caller before the first sales call. Brings enterprise AI credibility and healthcare data pedigree to every engagement.</div>
+      </div>
+      <div class="team-card" style="background: linear-gradient(135deg, rgba(200,169,110,0.04), var(--surface));">
+        <div class="team-name">Hovey Energy</div>
+        <div class="team-title">Melissa Hovey · Corey Sinkuler · Brek Erickson</div>
+        <div class="team-bio">Melissa (Owner), Corey, and Brek bring the domain knowledge, ICP definition, and sales process expertise that makes the AI agent work. DTN builds the system around Hovey's specific product, buyer, and compliance environment.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-note">
+    DTN Consulting &nbsp;·&nbsp; <a href="https://do-the-numbers.com">do-the-numbers.com</a> &nbsp;·&nbsp; Steve@do-the-numbers.com<br>
+    Prepared for Hovey Energy &nbsp;·&nbsp; April 2026 &nbsp;·&nbsp; Private &amp; Confidential &nbsp;·&nbsp; Link-Only Access<br>
+    All cost estimates subject to final scope confirmation. Platform pricing per ElevenLabs/Twilio published rates as of April 2026.
+  </div>
+
+</div>
+</body>
+</html>
