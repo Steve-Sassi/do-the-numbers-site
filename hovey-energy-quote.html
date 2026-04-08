@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DTN × Hovey Energy — Project Quote</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --bg: #0d0f14;
+    --surface: #13161e;
+    --surface2: #1a1e28;
+    --border: #252a38;
+    --accent: #c8a96e;
+    --accent2: #4e9d8e;
+    --hot: #e05252;
+    --text: #e8e4dc;
+    --muted: #7a8090;
+    --partner: #5b7de8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 14px; line-height: 1.6; }
+  .page { max-width: 900px; margin: 0 auto; padding: 48px 32px 100px; }
+
+  .confidential-banner {
+    background: rgba(200,169,110,0.07); border: 1px solid rgba(200,169,110,0.2);
+    border-radius: 6px; padding: 10px 18px; margin-bottom: 32px;
+    display: flex; align-items: center; gap: 12px;
+    font-family: 'DM Mono', monospace; font-size: 10px; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 0.12em;
+  }
+  .confidential-banner::before { content: '●'; font-size: 8px; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+  .header { border-bottom: 1px solid var(--border); padding-bottom: 32px; margin-bottom: 40px; }
+  .header-meta { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 16px; }
+  .header h1 { font-family: 'DM Serif Display', serif; font-size: 38px; line-height: 1.15; color: var(--text); margin-bottom: 8px; }
+  .header h1 em { color: var(--accent); font-style: italic; }
+  .header-sub { color: var(--muted); font-size: 14px; max-width: 640px; line-height: 1.7; }
+
+  .section { margin-bottom: 48px; }
+  .section-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  .section-header h2 { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--text); }
+  .badge { font-family: 'DM Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; padding: 3px 10px; border-radius: 20px; }
+  .badge-gold { background: rgba(200,169,110,0.12); color: var(--accent); border: 1px solid rgba(200,169,110,0.3); }
+  .badge-teal { background: rgba(78,157,142,0.12); color: var(--accent2); border: 1px solid rgba(78,157,142,0.3); }
+  .badge-blue { background: rgba(91,125,232,0.12); color: var(--partner); border: 1px solid rgba(91,125,232,0.3); }
+
+  .callout { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 18px 22px; margin-bottom: 20px; font-size: 13px; color: var(--muted); }
+  .callout.gold { border-left: 3px solid var(--accent); }
+  .callout.teal { border-left: 3px solid var(--accent2); }
+  .callout.blue { border-left: 3px solid var(--partner); }
+  .callout strong { color: var(--text); font-weight: 600; }
+  .callout p + p { margin-top: 8px; }
+
+  .table-wrap { overflow-x: auto; margin-bottom: 20px; border-radius: 8px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead tr { background: var(--surface2); }
+  thead th { font-family: 'DM Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+  tbody tr { background: var(--surface); border-bottom: 1px solid var(--border); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--surface2); }
+  tbody tr.total-row { background: rgba(200,169,110,0.05); border-top: 1px solid rgba(200,169,110,0.2); }
+  tbody tr.total-row td { font-weight: 600; color: var(--text); }
+  td { padding: 12px 16px; color: var(--muted); vertical-align: top; }
+  td.val-label { color: var(--text); font-weight: 500; }
+  td.val-amount { color: var(--accent2); font-weight: 600; }
+
+  .terms-list { list-style: none; display: flex; flex-direction: column; gap: 16px; margin-bottom: 20px; }
+  .terms-list li { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; }
+  .terms-list li .term-title { font-weight: 600; color: var(--text); font-size: 13px; margin-bottom: 4px; }
+  .terms-list li .term-desc { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+
+  .sig-block { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 32px; margin-top: 32px; }
+  .sig-row { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 24px; }
+  .sig-field { border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 8px; min-height: 32px; }
+  .sig-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  .footer-note { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border); font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); text-align: center; letter-spacing: 0.06em; line-height: 1.8; }
+  .footer-note a { color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 768px) {
+    .page { padding: 28px 16px 64px; }
+    .header h1 { font-size: 28px; }
+    .section-header { flex-wrap: wrap; gap: 8px; }
+    .sig-row { grid-template-columns: 1fr; gap: 24px; }
+  }
+  @media (max-width: 480px) {
+    .page { padding: 20px 12px 48px; }
+    .header h1 { font-size: 24px; }
+    table { font-size: 12px; }
+    thead th { font-size: 9px; padding: 10px 10px; }
+    td { padding: 10px 10px; }
+    .callout { padding: 14px 14px; }
+    .confidential-banner { flex-wrap: wrap; font-size: 9px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="confidential-banner">
+    Private &amp; Confidential &nbsp;|&nbsp; Project Quote &nbsp;|&nbsp; DTN Consulting &nbsp;|&nbsp; April 2026
+  </div>
+
+  <div class="header">
+    <div class="header-meta">DTN Consulting &nbsp;×&nbsp; Hovey Energy &nbsp;|&nbsp; AI Voice Agent Program &nbsp;|&nbsp; Project Quote</div>
+    <h1>Project Quote &amp;<br><em>Terms of Engagement</em></h1>
+    <p class="header-sub">This document outlines the project scope, pricing, payment schedule, and terms for the AI Voice Agent engagement between DTN Consulting ("DTN") and Hovey Energy ("Client"). A detailed Scope of Work will be provided separately for collaborative review.</p>
+  </div>
+
+  <!-- ── PROJECT OVERVIEW ── -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Project Overview</h2>
+      <span class="badge badge-gold">What DTN Is Building</span>
+    </div>
+
+    <div class="callout gold">
+      <p><strong>DTN will build, deploy, and manage a production AI outbound voice agent</strong> purpose-built for Hovey Energy's sales operation. The system is designed to replace the workload of two fronters, operating as a completely independent calling system alongside Hovey's existing outbound dialer.</p>
+    </div>
+
+    <ul class="terms-list">
+      <li>
+        <div class="term-title">AI Voice Agent</div>
+        <div class="term-desc">One (1) AI voice agent configured for Hovey Energy's ICP, qualification logic, objection handling, and live transfer workflow. The agent is licensed to run continuously during configured operating hours with no limit on the number of leads processed.</div>
+      </li>
+      <li>
+        <div class="term-title">Cloud Hosted</div>
+        <div class="term-desc">The system is fully cloud hosted and internet dependent. No hardware, servers, or on-premise infrastructure are required from Hovey Energy. An internet connection is the only technical requirement.</div>
+      </li>
+      <li>
+        <div class="term-title">Independent System</div>
+        <div class="term-desc">The AI voice agent operates independently from Hovey's existing outbound dialer. The two systems do not interact. Hovey's current team workflow remains unchanged.</div>
+      </li>
+      <li>
+        <div class="term-title">Dashboard &amp; Reporting</div>
+        <div class="term-desc">A custom metrics dashboard providing call outcome tracking, performance reporting, and lead status visibility. Full MP3 recording and transcription of every call.</div>
+      </li>
+      <li>
+        <div class="term-title">Same Team, Start to Finish</div>
+        <div class="term-desc">The DTN team that builds the system is the same team that deploys, manages, and optimizes it. No handoffs to a support desk or third party.</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ── PRICING ── -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Pricing</h2>
+      <span class="badge badge-gold">Project Fee &amp; Monthly Services</span>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Description</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="val-label">One-Time Project Fee</td>
+            <td>Discovery, architecture, build, pilot, launch, training, and deployment of production AI voice agent. Includes all development, configuration, and testing.</td>
+            <td class="val-amount">$24,000</td>
+          </tr>
+          <tr>
+            <td class="val-label">Monthly Managed Services</td>
+            <td>Ongoing management, prompt tuning, performance reporting, system monitoring, AI platform and telephony costs, and scaling support. Three (3) days per month of dedicated specialist time. Work beyond 3 days in any month is billable at a pre-agreed rate.</td>
+            <td class="val-amount">$2,390/mo</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout teal">
+      <strong>What's included in the monthly fee:</strong> All AI platform costs, telephony, API usage, prompt tuning, performance reporting, system monitoring, and scaling support. One invoice. No separate vendor charges. No pass-through costs at current volume.
+    </div>
+  </div>
+
+  <!-- ── PAYMENT SCHEDULE ── -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Payment Schedule</h2>
+      <span class="badge badge-teal">Milestone-Based</span>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Milestone</th>
+            <th>Trigger</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="val-label">Milestone 1: Project Kickoff (50%)</td>
+            <td>Invoiced on the Effective Date (date of signature). Work commences upon receipt of payment.</td>
+            <td class="val-amount">$12,000</td>
+          </tr>
+          <tr>
+            <td class="val-label">Milestone 2: Mid-Project (25%)</td>
+            <td>Due Net 60 from the Effective Date.</td>
+            <td class="val-amount">$6,000</td>
+          </tr>
+          <tr>
+            <td class="val-label">Milestone 3: Completion (25%)</td>
+            <td>Due at Go-Live (system handoff to Client) or ninety (90) days from the Effective Date, whichever comes first.</td>
+            <td class="val-amount">$6,000</td>
+          </tr>
+          <tr class="total-row">
+            <td>Project Total</td>
+            <td></td>
+            <td style="color:var(--accent);font-size:15px;">$24,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout gold">
+      <strong>Monthly managed services ($2,390/mo)</strong> begin on the Go-Live date, defined as the date DTN delivers the production system and hands operational control to Client. Monthly services are not invoiced during the build phase.
+    </div>
+  </div>
+
+  <!-- ── SCOPE SUMMARY ── -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Scope Summary</h2>
+      <span class="badge badge-blue">Detailed SOW to Follow</span>
+    </div>
+
+    <div class="callout blue">
+      <strong>A detailed Scope of Work</strong> will be provided separately as a collaborative working document. The SOW will outline specific milestones, deliverables, and week-by-week activities. The scope below is a summary of what is included in this engagement.
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Phase</th>
+            <th>What's Included</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="val-label">Discovery &amp; Blueprint</td>
+            <td>Script design, qualification logic, objection handling, KPI definition, compliance review (in collaboration with Hovey team)</td>
+          </tr>
+          <tr>
+            <td class="val-label">Architecture &amp; Build</td>
+            <td>Production AI agent configuration, prompt engineering for Hovey ICP, telephony and call routing, dashboard and reporting pipeline, call recording setup</td>
+          </tr>
+          <tr>
+            <td class="val-label">Pilot &amp; Launch</td>
+            <td>Live pilot on controlled call segment, call quality review, prompt tuning, full production deployment</td>
+          </tr>
+          <tr>
+            <td class="val-label">Training &amp; Handoff</td>
+            <td>Hovey team walkthrough, dashboard access, operational playbook, Go-Live</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── TERMS ── -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Terms</h2>
+      <span class="badge badge-gold">Agreement</span>
+    </div>
+
+    <ul class="terms-list">
+      <li>
+        <div class="term-title">1. Effective Date</div>
+        <div class="term-desc">This agreement becomes effective on the date both parties sign below (the "Effective Date"). DTN will invoice Milestone 1 on the Effective Date. Project work commences upon receipt of Milestone 1 payment.</div>
+      </li>
+      <li>
+        <div class="term-title">2. Agent License</div>
+        <div class="term-desc">The monthly managed services fee includes the right to operate one (1) AI voice agent. The agent may run continuously during configured operating hours and process an unlimited number of leads. Additional concurrent agents may be added at a rate to be agreed upon at the time of scaling.</div>
+      </li>
+      <li>
+        <div class="term-title">3. Hosting &amp; Infrastructure</div>
+        <div class="term-desc">The AI voice agent system is fully cloud hosted and managed by DTN. No hardware, server, or on-premise infrastructure is required from Client. System availability is dependent on internet connectivity and third-party cloud service uptime. DTN does not guarantee specific uptime percentages but will use commercially reasonable efforts to maintain system availability.</div>
+      </li>
+      <li>
+        <div class="term-title">4. Monthly Services Start Date</div>
+        <div class="term-desc">Monthly managed services fees begin on the Go-Live date, defined as the date DTN delivers the production-ready system to Client. No monthly fees are charged during the project build phase.</div>
+      </li>
+      <li>
+        <div class="term-title">5. Monthly Services Scope</div>
+        <div class="term-desc">The monthly fee includes three (3) days of dedicated specialist time per month, plus all AI platform, telephony, and API costs at current operating volume. Work requested by Client beyond three (3) days in any calendar month will be billed at a rate agreed upon in writing prior to the work being performed.</div>
+      </li>
+      <li>
+        <div class="term-title">6. Monthly Cancellation</div>
+        <div class="term-desc">Client may cancel monthly managed services at any time with thirty (30) days written notice. No minimum commitment period applies to monthly services. Cancellation of monthly services does not affect project fee obligations.</div>
+      </li>
+      <li>
+        <div class="term-title">7. Compliance Responsibility</div>
+        <div class="term-desc">DTN will configure the AI voice agent with compliance-supporting features including do-not-call list management, AI disclosure language, opt-out handling, and call log retention. Client is responsible for ensuring its use of the AI voice agent complies with all applicable federal, state, and local laws and regulations, including but not limited to TCPA, state telemarketing laws, and do-not-call requirements. DTN recommends Client consult qualified legal counsel regarding applicable regulations prior to Go-Live. DTN is not liable for any fines, penalties, or legal actions arising from Client's use of the system.</div>
+      </li>
+      <li>
+        <div class="term-title">8. Intellectual Property</div>
+        <div class="term-desc">All call recordings, transcriptions, and lead data generated by the system are the property of Client. Prompt configurations, AI agent architecture, system code, and proprietary tooling developed by DTN remain the intellectual property of DTN Consulting. Client receives a non-exclusive license to use the system for the duration of the managed services engagement.</div>
+      </li>
+      <li>
+        <div class="term-title">9. Confidentiality</div>
+        <div class="term-desc">Both parties agree to treat all information shared during this engagement as confidential and will not disclose it to third parties without prior written consent. This includes but is not limited to business strategies, customer data, call recordings, system configurations, and pricing.</div>
+      </li>
+      <li>
+        <div class="term-title">10. Limitation of Liability</div>
+        <div class="term-desc">DTN's total liability under this agreement shall not exceed the total fees paid by Client to DTN under this agreement. DTN shall not be liable for any indirect, incidental, consequential, or punitive damages, including but not limited to lost revenue, lost profits, or business interruption, regardless of the cause of action. The AI voice agent is provided as a managed service; DTN does not guarantee specific sales outcomes, lead conversion rates, or revenue results.</div>
+      </li>
+      <li>
+        <div class="term-title">11. Termination for Cause</div>
+        <div class="term-desc">Either party may terminate this agreement with written notice if the other party materially breaches any term of this agreement and fails to cure such breach within fifteen (15) days of receiving written notice of the breach.</div>
+      </li>
+      <li>
+        <div class="term-title">12. Governing Law</div>
+        <div class="term-desc">This agreement shall be governed by and construed in accordance with the laws of the State of Illinois, without regard to conflict of law principles.</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ── SIGNATURES ── -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Acceptance</h2>
+    </div>
+
+    <p style="color:var(--muted); font-size:13px; margin-bottom:24px;">By signing below, both parties agree to the terms outlined in this document. This agreement becomes effective on the date of last signature below.</p>
+
+    <div class="sig-block">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; color:var(--accent); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:20px;">DTN Consulting</div>
+      <div class="sig-row">
+        <div>
+          <div class="sig-field"></div>
+          <div class="sig-label">Signature</div>
+        </div>
+        <div>
+          <div class="sig-field"></div>
+          <div class="sig-label">Date</div>
+        </div>
+      </div>
+      <div class="sig-row">
+        <div>
+          <div class="sig-field" style="color:var(--text); font-size:13px;">Steve Sassi, Managing Partner</div>
+          <div class="sig-label">Printed Name &amp; Title</div>
+        </div>
+        <div>
+          <div class="sig-field" style="color:var(--text); font-size:13px;">Nick Bianco, Partner &amp; Technical Advisor</div>
+          <div class="sig-label">Printed Name &amp; Title</div>
+        </div>
+      </div>
+
+      <div style="font-family:'DM Mono',monospace; font-size:10px; color:var(--accent); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:20px; margin-top:40px;">Hovey Energy</div>
+      <div class="sig-row">
+        <div>
+          <div class="sig-field"></div>
+          <div class="sig-label">Signature</div>
+        </div>
+        <div>
+          <div class="sig-field"></div>
+          <div class="sig-label">Date</div>
+        </div>
+      </div>
+      <div class="sig-row">
+        <div>
+          <div class="sig-field"></div>
+          <div class="sig-label">Printed Name &amp; Title</div>
+        </div>
+        <div>
+          <div class="sig-field"></div>
+          <div class="sig-label">Email</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    DTN Consulting &nbsp;·&nbsp; <a href="https://do-the-numbers.com">do-the-numbers.com</a> &nbsp;·&nbsp; Steve@do-the-numbers.com<br>
+    Prepared for Hovey Energy &nbsp;·&nbsp; April 2026 &nbsp;·&nbsp; Private &amp; Confidential
+  </div>
+
+</div>
+</body>
+</html>
