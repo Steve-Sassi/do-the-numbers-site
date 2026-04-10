@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Master Service Agreement — DTN Consulting &amp; Hovey Energy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1c22;
+      --ink-mid: #3a3d48;
+      --ink-light: #6b6f7e;
+      --rule: #d0d3dc;
+      --rule-light: #e8eaef;
+      --bg: #ffffff;
+      --bg-offset: #f7f8fa;
+      --accent: #8b6f3a;
+      --accent2: #2e7a6f;
+      --accent-light: #f5f0e8;
+      --accent2-light: #e8f4f2;
+      --warn-bg: #fff8e8;
+      --warn-border: #e0c050;
+      --section-num: #bbbfc9;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --mono: 'DM Mono', 'Courier New', monospace;
+    }
+
+    body {
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--ink);
+      background: var(--bg);
+    }
+
+    /* ── Layout ── */
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 64px 56px 80px;
+    }
+
+    /* ── Header ── */
+    .doc-header {
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 28px;
+      margin-bottom: 36px;
+    }
+    .doc-header .label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 10px;
+    }
+    .doc-header h1 {
+      font-family: var(--serif);
+      font-size: 30px;
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--ink);
+    }
+    .doc-meta {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+      font-size: 12.5px;
+      color: var(--ink-mid);
+    }
+    .doc-meta span { font-weight: 600; color: var(--ink); }
+
+    /* ── Parties block ── */
+    .parties-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .party-card {
+      background: var(--bg-offset);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 20px 22px;
+    }
+    .party-card .role {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .party-card .name {
+      font-family: var(--serif);
+      font-size: 16px;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .party-card p {
+      font-size: 12.5px;
+      color: var(--ink-mid);
+      line-height: 1.6;
+    }
+
+    /* ── Sections ── */
+    .msa-section {
+      margin-bottom: 36px;
+    }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .section-num {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--section-num);
+      font-weight: 500;
+      min-width: 28px;
+      flex-shrink: 0;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--ink);
+      letter-spacing: .01em;
+    }
+
+    /* ── Body text ── */
+    .msa-section p {
+      font-size: 13.5px;
+      line-height: 1.8;
+      color: var(--ink-mid);
+      margin-bottom: 12px;
+    }
+    .msa-section p:last-child { margin-bottom: 0; }
+    .msa-section p strong { color: var(--ink); font-weight: 600; }
+
+    /* ── Subsections ── */
+    .subsection {
+      margin: 12px 0 12px 0;
+      padding-left: 0;
+    }
+    .subsection-item {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 10px;
+      font-size: 13.5px;
+      line-height: 1.75;
+      color: var(--ink-mid);
+    }
+    .subsection-item .sub-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--section-num);
+      min-width: 32px;
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+    .subsection-item strong { color: var(--ink); font-weight: 600; }
+
+    /* ── SOW table ── */
+    .table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 16px 0 20px;
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+    }
+    table {
+      width: 100%;
+      min-width: 480px;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    thead {
+      background: var(--bg-offset);
+    }
+    th {
+      padding: 11px 16px;
+      text-align: left;
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      font-weight: 500;
+      border-bottom: 1px solid var(--rule);
+    }
+    td {
+      padding: 11px 16px;
+      vertical-align: top;
+      border-bottom: 1px solid var(--rule-light);
+      color: var(--ink-mid);
+      line-height: 1.6;
+    }
+    td.val-label { white-space: nowrap; font-weight: 600; color: var(--ink); }
+    td strong { color: var(--ink); font-weight: 600; }
+    tr:last-child td { border-bottom: none; }
+    tr.total-row td { background: var(--accent-light); font-weight: 600; color: var(--ink); }
+
+    /* ── Callout boxes ── */
+    .callout {
+      border-left: 3px solid var(--accent);
+      background: var(--accent-light);
+      padding: 14px 18px;
+      margin: 16px 0;
+      border-radius: 0 4px 4px 0;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--ink-mid);
+    }
+    .callout.green {
+      border-left-color: var(--accent2);
+      background: var(--accent2-light);
+    }
+    .callout strong { color: var(--ink); font-weight: 600; }
+
+    /* ── Warning box ── */
+    .warn-box {
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+      border-radius: 6px;
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--ink-mid);
+    }
+    .warn-box strong { color: #7a5800; }
+
+    /* ── Important caps text ── */
+    .caps-clause {
+      font-size: 12px;
+      line-height: 1.8;
+      color: var(--ink-mid);
+      background: var(--bg-offset);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 16px 18px;
+      margin: 14px 0;
+    }
+    .caps-clause em {
+      font-style: normal;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    /* ── Signature block ── */
+    .sig-section {
+      margin-top: 52px;
+      padding-top: 36px;
+      border-top: 2px solid var(--ink);
+    }
+    .sig-header {
+      font-family: var(--serif);
+      font-size: 20px;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .sig-subtext {
+      font-size: 12.5px;
+      color: var(--ink-light);
+      margin-bottom: 28px;
+    }
+    .sig-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+    }
+    .sig-party {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .sig-party .party-name {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .sig-field {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 18px;
+    }
+    .sig-field label {
+      font-size: 10px;
+      font-family: var(--mono);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 5px;
+    }
+    .sig-field input[type="text"],
+    .sig-field input[type="date"] {
+      border: none;
+      border-bottom: 1.5px solid var(--rule);
+      background: transparent;
+      font-family: var(--serif);
+      font-size: 18px;
+      color: var(--ink);
+      padding: 4px 0 6px;
+      outline: none;
+      width: 100%;
+      appearance: none;
+      -webkit-appearance: none;
+      transition: border-color .2s;
+    }
+    .sig-field input[type="text"]:focus,
+    .sig-field input[type="date"]:focus {
+      border-bottom-color: var(--accent);
+    }
+    .sig-field input[type="text"]::placeholder {
+      color: var(--rule);
+      font-family: var(--sans);
+      font-size: 13px;
+      font-style: italic;
+    }
+    .sig-field .printed-name {
+      font-family: var(--sans);
+      font-size: 12px;
+      color: var(--ink-light);
+      margin-top: 4px;
+    }
+
+    /* ── Agreement checkbox ── */
+    .agree-row {
+      margin: 28px 0 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .agree-row input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      flex-shrink: 0;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+    .agree-row label {
+      font-size: 12.5px;
+      line-height: 1.65;
+      color: var(--ink-mid);
+      cursor: pointer;
+    }
+    .agree-row label strong { color: var(--ink); }
+
+    /* ── Print button ── */
+    .print-bar {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 32px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 5px;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: background .2s, color .2s;
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { background: #7a5e2c; }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--rule);
+      color: var(--ink-mid);
+    }
+    .btn-outline:hover { border-color: var(--ink); color: var(--ink); }
+
+    /* ── Footer ── */
+    .doc-footer {
+      margin-top: 64px;
+      padding-top: 20px;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .doc-footer p {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--section-num);
+      letter-spacing: .08em;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .page { padding: 36px 20px 52px; }
+      .doc-header h1 { font-size: 22px; }
+      .parties-block { grid-template-columns: 1fr; }
+      .sig-grid { grid-template-columns: 1fr; gap: 24px; }
+      .doc-meta { flex-direction: column; gap: 6px; }
+      .doc-footer { flex-direction: column; align-items: flex-start; }
+      .print-bar { justify-content: flex-start; }
+    }
+
+    @media (max-width: 480px) {
+      .page { padding: 24px 14px 40px; }
+      .doc-header h1 { font-size: 19px; }
+      .section-title { font-size: 14px; }
+    }
+
+    /* ── Signature status bar ── */
+    .sig-status-bar {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+      padding: 14px 18px;
+      background: var(--bg-offset);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      font-family: var(--mono);
+      letter-spacing: .04em;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+    .status-pill.pending {
+      background: #f0f0f3;
+      color: var(--ink-light);
+    }
+    .status-pill.signed {
+      background: #e2f5ee;
+      color: #1a7a50;
+    }
+    .status-pill .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+    }
+    .sig-badge {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+      padding: 10px 14px;
+      background: #e2f5ee;
+      border: 1px solid #a8dfc4;
+      border-radius: 5px;
+      font-size: 12px;
+      color: #1a7a50;
+      font-weight: 600;
+    }
+    .sig-badge.visible { display: flex; }
+    .sig-badge svg { flex-shrink: 0; }
+    .sig-badge .badge-detail {
+      font-weight: 400;
+      color: #2e7a6f;
+      margin-left: 4px;
+    }
+    .sig-party.submitted .sig-field input[type="text"],
+    .sig-party.submitted .sig-field input[type="date"] {
+      color: var(--ink-light);
+      pointer-events: none;
+    }
+    .submit-party-btn {
+      margin-top: 14px;
+      width: 100%;
+    }
+    .download-bar {
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid var(--rule-light);
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .download-bar .dl-label {
+      font-size: 11px;
+      font-family: var(--mono);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      flex-basis: 100%;
+      margin-bottom: 2px;
+    }
+    .share-link-box {
+      margin-top: 20px;
+      padding: 12px 16px;
+      background: var(--accent-light);
+      border: 1px solid #d4b97a;
+      border-radius: 5px;
+      font-size: 12px;
+      color: var(--ink-mid);
+      display: none;
+    }
+    .share-link-box.visible { display: block; }
+    .share-link-box strong { color: var(--ink); }
+    .share-link-box .link-url {
+      font-family: var(--mono);
+      font-size: 11px;
+      word-break: break-all;
+      color: var(--accent);
+      margin-top: 5px;
+      display: block;
+    }
+
+    /* ── Print styles ── */
+    @media print {
+      body { font-size: 11pt; }
+      .page { max-width: 100%; padding: 0; margin: 0; }
+      .print-bar, .btn { display: none !important; }
+      .sig-field input {
+        border-bottom: 1px solid #999 !important;
+        font-size: 14pt;
+      }
+      .agree-row { display: none; }
+      .msa-section { page-break-inside: avoid; }
+      .sig-section { page-break-before: always; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── HEADER ── -->
+  <div class="doc-header">
+    <div class="label">Confidential &nbsp;·&nbsp; Professional Services Agreement</div>
+    <h1>Master Service Agreement</h1>
+    <div class="doc-meta">
+      <div>Reference No.: <span>DTN-2026-004-MSA</span></div>
+      <div>Effective Date: <span id="effective-date-display">_______________________</span></div>
+      <div>Governing Law: <span>Illinois</span></div>
+    </div>
+  </div>
+
+  <!-- ── PARTIES ── -->
+  <div class="parties-block">
+    <div class="party-card">
+      <div class="role">Service Provider</div>
+      <div class="name">DTN Consulting, LLC</div>
+      <p>
+        Steve Sassi, Principal<br>
+        Chicago, Illinois<br>
+        steve@do-the-numbers.com
+      </p>
+    </div>
+    <div class="party-card">
+      <div class="role">Client</div>
+      <div class="name">Hovey Energy</div>
+      <p>
+        Melissa Hovey, President &amp; Owner<br>
+        Illinois<br>
+        mhovey@hoveyenergy.com
+      </p>
+    </div>
+  </div>
+
+  <div class="msa-section">
+    <p>This Master Service Agreement (the <strong>"Agreement"</strong>) is entered into as of the Effective Date set forth above by and between <strong>DTN Consulting, LLC</strong> (<strong>"DTN"</strong> or <strong>"Service Provider"</strong>) and <strong>Hovey Energy</strong> (<strong>"Client"</strong>). DTN and Client are each referred to herein individually as a <strong>"Party"</strong> and collectively as the <strong>"Parties."</strong></p>
+    <p><strong>IN CONSIDERATION OF</strong> the mutual covenants, representations, and obligations set forth herein, and for other good and valuable consideration, the receipt and sufficiency of which are hereby acknowledged, the Parties agree as follows:</p>
+  </div>
+
+  <!-- ── 1. DEFINITIONS ── -->
+  <div class="msa-section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <span class="section-title">Definitions</span>
+    </div>
+    <div class="subsection">
+      <div class="subsection-item">
+        <span class="sub-num">1.1</span>
+        <div><strong>"AI Voice Agent"</strong> means the conversational artificial intelligence system, including associated telephony infrastructure, outbound calling workflows, voice scripts, and supporting configurations, built and operated by DTN under this Agreement.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">1.2</span>
+        <div><strong>"Call Content"</strong> means any script, messaging, promotional claim, telephony number, call list, or verbal representation delivered through the AI Voice Agent on behalf of Client.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">1.3</span>
+        <div><strong>"Deliverables"</strong> means all work product specifically developed for Client under a Statement of Work, including agent configurations, landing pages, dashboards, and reporting outputs.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">1.4</span>
+        <div><strong>"DTN Platform"</strong> means DTN's proprietary AI infrastructure, code, frameworks, integrations, methodologies, and know-how, including all third-party tools licensed by DTN (ElevenLabs, telephony APIs, CRM connectors, etc.).</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">1.5</span>
+        <div><strong>"Go-Live Date"</strong> means the date on which the AI Voice Agent completes successful end-to-end testing and is deployed for live outbound calling, as confirmed in writing by DTN to Client.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">1.6</span>
+        <div><strong>"Monthly Recurring Services"</strong> means the ongoing AI agent hosting, maintenance, call management, and active optimization services provided after Go-Live under Phase 2 of the SOW.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">1.7</span>
+        <div><strong>"Regulatory Requirements"</strong> means all applicable federal, state, and local laws, rules, and regulations governing outbound telephone communications, including without limitation the Telephone Consumer Protection Act (TCPA), the Telemarketing Sales Rule (TSR), Do-Not-Call Registry requirements, Illinois Public Utilities Act, and all applicable Public Utilities Commission (PUC) regulations.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">1.8</span>
+        <div><strong>"Statement of Work" or "SOW"</strong> means the project specification attached as Exhibit A to this Agreement (DTN-2026-004), which defines scope, deliverables, milestones, and fees.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 2. SCOPE OF SERVICES ── -->
+  <div class="msa-section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <span class="section-title">Scope of Services</span>
+    </div>
+    <div class="subsection">
+      <div class="subsection-item">
+        <span class="sub-num">2.1</span>
+        <div><strong>Services.</strong> DTN shall provide the services described in the SOW (Exhibit A), which is incorporated herein by reference. In the event of any conflict between this Agreement and the SOW, this Agreement controls unless the SOW explicitly states otherwise.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">2.2</span>
+        <div><strong>Phase 1 — Build &amp; Pilot.</strong> DTN shall design, configure, and deploy the AI Voice Agent system, including: AI agent script design and compliance review; telephony infrastructure setup; lead list acquisition and CRM integration; a 100-call pilot program; dashboard and reporting; and initial team training. Phase 1 is substantially complete upon the Go-Live Date.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">2.3</span>
+        <div><strong>Phase 2 — Monthly Recurring Services.</strong> Commencing on the Go-Live Date, DTN shall provide: AI agent hosting and operation (up to 2,000 minutes of AI agent usage per month); proactive script optimization; performance reporting; and up to 20 hours per month of active campaign management. Usage exceeding 2,000 minutes per month will be billed at DTN's then-current overage rate.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">2.4</span>
+        <div><strong>Change Orders.</strong> Any material change to the scope of services requires a written change order signed by both Parties. DTN is not obligated to perform out-of-scope work pending execution of a change order.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">2.5</span>
+        <div><strong>Client Responsibilities.</strong> Client shall: (a) designate a primary point of contact; (b) provide timely access to all information, approvals, and materials reasonably required by DTN; (c) ensure all phone numbers provided by Client are compliant with applicable DNC and TCPA requirements; and (d) respond to DTN review requests within five (5) business days. Delays attributable to Client's failure to perform its obligations may extend timelines without liability to DTN.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 3. FEES AND PAYMENT ── -->
+  <div class="msa-section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <span class="section-title">Fees and Payment</span>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Description</th>
+            <th>Fee</th>
+            <th>Due</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="val-label">Phase 1 Deposit</td>
+            <td>50% of Phase 1 fee — project initiation</td>
+            <td><strong>$12,000</strong></td>
+            <td>Upon execution of this Agreement</td>
+          </tr>
+          <tr>
+            <td class="val-label">Phase 1 Balance</td>
+            <td>50% of Phase 1 fee — upon Go-Live</td>
+            <td><strong>$12,000</strong></td>
+            <td>Net 15 from Go-Live Date</td>
+          </tr>
+          <tr class="total-row">
+            <td class="val-label">Phase 1 Total</td>
+            <td>AI Agent Build, Pilot, Training, Website</td>
+            <td><strong>$24,000</strong></td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td class="val-label">Phase 2 Monthly</td>
+            <td>Hosting, management, 2,000 min AI usage/mo</td>
+            <td><strong>$2,390/mo</strong></td>
+            <td>Net 15 — invoiced monthly from Go-Live</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-item">
+        <span class="sub-num">3.1</span>
+        <div><strong>Payment Terms.</strong> All invoices are due Net 15 days from the invoice date unless otherwise stated above. Payments are due in United States Dollars.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">3.2</span>
+        <div><strong>Late Payments.</strong> Invoices not paid within 15 days of their due date will accrue interest at the rate of <strong>1.5% per month</strong> (18% per annum) on the outstanding balance, compounding monthly, from the due date until paid in full.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">3.3</span>
+        <div><strong>Suspension for Non-Payment.</strong> If any invoice remains unpaid for more than <strong>30 days</strong> past its due date, DTN may, upon three (3) business days' written notice, suspend all Monthly Recurring Services without liability to Client until all outstanding amounts (including accrued interest) are paid in full.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">3.4</span>
+        <div><strong>Non-Refundable Deposit.</strong> The Phase 1 Deposit ($12,000) is non-refundable upon execution of this Agreement, as it compensates DTN for immediately commencing project work, reserving personnel capacity, and procuring third-party services on Client's behalf.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">3.5</span>
+        <div><strong>Disputed Invoices.</strong> Client must notify DTN in writing of any good-faith dispute within ten (10) days of receipt of the invoice. Undisputed portions of any invoice remain due per the standard payment terms. The Parties will work in good faith to resolve billing disputes within 30 days.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">3.6</span>
+        <div><strong>Taxes.</strong> Fees are exclusive of applicable sales, use, or similar taxes. Client is responsible for all such taxes, excluding taxes based on DTN's net income.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 4. TERM AND TERMINATION ── -->
+  <div class="msa-section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <span class="section-title">Term and Termination</span>
+    </div>
+    <div class="subsection">
+      <div class="subsection-item">
+        <span class="sub-num">4.1</span>
+        <div><strong>Term.</strong> This Agreement commences on the Effective Date. Phase 1 continues until the Go-Live Date. Phase 2 (Monthly Recurring Services) continues month-to-month thereafter until terminated in accordance with this Section 4.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">4.2</span>
+        <div><strong>Termination of Monthly Services.</strong> Either Party may terminate the Monthly Recurring Services upon <strong>30 days' prior written notice</strong> to the other Party. Termination does not relieve Client of any fees accrued or owed through the end of the notice period.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">4.3</span>
+        <div><strong>Termination for Cause.</strong> Either Party may terminate this Agreement immediately upon written notice if the other Party: (a) materially breaches this Agreement and fails to cure such breach within 15 days after written notice thereof; (b) becomes insolvent, makes a general assignment for the benefit of creditors, or has a receiver appointed; or (c) ceases to conduct business in the ordinary course.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">4.4</span>
+        <div><strong>Termination for Non-Payment.</strong> DTN may terminate this Agreement immediately upon written notice if Client fails to pay any undisputed invoice within <strong>30 days</strong> of its due date and does not cure such failure within three (3) business days of written notice from DTN.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">4.5</span>
+        <div><strong>Effect of Termination.</strong> Upon any termination: (a) Client shall pay all amounts owed through the termination date within 15 days; (b) DTN shall cease all services; (c) each Party shall return or destroy the other's Confidential Information upon request; (d) the Phase 1 Deposit is non-refundable under all circumstances; and (e) Sections 1, 5.3, 6, 7, 8, 9, 10, 11, and 12 survive termination.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 5. INTELLECTUAL PROPERTY ── -->
+  <div class="msa-section">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <span class="section-title">Intellectual Property</span>
+    </div>
+    <div class="subsection">
+      <div class="subsection-item">
+        <span class="sub-num">5.1</span>
+        <div><strong>DTN Platform.</strong> DTN retains all right, title, and interest in and to the DTN Platform, including all AI agent prompts, scripts, conversation designs, telephony configurations, code, frameworks, and methodologies developed by DTN. Nothing in this Agreement transfers ownership of the DTN Platform or any portion thereof to Client.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">5.2</span>
+        <div><strong>License During Engagement.</strong> Subject to Client's timely payment of all fees, DTN grants Client a limited, non-exclusive, non-transferable, revocable license to use the Deliverables solely in connection with Client's internal business operations during the term of this Agreement. This license terminates immediately upon termination or expiration of this Agreement.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">5.3</span>
+        <div><strong>Client Data.</strong> Client retains ownership of all data, call records, and contact information provided by Client. Client grants DTN a limited license to use such data solely to perform the services under this Agreement.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">5.4</span>
+        <div><strong>Feedback.</strong> If Client provides DTN with feedback or suggestions regarding the DTN Platform or Deliverables, DTN may use such feedback freely without restriction or obligation to Client.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 6. CONFIDENTIALITY ── -->
+  <div class="msa-section">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <span class="section-title">Confidentiality</span>
+    </div>
+    <div class="subsection">
+      <div class="subsection-item">
+        <span class="sub-num">6.1</span>
+        <div><strong>Confidential Information.</strong> Each Party may disclose to the other certain non-public, proprietary, or confidential information in connection with this Agreement (<strong>"Confidential Information"</strong>), including business plans, pricing, technical specifications, customer data, and trade secrets. Information is Confidential Information if designated as such or if a reasonable person would understand it to be confidential given the nature of the information and circumstances of disclosure.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">6.2</span>
+        <div><strong>Obligations.</strong> Each Party agrees to: (a) hold the other's Confidential Information in strict confidence using at least the same degree of care it uses to protect its own confidential information (but no less than reasonable care); (b) use Confidential Information solely to perform its obligations or exercise its rights under this Agreement; and (c) not disclose Confidential Information to any third party without prior written consent, except to employees, contractors, or advisors who have a need to know and are bound by confidentiality obligations at least as protective as those herein.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">6.3</span>
+        <div><strong>Exceptions.</strong> Confidentiality obligations do not apply to information that: (a) is or becomes publicly available through no breach of this Agreement; (b) was rightfully known to the receiving Party prior to disclosure; (c) is independently developed by the receiving Party without use of the disclosing Party's Confidential Information; or (d) is required to be disclosed by law, court order, or regulatory authority, provided the receiving Party gives prompt written notice to the disclosing Party where legally permitted.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">6.4</span>
+        <div><strong>Duration.</strong> Confidentiality obligations survive termination of this Agreement for a period of <strong>two (2) years</strong>, except with respect to trade secrets, which shall be maintained in confidence for as long as the information remains a trade secret under applicable law.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 7. REGULATORY COMPLIANCE ── -->
+  <div class="msa-section">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <span class="section-title">Regulatory Compliance</span>
+    </div>
+
+    <div class="warn-box">
+      <strong>Important — Client Compliance Responsibility:</strong> The AI Voice Agent is a tool that executes Call Content on Client's behalf. All regulatory responsibility for outbound calling campaigns rests with Client as the party directing and authorizing the campaigns. DTN provides technology; Client provides the direction.
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-item">
+        <span class="sub-num">7.1</span>
+        <div><strong>Client Obligations.</strong> Client is solely responsible for ensuring that all outbound calling campaigns conducted through the AI Voice Agent comply with all applicable Regulatory Requirements, including: (a) obtaining all required consents prior to calling any individual; (b) maintaining and scrubbing against all applicable Do-Not-Call lists (federal, state, and any internal lists); (c) compliance with calling hour restrictions; (d) compliance with all applicable state and federal telemarketing registration requirements; (e) ensuring all promotional claims made through Call Content are truthful, substantiated, and compliant with applicable consumer protection laws; and (f) compliance with all PUC regulations applicable to energy supply marketing in any jurisdiction where calls are made.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">7.2</span>
+        <div><strong>DTN Obligations.</strong> DTN shall: (a) design the AI Voice Agent with reasonable technical safeguards to support compliance (e.g., calling hours controls, call recording, AI identification disclosures); and (b) operate the system in accordance with Client's instructions and applicable technical standards. DTN does not provide legal advice and does not guarantee that any particular use of the AI Voice Agent will comply with applicable law. Client is responsible for consulting its own legal counsel regarding regulatory requirements.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">7.3</span>
+        <div><strong>Cooperation.</strong> If either Party receives notice of a regulatory complaint, investigation, or enforcement action relating to the services under this Agreement, it shall promptly notify the other Party in writing. The Parties shall cooperate in good faith in responding to such matters, at their respective expense.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 8. REPRESENTATIONS AND WARRANTIES ── -->
+  <div class="msa-section">
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <span class="section-title">Representations and Warranties</span>
+    </div>
+    <div class="subsection">
+      <div class="subsection-item">
+        <span class="sub-num">8.1</span>
+        <div><strong>Mutual Representations.</strong> Each Party represents and warrants that: (a) it is duly organized, validly existing, and in good standing under the laws of its jurisdiction of organization; (b) it has full power and authority to execute, deliver, and perform this Agreement; (c) this Agreement constitutes its legal, valid, and binding obligation, enforceable against it in accordance with its terms; and (d) its performance of this Agreement will not violate any applicable law or any agreement to which it is a party.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">8.2</span>
+        <div><strong>DTN Warranties.</strong> DTN represents and warrants that: (a) the services will be performed in a professional and workmanlike manner consistent with industry standards; and (b) to DTN's knowledge, the DTN Platform, as delivered, does not knowingly infringe any third-party intellectual property rights.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">8.3</span>
+        <div><strong>Client Warranties.</strong> Client represents and warrants that: (a) it has the right and authority to authorize DTN to make outbound calls using the telephone numbers, call lists, and Call Content provided by Client; (b) all contact data and call lists provided by Client have been lawfully obtained and are compliant with applicable law; and (c) all promotional claims to be made through the AI Voice Agent are truthful and comply with applicable advertising and consumer protection laws.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">8.4</span>
+        <div><strong>Disclaimer of Warranties.</strong> EXCEPT AS EXPRESSLY SET FORTH IN SECTION 8.2, DTN PROVIDES ALL SERVICES ON AN "AS-IS" AND "AS-AVAILABLE" BASIS AND EXPRESSLY DISCLAIMS ALL OTHER WARRANTIES, EXPRESS OR IMPLIED, INCLUDING ANY IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, OR TITLE. DTN DOES NOT WARRANT THAT THE AI VOICE AGENT WILL BE UNINTERRUPTED, ERROR-FREE, OR THAT ANY PARTICULAR CALL WILL RESULT IN A SPECIFIC BUSINESS OUTCOME.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 9. INDEMNIFICATION ── -->
+  <div class="msa-section">
+    <div class="section-header">
+      <span class="section-num">09</span>
+      <span class="section-title">Indemnification</span>
+    </div>
+    <div class="subsection">
+      <div class="subsection-item">
+        <span class="sub-num">9.1</span>
+        <div>
+          <strong>Client's Indemnification of DTN.</strong> Client shall defend, indemnify, and hold harmless DTN and its members, managers, officers, employees, contractors, and agents (collectively, <strong>"DTN Indemnitees"</strong>) from and against any and all claims, demands, suits, proceedings, losses, liabilities, damages, fines, penalties, judgments, settlements, costs, and expenses (including reasonable attorneys' fees) (<strong>"Losses"</strong>) arising out of or relating to:
+          <div class="subsection" style="margin-top:10px;">
+            <div class="subsection-item"><span class="sub-num">(a)</span><div>any actual or alleged violation of any Regulatory Requirement in connection with any calling campaign authorized or directed by Client, including but not limited to TCPA violations, PUC violations, DNC Registry violations, or TSR violations;</div></div>
+            <div class="subsection-item"><span class="sub-num">(b)</span><div>any actual or alleged false, misleading, deceptive, or unlawful promotional claim made through the AI Voice Agent in Call Content provided or approved by Client;</div></div>
+            <div class="subsection-item"><span class="sub-num">(c)</span><div>Client's breach of any representation, warranty, covenant, or obligation under this Agreement;</div></div>
+            <div class="subsection-item"><span class="sub-num">(d)</span><div>any claim by a called party arising from Client's outbound calling campaign, including any claim that a called party did not consent to being called or that the call violated applicable law;</div></div>
+            <div class="subsection-item"><span class="sub-num">(e)</span><div>any act or omission of Client, its employees, agents, or subcontractors in connection with the services; or</div></div>
+            <div class="subsection-item"><span class="sub-num">(f)</span><div>Client's use of the AI Voice Agent in any manner that violates this Agreement or applicable law.</div></div>
+          </div>
+          This indemnification obligation applies even if the underlying violation arose from Client's direction or approval of Call Content that DTN assisted in drafting, so long as DTN did not act with gross negligence or willful misconduct in drafting such content.
+        </div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">9.2</span>
+        <div>
+          <strong>DTN's Indemnification of Client.</strong> DTN shall defend, indemnify, and hold harmless Client and its officers, directors, employees, and agents (<strong>"Client Indemnitees"</strong>) from and against Losses arising out of or relating to:
+          <div class="subsection" style="margin-top:10px;">
+            <div class="subsection-item"><span class="sub-num">(a)</span><div>DTN's gross negligence or willful misconduct in performing the services; or</div></div>
+            <div class="subsection-item"><span class="sub-num">(b)</span><div>any third-party claim that the DTN Platform (exclusive of any Call Content or data provided by Client) infringes such third party's valid intellectual property rights under United States law.</div></div>
+          </div>
+          DTN's indemnification obligation under Section 9.2(b) does not apply to the extent any infringement claim arises from: (i) Client's modification of any Deliverable; (ii) Client's combination of any Deliverable with materials not provided by DTN; (iii) DTN's compliance with Client's specific instructions; or (iv) Client's use of the Deliverable in a manner not authorized by this Agreement.
+        </div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">9.3</span>
+        <div><strong>Indemnification Procedure.</strong> The indemnified Party shall: (a) promptly notify the indemnifying Party in writing of any claim for which indemnification may be sought (provided that failure to give prompt notice does not relieve the indemnifying Party of its obligations except to the extent it is materially prejudiced by the delay); (b) give the indemnifying Party sole control of the defense and settlement of the claim; and (c) provide reasonable cooperation and assistance at the indemnifying Party's expense. The indemnifying Party shall not settle any claim in a manner that imposes liability or obligations on the indemnified Party, or that does not include a full release of the indemnified Party, without prior written consent.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">9.4</span>
+        <div><strong>Mitigation.</strong> Each Party shall take commercially reasonable steps to mitigate any Losses for which it may seek indemnification under this Section 9.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 10. LIMITATION OF LIABILITY ── -->
+  <div class="msa-section">
+    <div class="section-header">
+      <span class="section-num">10</span>
+      <span class="section-title">Limitation of Liability</span>
+    </div>
+
+    <div class="caps-clause">
+      <em>10.1 — Exclusion of Consequential Damages.</em><br>
+      TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL EITHER PARTY BE LIABLE TO THE OTHER FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES OF ANY KIND, INCLUDING BUT NOT LIMITED TO LOST PROFITS, LOST REVENUE, LOSS OF BUSINESS OPPORTUNITY, LOSS OF DATA, LOSS OF GOODWILL, BUSINESS INTERRUPTION, OR COST OF SUBSTITUTE GOODS OR SERVICES, EVEN IF SUCH PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES AND REGARDLESS OF THE THEORY OF LIABILITY (WHETHER IN CONTRACT, TORT, STRICT LIABILITY, OR OTHERWISE).
+    </div>
+
+    <div class="caps-clause">
+      <em>10.2 — Aggregate Liability Cap.</em><br>
+      EXCEPT AS PROVIDED IN SECTION 10.3, EACH PARTY'S MAXIMUM CUMULATIVE AND AGGREGATE LIABILITY TO THE OTHER PARTY FOR ALL CLAIMS ARISING OUT OF OR RELATING TO THIS AGREEMENT, REGARDLESS OF THE FORM OF ACTION OR THEORY OF LIABILITY, SHALL NOT EXCEED THE TOTAL FEES ACTUALLY PAID BY CLIENT TO DTN IN THE <em>THREE (3) CALENDAR MONTHS</em> IMMEDIATELY PRECEDING THE EVENT OR CIRCUMSTANCE GIVING RISE TO THE CLAIM. IF THE AGREEMENT HAS BEEN IN EFFECT FOR FEWER THAN THREE MONTHS AT THE TIME OF THE CLAIM, THE CAP SHALL BE THE TOTAL FEES PAID AS OF THE DATE OF THE CLAIM.
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-item">
+        <span class="sub-num">10.3</span>
+        <div><strong>Exceptions to Cap.</strong> The limitations in Sections 10.1 and 10.2 do not apply to, and shall not limit: (a) <strong>Client's indemnification obligations under Section 9.1</strong> for regulatory violations, TCPA/PUC/DNC claims, or Call Content claims — which are uncapped given the potentially substantial statutory damages and regulatory penalties involved; (b) either Party's liability for <strong>willful misconduct or fraud</strong>; (c) either Party's liability for <strong>death or bodily injury</strong> caused by its negligence to the extent such limitation is prohibited by applicable law; (d) Client's payment obligations under Section 3; or (e) either Party's liability for breach of its confidentiality obligations under Section 6, which may include equitable relief.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">10.4</span>
+        <div><strong>Essential Basis.</strong> The Parties acknowledge that the limitations of liability in this Section 10 reflect a reasonable allocation of risk and are an essential element of the basis of the bargain between the Parties. DTN would not have entered into this Agreement on the commercial terms set forth herein without these limitations.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">10.5</span>
+        <div><strong>Limitation Period.</strong> No claim arising under or relating to this Agreement may be brought by either Party more than <strong>two (2) years</strong> after the Party bringing the claim first knew, or reasonably should have known, of the facts giving rise to the claim.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 11. DISPUTE RESOLUTION ── -->
+  <div class="msa-section">
+    <div class="section-header">
+      <span class="section-num">11</span>
+      <span class="section-title">Dispute Resolution</span>
+    </div>
+    <div class="subsection">
+      <div class="subsection-item">
+        <span class="sub-num">11.1</span>
+        <div><strong>Good-Faith Negotiation.</strong> Before initiating formal proceedings, the Parties agree to attempt to resolve any dispute arising out of or relating to this Agreement through good-faith negotiations between senior representatives of each Party for a period of <strong>30 days</strong> after written notice of the dispute is provided by either Party.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">11.2</span>
+        <div><strong>Binding Arbitration.</strong> If the dispute is not resolved through negotiation within the 30-day period, it shall be resolved by final and binding arbitration administered by the <strong>American Arbitration Association (AAA)</strong> under its Commercial Arbitration Rules, as amended. The arbitration shall be conducted by a single arbitrator mutually agreed upon by the Parties, or selected by AAA in accordance with its rules if the Parties cannot agree. The seat and place of arbitration shall be <strong>Cook County, Illinois.</strong></div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">11.3</span>
+        <div><strong>Arbitration Procedures.</strong> The arbitration shall be conducted in English. The arbitrator shall have authority to award any remedy available at law or in equity, subject to the limitations in Section 10. The arbitrator's award shall be in writing, shall state the reasons for the award, and shall be final and binding. Judgment on the award may be entered in any court of competent jurisdiction. The costs of arbitration, including arbitrator fees, shall be borne equally by the Parties unless the arbitrator determines otherwise.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">11.4</span>
+        <div><strong>Injunctive Relief.</strong> Notwithstanding the arbitration obligation, either Party may seek temporary or preliminary injunctive or other equitable relief from any court of competent jurisdiction to prevent irreparable harm pending the outcome of arbitration, including for actual or threatened breach of confidentiality or intellectual property obligations.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">11.5</span>
+        <div><strong>No Class Actions.</strong> All disputes shall be resolved individually. Neither Party shall assert or participate in any class action, consolidated action, or representative proceeding against the other arising under this Agreement.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 12. GOVERNING LAW ── -->
+  <div class="msa-section">
+    <div class="section-header">
+      <span class="section-num">12</span>
+      <span class="section-title">Governing Law</span>
+    </div>
+    <p>This Agreement and all disputes arising out of or in connection with it shall be governed by and construed in accordance with the laws of the <strong>State of Illinois</strong>, without regard to its conflict-of-law principles. To the extent any matter requires court jurisdiction (e.g., entry of arbitration judgment, injunctive relief), the Parties consent to the exclusive jurisdiction of the state and federal courts located in <strong>Cook County, Illinois</strong>, and waive any objection to the laying of venue in such courts.</p>
+  </div>
+
+  <!-- ── 13. GENERAL PROVISIONS ── -->
+  <div class="msa-section">
+    <div class="section-header">
+      <span class="section-num">13</span>
+      <span class="section-title">General Provisions</span>
+    </div>
+    <div class="subsection">
+      <div class="subsection-item">
+        <span class="sub-num">13.1</span>
+        <div><strong>Entire Agreement.</strong> This Agreement (including all exhibits and SOWs) constitutes the entire agreement between the Parties with respect to its subject matter and supersedes all prior and contemporaneous negotiations, representations, warranties, agreements, and understandings, whether written or oral.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">13.2</span>
+        <div><strong>Amendments.</strong> No amendment or modification of this Agreement is effective unless it is in writing and signed by authorized representatives of both Parties. No waiver of any provision is effective unless in writing.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">13.3</span>
+        <div><strong>Waiver.</strong> The failure of either Party to enforce any right under this Agreement shall not be deemed a waiver of that right or any other right. A waiver is only effective if made in writing and shall not be deemed a continuing waiver.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">13.4</span>
+        <div><strong>Severability.</strong> If any provision of this Agreement is held by a court or arbitrator of competent jurisdiction to be invalid, illegal, or unenforceable, such provision shall be modified to the minimum extent necessary to make it enforceable, and the remaining provisions of this Agreement shall remain in full force and effect.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">13.5</span>
+        <div><strong>Assignment.</strong> Neither Party may assign or transfer this Agreement or any of its rights or obligations hereunder without the prior written consent of the other Party (not to be unreasonably withheld), except that DTN may assign this Agreement without consent in connection with a merger, acquisition, or sale of all or substantially all of DTN's assets or business. Any purported assignment in violation of this Section is void.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">13.6</span>
+        <div><strong>Independent Contractors.</strong> The Parties are independent contractors. Nothing in this Agreement creates a partnership, joint venture, agency, franchise, employment, or fiduciary relationship between the Parties. Neither Party has authority to bind the other or incur obligations on the other's behalf.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">13.7</span>
+        <div><strong>Notices.</strong> All notices, requests, and other communications under this Agreement shall be in writing and delivered by: (a) electronic mail to the address provided by the receiving Party, with written confirmation of receipt; (b) personal delivery; (c) overnight courier; or (d) certified mail, return receipt requested. Notices are effective upon receipt.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">13.8</span>
+        <div><strong>Force Majeure.</strong> Neither Party shall be liable for any failure or delay in performance caused by circumstances beyond its reasonable control, including acts of God, natural disasters, pandemic, government actions, or telecommunications outages, provided the affected Party gives prompt written notice and uses commercially reasonable efforts to resume performance.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">13.9</span>
+        <div><strong>Counterparts and Electronic Execution.</strong> This Agreement may be executed in one or more counterparts, each of which shall be deemed an original and all of which together shall constitute one and the same instrument. Electronic signatures (including typed name signatures in the fields below, digital signatures, or signatures transmitted by electronic mail) are valid and enforceable to the same extent as original ink signatures.</div>
+      </div>
+      <div class="subsection-item">
+        <span class="sub-num">13.10</span>
+        <div><strong>Construction.</strong> This Agreement has been negotiated by both Parties and shall not be construed more strictly against either Party as the drafter. Section headings are for convenience only and do not affect the meaning or interpretation of this Agreement.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── EXHIBIT A – SOW ── -->
+  <div class="msa-section">
+    <div class="section-header">
+      <span class="section-num">A</span>
+      <span class="section-title">Exhibit A — Statement of Work (SOW DTN-2026-004)</span>
+    </div>
+    <p>This Exhibit A is incorporated into and made part of the Master Service Agreement between DTN Consulting, LLC and Hovey Energy.</p>
+
+    <div class="callout">
+      <strong>Project:</strong> AI Voice Agent — Outbound Energy Sales Calling System<br>
+      <strong>SOW Reference:</strong> DTN-2026-004<br>
+      <strong>Estimated Go-Live:</strong> Approximately 4–6 weeks from Phase 1 deposit receipt
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:30%">Phase 1 Deliverable</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="val-label">AI Agent Build</td>
+            <td>Full conversational AI voice agent design, configuration, and deployment on ElevenLabs Conversational AI platform</td>
+          </tr>
+          <tr>
+            <td class="val-label">Script Design</td>
+            <td>Production outbound calling script with gatekeeper handling, objection responses, and transfer logic</td>
+          </tr>
+          <tr>
+            <td class="val-label">TCPA Compliance Framework</td>
+            <td>Technical safeguards including calling hour controls, AI identity disclosure, call recording, and DNC management tools</td>
+          </tr>
+          <tr>
+            <td class="val-label">Telephony Infrastructure</td>
+            <td>Outbound calling phone number(s), call routing, live transfer capability to Client's designated transfer number</td>
+          </tr>
+          <tr>
+            <td class="val-label">Lead List (500 contacts)</td>
+            <td>Initial commercial business lead list for Illinois market, scrubbed against federal DNC registry</td>
+          </tr>
+          <tr>
+            <td class="val-label">Website Redesign</td>
+            <td>Hovey Energy website update including service page, SEO landing page, and rate comparison content</td>
+          </tr>
+          <tr>
+            <td class="val-label">100-Call Pilot</td>
+            <td>Live outbound pilot campaign; performance analysis and script optimization report delivered post-pilot</td>
+          </tr>
+          <tr>
+            <td class="val-label">Dashboard &amp; Reporting</td>
+            <td>Real-time call performance dashboard with call volume, transfer rate, outcome tracking, and transcript access</td>
+          </tr>
+          <tr>
+            <td class="val-label">Team Training</td>
+            <td>Live walkthrough session for Client team; documentation of agent management and transfer protocols</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="table-wrap" style="margin-top:20px;">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:30%">Phase 2 Deliverable</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="val-label">AI Agent Hosting</td>
+            <td>Continuous hosting, uptime monitoring, and infrastructure management for the AI Voice Agent system</td>
+          </tr>
+          <tr>
+            <td class="val-label">AI Usage Allocation</td>
+            <td>2,000 minutes per month of AI agent call usage included; overages billed at then-current rates</td>
+          </tr>
+          <tr>
+            <td class="val-label">Campaign Management</td>
+            <td>Up to 20 hours/month of active campaign management: call scheduling, list management, performance review</td>
+          </tr>
+          <tr>
+            <td class="val-label">Script Optimization</td>
+            <td>Ongoing A/B testing and refinement of agent script based on call performance data</td>
+          </tr>
+          <tr>
+            <td class="val-label">Monthly Reporting</td>
+            <td>Monthly performance report including call volume, transfer rates, prospect feedback, and recommendations</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── SIGNATURE BLOCK ── -->
+  <div class="sig-section">
+    <div class="sig-header">Signatures</div>
+    <p class="sig-subtext">Each Party must submit their signature independently. A confirmation email is sent to both parties upon each submission. The Agreement is fully executed once both signatures are recorded.</p>
+
+    <!-- Status bar — shows who has signed -->
+    <div class="sig-status-bar">
+      <span class="status-pill pending" id="status-dtn">
+        <span class="dot"></span>DTN Consulting — Awaiting Signature
+      </span>
+      <span class="status-pill pending" id="status-hovey">
+        <span class="dot"></span>Hovey Energy — Awaiting Signature
+      </span>
+    </div>
+
+    <div class="agree-row">
+      <input type="checkbox" id="agree-check">
+      <label for="agree-check">I have read, understand, and agree to the terms of this Master Service Agreement in full, and I have the authority to bind the entity I represent. I understand that my typed name below constitutes a legally valid electronic signature.</label>
+    </div>
+
+    <div class="sig-grid">
+
+      <!-- DTN -->
+      <div class="sig-party" id="party-dtn">
+        <div class="party-name">DTN Consulting, LLC — Service Provider</div>
+        <div class="sig-badge" id="badge-dtn">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#1a7a50"/><path d="M3.5 7l2.5 2.5 4.5-5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Signature submitted<span class="badge-detail" id="badge-dtn-detail"></span>
+        </div>
+        <div class="sig-field">
+          <label>Signature (Type Full Legal Name)</label>
+          <input type="text" id="sig-dtn" placeholder="Steve Sassi" autocomplete="off">
+        </div>
+        <div class="sig-field">
+          <label>Printed Name</label>
+          <div class="printed-name">Steve Sassi</div>
+        </div>
+        <div class="sig-field">
+          <label>Title</label>
+          <div class="printed-name">Principal, DTN Consulting, LLC</div>
+        </div>
+        <div class="sig-field">
+          <label>Date</label>
+          <input type="date" id="date-dtn">
+        </div>
+        <button class="btn btn-primary submit-party-btn" id="btn-dtn" onclick="submitParty('dtn')">Submit DTN Signature</button>
+      </div>
+
+      <!-- Hovey -->
+      <div class="sig-party" id="party-hovey">
+        <div class="party-name">Hovey Energy — Client</div>
+        <div class="sig-badge" id="badge-hovey">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#1a7a50"/><path d="M3.5 7l2.5 2.5 4.5-5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Signature submitted<span class="badge-detail" id="badge-hovey-detail"></span>
+        </div>
+        <div class="sig-field">
+          <label>Signature (Type Full Legal Name)</label>
+          <input type="text" id="sig-hovey" placeholder="Melissa Hovey" autocomplete="off">
+        </div>
+        <div class="sig-field">
+          <label>Printed Name</label>
+          <input type="text" id="name-hovey" placeholder="Full legal name">
+        </div>
+        <div class="sig-field">
+          <label>Title</label>
+          <input type="text" id="title-hovey" placeholder="President &amp; Owner">
+        </div>
+        <div class="sig-field">
+          <label>Date</label>
+          <input type="date" id="date-hovey">
+        </div>
+        <button class="btn btn-primary submit-party-btn" id="btn-hovey" onclick="submitParty('hovey')">Submit Hovey Energy Signature</button>
+      </div>
+
+    </div>
+
+    <!-- Effective date note -->
+    <div style="margin-top:24px; font-size:12.5px; color:var(--ink-light);">
+      <strong style="color:var(--ink);">Effective Date</strong> — This Agreement is effective as of the date both Parties have signed above. If the Parties sign on different dates, the later date controls.
+    </div>
+
+    <!-- Share link (appears after a party signs) -->
+    <div class="share-link-box" id="share-link-box">
+      <strong>Signature recorded.</strong> Share this link with the other party to complete execution:
+      <span class="link-url" id="share-link-url"></span>
+    </div>
+
+    <!-- Download & print bar -->
+    <div class="download-bar">
+      <span class="dl-label">Download / Print</span>
+      <button class="btn btn-outline" onclick="downloadDoc()">Download as HTML</button>
+      <button class="btn btn-outline" onclick="window.print()">Print / Save as PDF</button>
+    </div>
+
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <div class="doc-footer">
+    <p>DTN Consulting, LLC &nbsp;·&nbsp; DTN-2026-004-MSA &nbsp;·&nbsp; Confidential</p>
+    <p>Governed by Illinois law &nbsp;·&nbsp; Arbitration in Cook County, IL</p>
+  </div>
+
+</div><!-- /page -->
+
+<script>
+  // ── EmailJS config ─────────────────────────────────────────────────────────
+  // Sign up free at https://emailjs.com, create a service + template, paste IDs below.
+  // Template variables: {{party}}, {{signer_name}}, {{signer_date}}, {{other_party}},
+  //                     {{dtn_status}}, {{hovey_status}}, {{signed_link}}
+  // To:  {{to_email_1}} and {{to_email_2}} (set both in template "To" field)
+  var EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // e.g. 'service_abc123'
+  var EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // e.g. 'template_xyz789'
+  var EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // found in EmailJS Account > API Keys
+
+  var DTN_EMAIL   = 'steve@do-the-numbers.com';
+  var HOVEY_EMAIL = 'mhovey@hoveyenergy.com';
+
+  // ── State ──────────────────────────────────────────────────────────────────
+  var sigState = { dtn: null, hovey: null };
+
+  // ── Init ───────────────────────────────────────────────────────────────────
+  (function () {
+    // Default dates
+    var today = new Date().toISOString().split('T')[0];
+    document.getElementById('date-dtn').value   = today;
+    document.getElementById('date-hovey').value = today;
+    setEffectiveDate();
+
+    // Signature font on input
+    ['sig-dtn', 'sig-hovey'].forEach(function (id) {
+      document.getElementById(id).addEventListener('input', function () {
+        this.style.fontFamily = this.value ? "'DM Serif Display', Georgia, serif" : '';
+      });
+    });
+
+    // Date field → effective date update
+    document.getElementById('date-dtn').addEventListener('change', setEffectiveDate);
+    document.getElementById('date-hovey').addEventListener('change', setEffectiveDate);
+
+    // Load state from URL param ?sig=<base64>
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var encoded = params.get('sig');
+      if (encoded) {
+        sigState = JSON.parse(atob(encoded));
+        applyState();
+      }
+    } catch (e) { /* ignore malformed params */ }
+
+    // Init EmailJS
+    if (EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
+      emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+    }
+  })();
+
+  function setEffectiveDate() {
+    var d1 = document.getElementById('date-dtn').value;
+    var d2 = document.getElementById('date-hovey').value;
+    var later = (d1 > d2 ? d1 : d2) || d1 || d2;
+    if (later) {
+      var fmt = new Date(later + 'T12:00:00').toLocaleDateString('en-US',
+        { year: 'numeric', month: 'long', day: 'numeric' });
+      document.getElementById('effective-date-display').textContent = fmt;
+    }
+  }
+
+  // ── Apply loaded state to UI ───────────────────────────────────────────────
+  function applyState() {
+    if (sigState.dtn)   applyPartyUI('dtn',   sigState.dtn);
+    if (sigState.hovey) applyPartyUI('hovey', sigState.hovey);
+    updateStatusBar();
+    if (sigState.dtn || sigState.hovey) showShareLink();
+  }
+
+  function applyPartyUI(party, data) {
+    var sigEl   = document.getElementById('sig-' + party);
+    var dateEl  = document.getElementById('date-' + party);
+    var badgeEl = document.getElementById('badge-' + party);
+    var detailEl = document.getElementById('badge-' + party + '-detail');
+    var btnEl   = document.getElementById('btn-' + party);
+    var partyEl = document.getElementById('party-' + party);
+
+    sigEl.value = data.name;
+    sigEl.style.fontFamily = "'DM Serif Display', Georgia, serif";
+    dateEl.value = data.date;
+    if (party === 'hovey' && data.signerName) {
+      var nameEl = document.getElementById('name-hovey');
+      var titleEl = document.getElementById('title-hovey');
+      if (nameEl) nameEl.value = data.signerName || '';
+      if (titleEl) titleEl.value = data.title || '';
+    }
+
+    var fmtDate = formatDateDisplay(data.date);
+    detailEl.textContent = ' — ' + data.name + ' · ' + fmtDate;
+    badgeEl.classList.add('visible');
+    partyEl.classList.add('submitted');
+    btnEl.textContent = 'Signature Recorded';
+    btnEl.disabled = true;
+    btnEl.style.opacity = '.5';
+    setEffectiveDate();
+  }
+
+  function updateStatusBar() {
+    var pillDTN   = document.getElementById('status-dtn');
+    var pillHovey = document.getElementById('status-hovey');
+    if (sigState.dtn) {
+      pillDTN.className = 'status-pill signed';
+      pillDTN.innerHTML = '<span class="dot"></span>DTN Consulting — Signed ' + formatDateDisplay(sigState.dtn.date);
+    }
+    if (sigState.hovey) {
+      pillHovey.className = 'status-pill signed';
+      pillHovey.innerHTML = '<span class="dot"></span>Hovey Energy — Signed ' + formatDateDisplay(sigState.hovey.date);
+    }
+  }
+
+  function showShareLink() {
+    var url = buildStateURL();
+    document.getElementById('share-link-url').textContent = url;
+    document.getElementById('share-link-box').classList.add('visible');
+  }
+
+  // ── Submit individual party ────────────────────────────────────────────────
+  function submitParty(party) {
+    if (!document.getElementById('agree-check').checked) {
+      alert('Please check the agreement checkbox before submitting your signature.');
+      return;
+    }
+
+    var sigName = document.getElementById('sig-' + party).value.trim();
+    var sigDate = document.getElementById('date-' + party).value;
+
+    if (!sigName) {
+      alert('Please type your full legal name in the signature field.');
+      return;
+    }
+    if (!sigDate) {
+      alert('Please select a date for your signature.');
+      return;
+    }
+
+    var record = { name: sigName, date: sigDate };
+    if (party === 'hovey') {
+      record.signerName = document.getElementById('name-hovey').value.trim();
+      record.title      = document.getElementById('title-hovey').value.trim();
+    }
+
+    sigState[party] = record;
+
+    applyPartyUI(party, record);
+    updateStatusBar();
+
+    // Update URL (no page reload)
+    var newURL = buildStateURL();
+    history.replaceState(null, '', newURL);
+    showShareLink();
+
+    // Send email
+    sendEmail(party, sigName, sigDate, newURL);
+  }
+
+  // ── Email ──────────────────────────────────────────────────────────────────
+  function sendEmail(party, sigName, sigDate, pageURL) {
+    var partyLabel      = party === 'dtn' ? 'DTN Consulting, LLC' : 'Hovey Energy';
+    var otherPartyLabel = party === 'dtn' ? 'Hovey Energy' : 'DTN Consulting, LLC';
+    var dtnStatus   = sigState.dtn   ? 'SIGNED — ' + sigState.dtn.name   + ' on ' + formatDateDisplay(sigState.dtn.date)   : 'Awaiting signature';
+    var hoveyStatus = sigState.hovey ? 'SIGNED — ' + sigState.hovey.name + ' on ' + formatDateDisplay(sigState.hovey.date) : 'Awaiting signature';
+    var bothSigned  = sigState.dtn && sigState.hovey;
+
+    var templateParams = {
+      party:        partyLabel,
+      signer_name:  sigName,
+      signer_date:  formatDateDisplay(sigDate),
+      other_party:  otherPartyLabel,
+      dtn_status:   dtnStatus,
+      hovey_status: hoveyStatus,
+      signed_link:  pageURL,
+      both_signed:  bothSigned ? 'YES — Agreement fully executed.' : 'No — awaiting ' + otherPartyLabel + ' signature.',
+      to_email_1:   DTN_EMAIL,
+      to_email_2:   HOVEY_EMAIL
+    };
+
+    if (EMAILJS_SERVICE_ID !== 'YOUR_SERVICE_ID') {
+      // EmailJS configured — send programmatically
+      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+        .then(function () {
+          console.log('Email sent via EmailJS.');
+        }, function (err) {
+          console.warn('EmailJS send failed, falling back to mailto.', err);
+          openMailto(partyLabel, sigName, sigDate, dtnStatus, hoveyStatus, pageURL);
+        });
+    } else {
+      // EmailJS not yet configured — open mailto: fallback
+      openMailto(partyLabel, sigName, sigDate, dtnStatus, hoveyStatus, pageURL);
+    }
+  }
+
+  function openMailto(partyLabel, sigName, sigDate, dtnStatus, hoveyStatus, pageURL) {
+    var both = sigState.dtn && sigState.hovey;
+    var subject = both
+      ? 'FULLY EXECUTED: Master Service Agreement — DTN Consulting / Hovey Energy (DTN-2026-004-MSA)'
+      : 'Signature Submitted: MSA — DTN Consulting / Hovey Energy (DTN-2026-004-MSA)';
+
+    var body = [
+      'This is an automated notification from the DTN / Hovey Energy Master Service Agreement.',
+      '',
+      partyLabel + ' has submitted their electronic signature.',
+      '',
+      'SIGNER: ' + sigName,
+      'DATE:   ' + formatDateDisplay(sigDate),
+      '',
+      '── SIGNATURE STATUS ──────────────────',
+      'DTN Consulting:  ' + dtnStatus,
+      'Hovey Energy:    ' + hoveyStatus,
+      '',
+      both
+        ? 'AGREEMENT STATUS: FULLY EXECUTED. Both parties have signed.'
+        : 'AGREEMENT STATUS: Pending — awaiting the second party\'s signature.',
+      '',
+      '── VIEW / COMPLETE SIGNING ───────────',
+      pageURL,
+      '',
+      'To complete execution, the other party should open the link above and submit their signature.',
+      '',
+      'Questions? Contact DTN Consulting at steve@do-the-numbers.com',
+      '',
+      '─────────────────────────────────────',
+      'DTN-2026-004-MSA | Confidential',
+      'Governed by Illinois law | Arbitration in Cook County, IL'
+    ].join('\n');
+
+    var mailto = 'mailto:' + DTN_EMAIL + ',' + HOVEY_EMAIL
+      + '?subject=' + encodeURIComponent(subject)
+      + '&body='    + encodeURIComponent(body);
+
+    window.open(mailto, '_blank');
+  }
+
+  // ── Download ───────────────────────────────────────────────────────────────
+  function downloadDoc() {
+    var html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+    var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    var url  = URL.createObjectURL(blob);
+    var a    = document.createElement('a');
+    var both = sigState.dtn && sigState.hovey;
+    var dtnSigned   = sigState.dtn   ? '-DTNsigned'   : '';
+    var hoveySigned = sigState.hovey ? '-HoveySigned' : '';
+    a.href     = url;
+    a.download = 'DTN-HoveyEnergy-MSA' + dtnSigned + hoveySigned + '.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  // ── Helpers ────────────────────────────────────────────────────────────────
+  function buildStateURL() {
+    var base = window.location.origin + window.location.pathname;
+    return base + '?sig=' + btoa(JSON.stringify(sigState));
+  }
+
+  function formatDateDisplay(dateStr) {
+    if (!dateStr) return '';
+    return new Date(dateStr + 'T12:00:00').toLocaleDateString('en-US',
+      { year: 'numeric', month: 'long', day: 'numeric' });
+  }
+</script>
+</body>
+</html>
