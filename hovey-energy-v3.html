@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
 <title>DTN × Hovey Energy — AI Voice Agent | Executive Summary</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -40,7 +41,7 @@
   .confidential-banner {
     background: rgba(200,169,110,0.07); border: 1px solid rgba(200,169,110,0.2);
     border-radius: 6px; padding: 10px 18px; margin-bottom: 32px;
-    display: flex; align-items: center; gap: 12px;
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
     font-family: 'DM Mono', monospace; font-size: 10px; color: var(--accent);
     text-transform: uppercase; letter-spacing: 0.12em;
   }
@@ -54,7 +55,7 @@
   .header-sub { color: var(--muted); font-size: 15px; max-width: 640px; }
 
   .section { margin-bottom: 64px; }
-  .section-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .section-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
   .section-header h2 { font-family: 'DM Serif Display', serif; font-size: 26px; color: var(--text); }
   .badge { font-family: 'DM Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; padding: 3px 10px; border-radius: 20px; }
   .badge-gold { background: rgba(200,169,110,0.12); color: var(--accent); border: 1px solid rgba(200,169,110,0.3); }
@@ -93,9 +94,9 @@
 
   .chart-container { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 28px; margin-bottom: 24px; }
   .chart-title { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 20px; }
-  .bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
   .bar-label { font-size: 12px; color: var(--muted); min-width: 100px; text-align: right; }
-  .bar-track { flex: 1; height: 28px; background: rgba(255,255,255,0.03); border-radius: 4px; overflow: hidden; position: relative; }
+  .bar-track { flex: 1; min-width: 120px; height: 28px; background: rgba(255,255,255,0.03); border-radius: 4px; overflow: hidden; position: relative; }
   .bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 10px; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text); font-weight: 500; white-space: nowrap; }
   .bar-fill.human { background: rgba(224,82,82,0.3); }
   .bar-fill.ai { background: rgba(78,157,142,0.4); }
@@ -111,6 +112,43 @@
   .invest-includes li::before { content: '→'; color: var(--accent); font-size: 11px; margin-top: 2px; flex-shrink: 0; }
   .invest-includes li strong { color: var(--text); }
 
+  /* TIMELINE */
+  .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+  .phase { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .phase-header { padding: 14px 16px 12px; border-bottom: 1px solid var(--border); }
+  .phase-week { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+  .phase-name { font-weight: 600; font-size: 14px; color: var(--text); margin-bottom: 2px; }
+  .phase-tagline { font-size: 11px; color: var(--muted); font-style: italic; }
+  .phase-body { padding: 14px 16px; }
+  .phase-tasks { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+  .phase-tasks li { font-size: 12px; color: var(--muted); display: flex; gap: 6px; align-items: flex-start; }
+  .phase-tasks li::before { content: '·'; color: var(--accent); font-size: 16px; line-height: 1; flex-shrink: 0; }
+  .phase-hours { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); padding: 4px 10px; background: rgba(200,169,110,0.08); border-radius: 20px; display: inline-block; }
+  .phase.purple .phase-header { border-top: 2px solid var(--partner); }
+  .phase.gold .phase-header { border-top: 2px solid var(--accent); }
+  .phase.teal .phase-header { border-top: 2px solid var(--accent2); }
+  .phase.warm .phase-header { border-top: 2px solid var(--warm); }
+
+  /* TABLES */
+  .table-wrap { overflow-x: auto; margin-bottom: 24px; border-radius: 8px; border: 1px solid var(--border); -webkit-overflow-scrolling: touch; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 480px; }
+  thead tr { background: var(--surface2); }
+  thead th { font-family: 'DM Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  tbody tr { background: var(--surface); border-bottom: 1px solid var(--border); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr.savings-row { background: rgba(78,157,142,0.05); }
+  tbody tr.savings-row td { color: var(--accent2); }
+  td { padding: 12px 16px; color: var(--muted); vertical-align: top; }
+  td.val-human { color: var(--hot); }
+  td.val-ai { color: var(--accent2); }
+  td.val-savings { color: var(--accent); font-weight: 600; }
+  td.val-label { color: var(--text); font-weight: 500; white-space: nowrap; }
+  td strong { color: var(--text); }
+
+  /* FOOTNOTE */
+  .footnote { font-size: 11px; color: var(--muted); font-style: italic; margin-top: 8px; line-height: 1.5; border-top: 1px solid var(--border); padding-top: 12px; }
+  .footnote strong { color: var(--text); font-style: normal; }
+
   .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
   .team-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 24px; }
   .team-name { font-weight: 600; font-size: 15px; color: var(--text); margin-bottom: 3px; }
@@ -124,10 +162,10 @@
   .cta-section h2 { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--text); margin-bottom: 12px; }
   .cta-section p { color: var(--muted); font-size: 14px; max-width: 600px; margin: 0 auto; }
 
+  /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     .page { padding: 28px 16px 64px; }
     .header h1 { font-size: 30px; }
-    .section-header { flex-wrap: wrap; gap: 8px; }
     .stats-bar { grid-template-columns: repeat(2, 1fr); }
     .investment-grid { grid-template-columns: 1fr; }
     .comparison-hero { grid-template-columns: 1fr; }
@@ -137,6 +175,10 @@
     .comp-box-amount { font-size: 32px; }
     .invest-amount { font-size: 30px; }
     .stat-num { font-size: 22px; }
+    .timeline { grid-template-columns: 1fr 1fr; }
+    .bar-label { min-width: 80px; text-align: left; }
+    .cta-section { padding: 28px 20px; }
+    table { font-size: 12px; }
   }
   @media (max-width: 480px) {
     .page { padding: 20px 12px 48px; }
@@ -147,8 +189,15 @@
     .savings-hero-amount { font-size: 34px; }
     .savings-hero { padding: 20px 16px; }
     .callout { padding: 16px 14px; }
-    .confidential-banner { flex-wrap: wrap; font-size: 9px; letter-spacing: 0.06em; }
+    .confidential-banner { font-size: 9px; letter-spacing: 0.06em; }
     .section-header h2 { font-size: 20px; }
+    .timeline { grid-template-columns: 1fr; }
+    .invest-card { padding: 20px 16px; }
+    .invest-amount { font-size: 28px; }
+    .chart-container { padding: 20px 14px; }
+    .cta-section { padding: 24px 16px; }
+    thead th { font-size: 9px; padding: 10px 10px; }
+    td { padding: 10px 10px; font-size: 12px; }
   }
 </style>
 </head>
@@ -326,6 +375,60 @@
         </div>
       </div>
     </div>
+
+    <div class="section-header" style="font-size:14px; margin-top:8px;">
+      <h2 style="font-size:18px;">Monthly Cost by Scale (Post-Project, Ongoing)</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Scale</th>
+            <th>Fronters — Monthly</th>
+            <th>AI Agent — Year 1 Monthly</th>
+            <th>AI Agent — Year 2+ Monthly</th>
+            <th>Y1 Monthly Savings</th>
+            <th>Y2+ Monthly Savings</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="val-label">1 fronter / 1,000 min/mo</td>
+            <td class="val-human">$5,726</td>
+            <td class="val-ai">$2,390 <span style="font-size:11px;color:var(--muted)">(pro-rated)</span></td>
+            <td class="val-ai">$2,195 <span style="font-size:11px;color:var(--muted)">(pro-rated)</span></td>
+            <td class="val-savings">$3,336 (58%)</td>
+            <td class="val-savings">$3,531 (62%)</td>
+          </tr>
+          <tr>
+            <td class="val-label">2 fronters / 2,000 min/mo</td>
+            <td class="val-human">$11,452</td>
+            <td class="val-ai">$2,390</td>
+            <td class="val-ai">$2,390</td>
+            <td class="val-savings">$9,062 (79%)</td>
+            <td class="val-savings">$9,062 (79%)</td>
+          </tr>
+          <tr>
+            <td class="val-label">5 fronters / 5,000 min/mo</td>
+            <td class="val-human">$28,630</td>
+            <td class="val-ai">$2,997 <span style="font-size:11px;color:var(--muted)">(scaled platform)</span></td>
+            <td class="val-ai">$2,920</td>
+            <td class="val-savings">$25,633 (90%)</td>
+            <td class="val-savings">$25,710 (90%)</td>
+          </tr>
+          <tr>
+            <td class="val-label">10 fronters / 10,000 min/mo</td>
+            <td class="val-human">$57,259</td>
+            <td class="val-ai">$3,620</td>
+            <td class="val-ai">$3,620</td>
+            <td class="val-savings">$53,639 (94%)</td>
+            <td class="val-savings">$53,639 (94%)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
   </div>
 
   <!-- ── 05 THE TEAM ── -->
